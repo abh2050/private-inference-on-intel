@@ -1,85 +1,72 @@
-# Intel AI for Enterprise Inference on IBM Cloud: reproducible Xeon (AMX) run
+# Runbook
 
-Checked 2026-11-03.
+Step-by-step instructions for reproducing run 1, with what to check at each step. For the findings, see the [README](README.md) or the [results page](https://abh2050.github.io/private-inference-on-intel/).
 
-## What changed since the earlier chat
-- `opea-project/Enterprise-Inference` is **archived**. Its README now says "PROJECT MOVED" to
-  [intel/enterprise-inference](https://github.com/intel/enterprise-inference).
-- The maintained stack is **Xeon-only** (vLLM CPU + OpenVINO Model Server on KServe). None of its files mention Gaudi.
-  Gaudi support exists only in the archived OPEA repo.
-- It is no longer standalone. You install it through
-  [intel/enterprise-ai-solutions](https://github.com/intel/enterprise-ai-solutions) (`es_auto_installer.sh`).
-- Pinned here: solutions **v1.1.0**, which pins enterprise-inference **v1.0.1** (`5d92bef`), vLLM CPU **0.24.0**,
-  model **Qwen/Qwen3-0.6B** (`qwen3-0-6b` in the catalog). It is public, so you need no Hugging Face token.
+## Versions
 
-## Hardware decision
-| Option | Verdict |
+| Component | Version |
 |---|---|
-| IBM VPC `bx3d-32x160` (4th Gen Xeon, AMX, 32 vCPU / 160 GB) | **Use this.** Meets the "3B model" minimum (32 cores, 64 GB). Roughly $1.6–2/h, an estimate you should confirm. |
-| IBM `bx2`/`cx2`/`mx2` (gen 2) | No AMX. Avoid. |
-| IBM Gaudi 3 (`gx3d-…gaudi3`) | Tens of $/h, and the current stack does not support Gaudi. Out of scope. |
-| AWS us-east-2 control plane | **Not needed.** It is a single node, and the installer runs on the server itself. Adding AWS would add cost and cross-cloud traffic for no gain. |
+| `intel/enterprise-ai-solutions` | v1.1.0 |
+| `intel/enterprise-inference` | v1.0.1 (`5d92bef`), pinned by the line above |
+| vLLM CPU | 0.24.0 (from the model catalog) |
+| Models | `Qwen/Qwen3-0.6B` (catalog name `qwen3-0-6b`) and `Qwen/Qwen2.5-3B-Instruct`; both public, no Hugging Face token needed |
+| Server | IBM Cloud `bx3d-32x160`, us-east-1, Ubuntu 24.04 |
 
-## Cost guards
+## Cost safeguards
+
 1. `02-provision.sh` refuses to run without `CONFIRM=yes`.
-2. A watchdog deletes everything after `MAX_HOURS` (default 6 h, about $11). It only runs while your Mac is awake.
-3. **bx3d keeps billing while stopped** because it has local instance storage. Delete the server, don't just stop it.
-4. Every resource name starts with `opea-ei`. `99-teardown.sh` deletes them all and prints a leftovers check that should show 0.
-5. Set this in the console: **Manage → Billing and usage → Spending notifications**, with an alert at $50 and $100.
-6. Budget: $150/month ÷ ~$1.9/h ≈ 75 server-hours. One full run is about 1 hour.
+2. A watchdog deletes every `opea-ei-*` resource after `MAX_HOURS` (default 4, set in `env.sh`). It runs on the operator's workstation, so it stops if that machine sleeps.
+3. `bx3d` profiles include local instance storage, and IBM keeps billing them while stopped. Delete the server; do not just stop it.
+4. `99-teardown.sh` ends with a leftovers check that must report zero for every resource type.
+5. Set spending notifications in the IBM console under Manage → Billing and usage.
+
+Run 1 used 1.49 server-hours, about $3.
 
 ## Steps
-```bash
-cd ~/Desktop/inteldv && chmod +x *.sh node/*.sh
 
-# 0. One-time setup (free)
-curl -fsSL https://clis.cloud.ibm.com/install/osx | sh
+```bash
+# One-time setup
+curl -fsSL https://clis.cloud.ibm.com/install/osx | sh     # or the Linux installer
 ibmcloud login --sso
 ibmcloud plugin install vpc-infrastructure -f
 
-# 1. Read-only check: account, credits, whether bx3d exists in us-east, Ubuntu image
-./01-preflight.sh
-#    -> Put the real hourly price from cloud.ibm.com/estimator into EST_USD_PER_HOUR in env.sh
-
-# 2. PAID: create the server (needs your approval)
-CONFIRM=yes ./02-provision.sh
-
-# 3. Check AMX, then run install + deploy + smoke test + benchmark (about 45 min)
-./03-run-remote.sh
-./03-run-remote.sh attach        # watch; wait for "ALL-DONE exit=0"
-./03-run-remote.sh collect       # copies results into ./results/<timestamp>/
-
-# 4. Teardown (always)
-CONFIRM=yes ./99-teardown.sh     # must end with "CLEAN"
+./01-preflight.sh                   # 1. read-only checks
+CONFIRM=yes ./02-provision.sh       # 2. create the server
+./03-run-remote.sh                  # 3. AMX check, then install and experiments in tmux
+./03-run-remote.sh attach           #    watch; finishes with "ALL-DONE exit=0"
+./03-run-remote.sh collect          # 4. copy results to results/<timestamp>/
+python3 analyze.py results/<timestamp> --usd-per-hour <rate>
+python3 docs/build_site.py results/<timestamp>
+CONFIRM=yes ./99-teardown.sh        # 5. delete everything; must end with "CLEAN"
 ```
 
-## Experiment design (E1–E5)
-| ID | Experiment | Question it answers |
+To rerun only some experiments on a running server: `STAGES="E3 E4" ~/node/experiments.sh` (stages: `E2`, `E3`, `E4`, `E2X`).
+
+If the macOS IBM Cloud CLI times out on DNS during login, `env.sh` already sets `GODEBUG=netdns=cgo`, which fixes it.
+
+## What to check
+
+| Check | File in `results/<run>/` | Pass |
 |---|---|---|
-| E1 | Timed install from bare server to first correct answer, with retries and errors logged | "What was hard?", "How does it compare with NIM?", adoption |
-| E2 | Qwen3-0.6B at 1, 2, 4, 8 and 16 concurrent users | SLA definition, cost per token |
-| E3 | Same as E2 with AMX disabled in oneDNN (`ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16`) | "Why run inference on Xeon?" |
-| E4 | Qwen2.5-3B-Instruct at 1, 2, 4 and 8 concurrent users | Does a CPU hold up at enterprise model sizes? |
-| E5 | Routing what-if, calculated from E2 and E4 data | "What would you build next?" |
+| Hardware | `hwcheck.txt` | `amx_tile`, `amx_bf16`, and `amx_int8` present |
+| Versions | `versions.txt` | solutions v1.1.0, inference `5d92bef` |
+| Install | `install.log`, `timeline.csv` | Ansible `failed=0` |
+| Platform health | `validate.log`, `validate-components.log` | Each component passes (see the README on `nfd`) |
+| Correctness | `smoke.txt` | Each model answers "Paris" |
+| Authentication | `smoke-auth.txt` | A request without a token gets HTTP 401 |
+| Performance | `bench-*.json` | 0 failed requests at every level |
+| AMX in use | `onednn-*.txt` | `avx10_1_512_amx` with AMX on; `avx512_core_bf16` with it off |
+| Step log | `logs/steps.log` | One line per deploy, smoke test, benchmark, and undeploy |
 
-SLA, fixed before the run: p95 TTFT ≤ 2 s, at least 10 tokens/s per user, 0 errors. All tests use 8 cores, the same prompt, 128 output tokens and temperature 0.
-After collecting results: `python3 analyze.py results/<run> --usd-per-hour <real rate>` writes `summary.md`.
+## Experiments
 
-## What counts as a pass
-| Check | File in results/ | Pass |
+| ID | Stage | What runs |
 |---|---|---|
-| Hardware | `hwcheck.txt` | `amx_tile`, `amx_bf16`, `amx_int8` are YES |
-| Versions | `versions.txt` | solutions v1.1.0, inference 5d92bef… |
-| Platform | `validate.log`, `unhealthy-pods.txt` | validate passes and the unhealthy-pods file is empty |
-| Serving | `served.txt` | model READY |
-| Correctness | `smoke.json` | the answer contains "Paris" |
-| Auth | `smoke-auth.txt` | a request without a token gets 401/403 |
-| Performance | `bench.json` / `bench.txt` | 0 failures at concurrency 1/4/8, plus TTFT, TPOT and tokens/s |
-| AMX in use | `vllm-cpu-log.txt`, `pod-spec.json` | bf16 dtype or oneDNN/AMX lines, and CPU pinning visible |
+| E1 | install | Timed install from a bare server to the first correct answer |
+| E2 | `E2` | Qwen3-0.6B, AMX on, 1, 2, 4, 8, and 16 users, 32 requests each |
+| E2X | `E2X` | The same at 24, 32, and 48 users, 48 requests each |
+| E3 | `E3` | E2 with `ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16` (AMX off) |
+| E4 | `E4` | Qwen2.5-3B-Instruct, AMX on, 1, 2, 4, and 8 users, 16 requests each |
+| E5 | analysis | Blended cost from E2 and E4 throughput |
 
-The benchmark sends 32 requests per level with a fixed ~500-token prompt and 128 output tokens at temperature 0, through the real gateway with auth.
-It is small on purpose, and every model call runs on your server, so no paid API is used.
-
-## Optional next experiment, in the same session
-Compare engines with the catalog's OpenVINO model (Qwen3.5-2B INT4, so it is a different model and not a like-for-like comparison):
-`./model-manager deploy qwen3-5-2b-ovms --wait`, then re-run `node/bench.py` with `--model qwen3-5-2b-ovms`.
+Every model gets 8 cores, a ~600-token prompt, 128 output tokens, and temperature 0. All requests go through the authenticated gateway.

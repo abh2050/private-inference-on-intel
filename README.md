@@ -1,210 +1,186 @@
-# Private LLM inference on Intel Xeon: how hard is it, and what do you get?
+<h1 align="center">Private LLM inference on one Intel Xeon node</h1>
 
-**Results page with charts: https://abh2050.github.io/private-inference-on-intel/**
+<p align="center">
+A measured, reproducible deployment of <a href="https://github.com/intel/enterprise-inference">Intel AI for Enterprise Inference</a> on IBM Cloud:<br>
+deployment effort, SLA capacity, cost per token, and what Intel AMX contributes.
+</p>
 
-I installed [Intel AI for Enterprise Inference](https://github.com/intel/enterprise-inference) on one IBM Cloud Xeon server, served open models through its OpenAI-compatible gateway, and measured four things: the effort to deploy it, the number of users one node serves within a latency target, the cost per token, and how much Intel AMX contributes. Every step is scripted and pinned to exact versions, and the raw data and logs from the run are in this repository.
+<p align="center">
+<a href="https://abh2050.github.io/private-inference-on-intel/"><b>Interactive results page →</b></a>
+&nbsp;·&nbsp; <a href="results/20261103-2026/summary.md">Raw results</a>
+&nbsp;·&nbsp; <a href="logs/operator-log.md">Run log</a>
+</p>
 
-| Result (run 1, 2026-11-04) | Value |
-|---|---|
-| Bare server to first correct answer | **32.9 min** of automation; 48.8 min wall clock, including 3 manual interventions |
-| Concurrent users within the latency target, one 8-core Xeon node, Qwen3-0.6B | **24** |
-| Cost per 1M output tokens at that load | **$2.50**\* |
-| Users within target with AMX vs. without it, same cores | **24 vs. 2**, with up to **3.1×** throughput |
-| Qwen2.5-3B on the same 8 cores | Correct answers, but no load level meets the target |
+<p align="center"><a href="https://abh2050.github.io/private-inference-on-intel/"><img src="docs/preview-hero.png" alt="Results page header: 24 users served concurrently by 8 Xeon cores with p95 time-to-first-token under 2 seconds; $2.50 per million output tokens; 12 times more users than with AMX off; 33 minutes from bare server to first answer." width="900"></a></p>
 
-\*At an estimated $1.90 per server-hour; IBM's partial billing data so far implies about $2. Ratios between configurations do not depend on the rate.
+## In one minute
+
+- **24 concurrent users** on 8 Xeon cores (Qwen3-0.6B), with p95 time to first token under 2 s and every request succeeding.
+- **$2.50 per million output tokens** at that load, at an estimated $1.90 per server-hour.
+- **AMX is worth 12× the capacity.** With AMX disabled on the same cores, only 2 users stay within the target. Throughput is up to 3.1× higher with it.
+- **33 minutes of automation** from a bare server to an authenticated, OpenAI-compatible endpoint answering correctly. The install ran 468 Ansible tasks with none failing.
+- **Six small deployment observations**, each paired with a suggested improvement, and four ideas for what to build next.
 
 ## The problem
 
-A team moving LLM inference onto its own infrastructure, for cost, data privacy, or air-gap reasons, has to answer four questions before it commits hardware:
+Teams moving LLM inference onto their own infrastructure, for cost, data privacy, or air-gap reasons, have to answer four questions before committing hardware:
 
-1. **Effort.** How long from an empty machine to an authenticated, OpenAI-compatible endpoint, and where does the process break?
-2. **Capacity.** How many concurrent users can one node serve before latency becomes unacceptable?
-3. **Economics.** What does a million output tokens cost at that load, and what does a node cost per month?
-4. **Hardware value.** How much of the CPU result comes from Intel AMX, the matrix unit in 4th Gen Xeon and newer?
+| Question | What was measured |
+|---|---|
+| **Effort.** How long from an empty machine to a working, authenticated endpoint? | Timed install with every step logged |
+| **Capacity.** How many users can one node serve before latency becomes unacceptable? | Concurrency sweep from 1 to 48 users |
+| **Economics.** What does a million output tokens cost at that load? | Measured throughput × server price |
+| **Hardware value.** How much of the result comes from Intel AMX? | The same run with AMX disabled |
 
-Vendor documentation explains how to install the stack but gives no numbers for any of these. This repository measures them on real hardware, with a latency target fixed before the run:
-
-- p95 time to first token (TTFT) of at most 2 seconds;
-- at least 10 output tokens per second for each user;
-- no failed requests.
-
-## From request to token
-
-| Step | Where | What happens | What it sets |
-|---|---|---|---|
-| 1 | Envoy Gateway | TLS termination and Keycloak JWT check; no token returns HTTP 401 | Access control |
-| 2 | Envoy AI Gateway | Reads `"model"` from the JSON body and selects that model's route | Multi-model routing |
-| 3 | EPP scheduler | Picks a serving endpoint for the `LLMInferenceService` | Load spreading |
-| 4 | vLLM | Tokenizes the prompt and adds it to the running batch (continuous batching) | Queueing |
-| 5 | vLLM prefill | Processes all prompt tokens at once; compute-bound bf16 matrix multiplies on AMX | **Time to first token** |
-| 6 | vLLM decode | One token per step per request, reading weights and the paged KV cache; memory-bandwidth-bound | **Tokens/s per user** |
-| 7 | Gateways | Tokens stream back as server-sent events | OpenAI compatibility |
-| 8 | NRI balloons (underneath) | Pin the pod to whole cores on one NUMA node, keeping memory local | Predictable latency |
-
-This is why AMX moves TTFT far more than per-user speed, and why 8 cores saturate near 217 tokens/s: past that point, new users queue for prefill.
+The service target was fixed before the run: **p95 time to first token ≤ 2 s, at least 10 output tokens/s per user, and no failed requests.**
 
 ## Results
 
-Every model ran on the same 8 physical cores (one NUMA node) with a ~600-token prompt and 128 output tokens. All traffic went through the authenticated gateway, and every request succeeded at every load level. Full tables are in [`results/20261103-2026/summary.md`](results/20261103-2026/summary.md).
+All runs used the same 8 physical cores (one NUMA node), a ~600-token prompt, and 128 output tokens. Every request went through the authenticated gateway, and every request succeeded.
 
-### Capacity and cost, Qwen3-0.6B with AMX
+<p align="center"><img src="docs/preview-capacity.png" alt="Two charts. Output throughput rises to about 217 tokens per second with AMX on, versus about 59 with AMX off and 30 for the 3B model. Time to first token p95 stays under 2 seconds up to 24 users with AMX on, but crosses it at 4 users with AMX off." width="900"></p>
 
-| Concurrent users | Output tok/s | TTFT p95 | Tok/s per user | $ per 1M output tokens | Meets target |
-|---|---|---|---|---|---|
-| 1 | 21.0 | 0.16 s | 22.0 | 25.13 | yes |
-| 4 | 59.8 | 0.43 s | 16.6 | 8.83 | yes |
-| 8 | 119.9 | 0.69 s | 18.5 | 4.40 | yes |
-| 16 | 182.4 | 1.21 s | 15.6 | 2.89 | yes |
-| **24** | **210.7** | **1.76 s** | **12.6** | **2.50** | **yes** |
-| 32 | 216.7 | 2.31 s | 10.3 | 2.44 | no |
-| 48 | 218.2 | 3.39 s | 5.5 | 2.42 | no |
+### Capacity and cost: Qwen3-0.6B with AMX
 
-Throughput levels off near 217 tokens/s at about 30 users. Beyond that, extra users wait longer rather than adding throughput, and TTFT is the first limit to break.
+| Users | Output tok/s | TTFT p95 | Tok/s per user | $ / 1M tokens | Within target |
+|---:|---:|---:|---:|---:|:---:|
+| 1 | 21.0 | 0.16 s | 22.0 | 25.13 | ✅ |
+| 4 | 59.8 | 0.43 s | 16.6 | 8.83 | ✅ |
+| 8 | 119.9 | 0.69 s | 18.5 | 4.40 | ✅ |
+| 16 | 182.4 | 1.21 s | 15.6 | 2.89 | ✅ |
+| **24** | **210.7** | **1.76 s** | **12.6** | **2.50** | ✅ |
+| 32 | 216.7 | 2.31 s | 10.3 | 2.44 | — |
+| 48 | 218.2 | 3.39 s | 5.5 | 2.42 | — |
 
-The cost per token falls 10× between 1 and 24 users, because the server costs the same per hour however busy it is. Run continuously at the estimated rate, the node costs about $1,390 a month and can produce up to about 550 million output tokens at its 24-user operating point. Utilization, not hardware, sets the effective cost.
+Throughput saturates near 217 tokens/s at about 30 users, and TTFT is the first limit reached. Cost per token falls 10× between 1 and 24 users because the server costs the same per hour at any load. Running continuously, the node costs about $1,390 a month and can produce about 550 million output tokens at its 24-user operating point.
 
 ### What AMX contributes
 
-The comparison used the same model on the same cores. The only change was capping oneDNN below AMX with `ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16`. A oneDNN probe inside each pod confirms the kernel that actually ran: `brg_matmul:avx10_1_512_amx` in one, `brg_matmul:avx512_core_bf16` in the other.
+Same model, same cores; the only change was `ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16` on the pod. oneDNN, probed inside each pod, confirms the kernel that ran: `brg_matmul:avx10_1_512_amx` with AMX and `brg_matmul:avx512_core_bf16` without it.
 
-| Concurrent users | Tok/s, AMX on | Tok/s, AMX off | Ratio | TTFT p95, on → off |
-|---|---|---|---|---|
+| Users | Tok/s, AMX on | Tok/s, AMX off | Gain | TTFT p95, on → off |
+|---:|---:|---:|---:|---:|
 | 1 | 21.0 | 18.0 | 1.2× | 0.16 → 0.62 s |
 | 4 | 59.8 | 39.6 | 1.5× | 0.43 → 2.15 s |
 | 8 | 119.9 | 55.4 | 2.2× | 0.69 → 4.40 s |
 | 16 | 182.4 | 59.0 | 3.1× | 1.21 → 8.39 s |
 
-With one user, AMX adds little, because generating tokens (decode) is limited by memory bandwidth. Under load, processing prompts (prefill) dominates, and prefill is compute-bound, so the matrix unit matters. At the target, AMX turns a node that serves 2 users at $18.58 per million tokens into one that serves 24 at $2.50.
+Decode is limited by memory bandwidth, so a single user sees little difference. Prefill is compute-bound and dominates under load, which is where the matrix unit pays off: **24 users at $2.50 per million tokens with AMX, against 2 users at $18.58 without it.**
 
 ### A larger model
 
-Qwen2.5-3B-Instruct answered correctly but delivered 5.2 tokens/s to a single user, half the target, and peaked at 29.7 tokens/s across 8 users ($17.77 per million tokens). A model this size needs more cores per replica, tensor parallelism across both sockets, or an accelerator to serve interactive traffic.
+Qwen2.5-3B-Instruct answered correctly. On 8 cores it delivered 5.2 tokens/s to a single user and peaked at 29.7 tokens/s across 8 users, so at this size the target needs more cores per replica or tensor parallelism across both sockets.
 
-### Routing (calculated, not measured)
+## From request to token
 
-Using the measured peak throughputs, sending 70% of requests to the 0.6B model and 30% to the 3B model would cost $7.03 per million tokens, against $17.77 for all-3B: a 60% saving. Before claiming that saving, an evaluation set would have to show that the small model handles that share of real traffic acceptably.
-
-## Deployment experience
-
-The install itself was solid: 468 Ansible tasks with none failed, and 49 pods healthy with no restarts. The friction sat around it. Each item below happened during the run and is logged with a timestamp in [`logs/operator-log.md`](logs/operator-log.md).
-
-| # | Issue | What happened | Suggested fix |
+| # | Component | What happens | What it determines |
 |---|---|---|---|
-| 1 | Unclear entry point | The OPEA repo is archived with a "moved" notice. The new `intel/enterprise-inference` cannot be installed on its own; a third repo, `intel/enterprise-ai-solutions`, drives it. | Point every README at one quick start |
-| 2 | `configure` waits at a `[y/N]` prompt | Over SSH or in CI it waits indefinitely; here it sat for 11.4 minutes. `--force` skips the prompt but is not in the quick start. | Document `--force`, or detect a non-terminal and name the flag |
-| 3 | `validate` fails on a healthy cluster | It aborts at `nfd`, whose `validate.yaml` is missing in v1.1.0, so the inference components after it are never checked | Skip components that have no validate task, and report per component |
-| 4 | Token helper breaks callers | `get-keycloak-token.sh` leaves a `RETURN` trap that aborts any calling script that uses `set -u` | Clear the trap, or add a command that prints the token |
-| 5 | `undeploy` returns early | The next deploy failed the NRI pre-flight check ("not enough physical cores") on an empty node, because the old pod still held its cores | Add `undeploy --wait`, or make pre-flight wait for terminating pods |
-| 6 | No built-in SLA benchmark | TTFT, per-user tokens/s, and cost per token had to be measured with a separate load generator | A `model-manager bench` command that reports against a stated target |
-| 7 | No Intel accelerator path yet | The release automates Xeon and NVIDIA GPU nodes, and its docs place Intel GPU support in a later milestone. Gaudi support exists only in the archived OPEA version. | — |
-
-The hardware-aware parts worked as designed. NRI balloons pinned each model to whole cores on one NUMA node. Pre-flight refused placements that would have spilled onto hyperthread siblings. KServe and the Envoy AI Gateway routed by the `model` field with no per-model gateway configuration.
-
-## Where Xeon fits, from this data
-
-The case for CPU inference is not raw speed. It is serving a known load within a target, on hardware that is already approved, owned, and allowed to see the data.
-
-| Good fit | Evidence |
-|---|---|
-| Small models at interactive load | Measured: 0.6B served 24 users within target on 8 cores |
-| Prefill-heavy traffic (RAG, summarization, classification) | Measured: AMX gives up to 3.1× under load |
-| Private and air-gapped deployments | Measured: one authenticated OpenAI-compatible endpoint; the model runs on the server |
-| Fleets that already run Xeon | Judgment: capacity without a new accelerator procurement |
-
-| Poor fit, or needs more hardware | Evidence |
-|---|---|
-| 3B+ models for interactive users on a few cores | Measured: 5.2 tokens/s for one user, target 10 |
-| Loads past saturation | Measured: beyond ~30 users on 8 cores, throughput stops rising |
-| Large models at high throughput | Judgment: accelerator memory bandwidth decides it |
-| More cores per replica, cross-socket tensor parallelism, INT8 / OpenVINO INT4 | Not yet tested |
-
-## What to build next
-
-Ranked by how much each would cut the time and expertise a new team needs to reach a trusted, measured endpoint.
-
-1. **A one-command evaluation path.** A single-node install that never prompts, validates each component without aborting, and ends by printing a working `curl`. This removes friction items 1–3, which cost about 15 minutes of this run. *Measure:* time to first answer, 49 minutes today, target under 15.
-2. **An SLA report built into model-manager.** `model-manager bench --sla ttft=2s,tps=10` would sweep concurrency, report capacity, TTFT, TPOT, and cost per million tokens, and export to the existing Grafana. *Measure:* the share of deployments with a recorded SLA capacity.
-3. **A capacity planner.** Given a model and an SLA, recommend cores, replicas, and tensor parallelism. NRI pre-flight already knows the free cores per NUMA node, and benchmark data supplies tokens/s per core. *Measure:* predicted vs. measured capacity, within 15%.
-4. **SLA-aware routing in the AI gateway.** The gateway already routes on the `model` field. Add a policy that sends each request to the smallest model that passes an evaluation set for its task, and report the realized saving. *Measure:* blended cost per million tokens at equal evaluation score.
+| 1 | Envoy Gateway | TLS termination and Keycloak JWT validation; no token returns HTTP 401 | Access control |
+| 2 | Envoy AI Gateway | Reads `"model"` from the JSON body and selects that model's route | Multi-model serving on one endpoint |
+| 3 | EPP scheduler | Picks a serving endpoint for the `LLMInferenceService` | Load placement |
+| 4 | vLLM | Tokenizes and joins the running batch (continuous batching) | Queueing |
+| 5 | vLLM prefill | All prompt tokens in one pass; bf16 matrix multiplies on AMX | **Time to first token** |
+| 6 | vLLM decode | One token per step, reading weights and the paged KV cache | **Tokens/s per user** |
+| 7 | Gateways | Tokens stream back as server-sent events | OpenAI compatibility |
+| 8 | NRI balloons | Pin the pod to whole cores on one NUMA node | Predictable latency |
 
 ## Architecture
 
-![Architecture: an operator workstation provisions an IBM Cloud VPC with one bx3d Xeon virtual server running single-node Kubernetes. Requests pass through Envoy Gateway (TLS and Keycloak JWT check), Envoy AI Gateway (model routing), an EPP scheduler, and a vLLM CPU pod pinned to 8 cores, whose bf16 matrix math runs on AMX through oneDNN.](docs/architecture.png)
+<p align="center"><img src="docs/architecture.png" alt="IBM Cloud VPC with one bx3d Xeon server running single-node Kubernetes. Requests pass through Envoy Gateway with a Keycloak JWT check, Envoy AI Gateway, an EPP scheduler, and a vLLM CPU pod pinned to 8 cores whose bf16 matrix math runs on AMX through oneDNN." width="900"></p>
 
-The draw.io source is [`docs/architecture.drawio`](docs/architecture.drawio). It uses IBM's architecture shapes and is regenerated by [`docs/gen_drawio.py`](docs/gen_drawio.py).
+| Layer | Components |
+|---|---|
+| Infrastructure | IBM Cloud VPC · `bx3d-32x160`: 4th Gen Xeon (Sapphire Rapids) with AMX, 2 sockets × 8 cores, 160 GB · Ubuntu 24.04 |
+| Cluster | Kubernetes v1.34 (Kubespray), single node |
+| Edge and identity | Envoy Gateway · MetalLB · cert-manager · Keycloak |
+| Routing | Envoy AI Gateway · EPP scheduler · KServe `LLMInferenceService` |
+| Serving | vLLM CPU 0.24, OpenAI-compatible (OpenVINO Model Server also available) |
+| CPU placement | NRI balloons, NUMA-aware |
+| Platform | Istio · PostgreSQL · SeaweedFS · Prometheus · Grafana |
 
-| Layer | Components | Job |
+Pinned versions: `intel/enterprise-ai-solutions` v1.1.0 → `intel/enterprise-inference` v1.0.1. Diagram source: [`docs/architecture.drawio`](docs/architecture.drawio).
+
+## Deployment experience
+
+The core install was solid: 468 Ansible tasks with none failing, 49 pods healthy, and no restarts. NUMA-aware placement, the placement pre-flight check, and model routing all worked as designed. Six small observations account for the rest of the time, and each has a simple fix:
+
+| Area | Observation | Suggested improvement |
 |---|---|---|
-| Infrastructure | IBM Cloud VPC, `bx3d-32x160` (4th Gen Xeon Sapphire Rapids, AMX; 2 sockets × 8 cores; 160 GB), Ubuntu 24.04 | One server. SSH is allowed only from the operator's IP. |
-| Cluster | Kubernetes v1.34.3 via Kubespray (the docs say v1.35.4), local-path storage | Single-node cluster |
-| Edge | Envoy Gateway, MetalLB, cert-manager, Keycloak | TLS termination; JWT validation (a request with no token gets HTTP 401) |
-| Routing | Envoy AI Gateway, EPP scheduler, KServe `LLMInferenceService` | Selects the backend from the request's `model` field |
-| Serving | vLLM CPU 0.24 (OpenVINO Model Server is also available) | OpenAI-compatible `/v1/chat/completions` |
-| CPU placement | NRI balloons | Pins each model to whole cores on one NUMA node |
-| Math | PyTorch and oneDNN | Runs bf16 matrix multiplies on AMX tiles |
-| Platform | Istio, PostgreSQL, SeaweedFS, Prometheus, Grafana | Service mesh, Keycloak database, object store, metrics |
+| Getting started | The OPEA repository points to `intel/enterprise-inference`, which is installed through `intel/enterprise-ai-solutions`; reaching the quick start took a few hops | Link every README straight to the one quick start |
+| Unattended installs | `configure` asks for `[y/N]` confirmation, which waits in SSH or CI sessions; `--force` skips it | Show `--force` in the quick start, or name it when no terminal is attached |
+| Validation coverage | `validate inference` stops at `nfd`, which has no `validate.yaml` in v1.1.0; the inference components after it all passed when validated individually | Skip components without a validate task and report per component |
+| Scripting the token helper | `get-keycloak-token.sh` leaves a RETURN trap set, which stops callers running `set -u` | Clear the trap on return, or add a print-token command |
+| Swapping models | `undeploy` returns while the pod still holds its pinned cores, so an immediate `deploy` fails pre-flight | Add `undeploy --wait` |
+| Measuring against an SLA | Turning metrics into SLA capacity and cost per token took a separate load generator | A `model-manager bench` that reports against a stated target |
 
-Versions are pinned to `intel/enterprise-ai-solutions` v1.1.0, which pins `intel/enterprise-inference` v1.0.1 (`5d92bef`).
+## Where Xeon fits, from this data
 
-## Experiments
+| Strong fit | Evidence |
+|---|---|
+| Small and mid-size models at interactive load | 24 users within target on 8 cores (measured) |
+| Prefill-heavy work: RAG, summarization, classification | AMX adds up to 3.1× under load (measured) |
+| Private and air-gapped deployments | Authenticated, OpenAI-compatible endpoint on owned hardware (measured) |
+| Fleets that already run Xeon | Inference capacity without a new procurement (judgment) |
 
-| ID | What was done | Question |
-|---|---|---|
-| E1 | Timed each install phase on a fresh server and logged every retry, error, and manual step | How hard is deployment? |
-| E2 | Served Qwen3-0.6B at 1, 2, 4, 8, and 16 concurrent users; E2X extended this to 24, 32, and 48 | How many users fit within the target, and at what cost? |
-| E3 | Repeated E2 with AMX disabled in oneDNN | What does AMX contribute? |
-| E4 | Served Qwen2.5-3B-Instruct at 1, 2, 4, and 8 users | Does a CPU hold up at a larger model size? |
-| E5 | Calculated blended cost for 50%, 70%, and 90% of traffic routed to the small model | Is routing worth building? |
+| Needs more cores or an accelerator | Evidence |
+|---|---|
+| 3B+ models for interactive users on a few cores | 5.2 tokens/s for one user on 8 cores (measured) |
+| Loads past saturation | Throughput flat beyond ~30 users on 8 cores (measured) |
 
-Cost per million output tokens = hourly price ÷ (output tokens/s × 3600) × 1,000,000.
+## What to build next
 
-### Limits of this run
+1. **A one-command evaluation path.** A single-node install that never prompts, validates each component, and ends by printing a working `curl`. *Target:* first answer in under 15 minutes.
+2. **SLA reporting in model-manager.** `model-manager bench --sla ttft=2s,tps=10` would report capacity, TTFT, TPOT, and cost per million tokens into the existing Grafana. *Target:* every deployment ships with a recorded SLA capacity.
+3. **A capacity planner.** Given a model and an SLA, recommend cores, replicas, and tensor parallelism, using the core inventory NRI pre-flight already has. *Target:* predictions within 15% of measured capacity.
+4. **SLA-aware routing in the AI gateway.** Route each request to the smallest model that passes an evaluation set for its task. Measured throughput suggests a 70/30 split would cut cost by about 60%, which the evaluation would need to confirm.
 
-- One server and one run per configuration, so run-to-run variance has not been measured.
-- The load generator ran on the same server. The model's cores were pinned; the client's were not.
-- Costs use an estimated hourly rate. To use the invoiced rate, rerun `analyze.py --usd-per-hour <rate>`.
-- No Intel accelerator was tested. IBM Cloud offers Intel Gaudi 3 (an 8-accelerator `gx3d-160x1792x8gaudi3` profile) but no Intel Arc or Data Center GPU instances. The current Enterprise Inference release serves on Xeon only; Gaudi support exists in the archived OPEA version.
+## Method and scope
 
-## Reproduce it
+| Experiment | What was done |
+|---|---|
+| E1, deployment effort | Timed each phase on a fresh server; logged every retry and manual step |
+| E2, capacity | Qwen3-0.6B at 1, 2, 4, 8, 16, 24, 32, and 48 concurrent users |
+| E3, AMX | E2 repeated with AMX disabled in oneDNN |
+| E4, model size | Qwen2.5-3B-Instruct at 1, 2, 4, and 8 users |
+| E5, routing | Blended cost calculated from E2 and E4 throughput |
 
-You need an IBM Cloud account that can create VPC virtual servers, plus `jq`, `bc`, and the IBM Cloud CLI. A full run uses about two hours of server time, roughly $3.
+Cost per million output tokens = hourly price ÷ (output tokens/s × 3600) × 10⁶.
+
+Scope and limits:
+- One server and one run per configuration.
+- The load generator ran on the same server.
+- Costs use an estimated rate; IBM's partial billing for the run implies about $2/hour.
+- Xeon only. Intel accelerators, such as Gaudi 3 on IBM Cloud, are candidates for a follow-up run.
+
+## Reproduce
+
+You need an IBM Cloud account and the IBM Cloud CLI. A full run takes about two hours of server time, roughly $3.
 
 ```bash
 ibmcloud login --sso
-./01-preflight.sh                  # read-only: account, credit, profiles, image, leftovers
-CONFIRM=yes ./02-provision.sh      # creates the VPC and server, starts a cost watchdog
-./03-run-remote.sh                 # checks AMX, then runs the install and E1-E4 in tmux
-./03-run-remote.sh attach          # watch progress
-./03-run-remote.sh collect         # copy results and logs to results/<timestamp>/
+./01-preflight.sh                  # read-only account and capacity checks
+CONFIRM=yes ./02-provision.sh      # server plus a 4-hour auto-delete watchdog
+./03-run-remote.sh                 # AMX check, timed install, experiments E1–E4
+./03-run-remote.sh collect         # results and logs to results/<timestamp>/
 python3 analyze.py results/<timestamp> --usd-per-hour <rate>
-python3 docs/build_site.py results/<timestamp>   # rebuild the results page
-CONFIRM=yes ./99-teardown.sh       # delete everything and confirm nothing is left
+python3 docs/build_site.py results/<timestamp>
+CONFIRM=yes ./99-teardown.sh       # deletes everything and verifies nothing is left
 ```
 
-Cost safeguards:
-- `02-provision.sh` refuses to run without `CONFIRM=yes`.
-- A watchdog deletes every `opea-ei-*` resource after `MAX_HOURS` (default 4).
-- `99-teardown.sh` ends with a leftovers check that must report zero.
-- `bx3d` servers keep billing while stopped, so the scripts delete them rather than stop them.
+[RUNBOOK.md](RUNBOOK.md) has step-by-step detail and pass criteria.
 
-[RUNBOOK.md](RUNBOOK.md) has step-by-step instructions and pass criteria for each output file.
-
-## Repository layout
+<details>
+<summary>Repository layout</summary>
 
 ```text
-README.md                this page
-docs/index.html          results page published with GitHub Pages
-docs/architecture.*      draw.io diagram and PNG export
-results/20261103-2026/   run 1: benchmarks, oneDNN probes, pod specs, install log, timestamped logs
-logs/operator-log.md     every action taken during run 1, including failures and fixes
+docs/                    results page (GitHub Pages), architecture diagram, previews
+results/20261103-2026/   run 1: benchmarks, oneDNN probes, pod specs, install and session logs
+logs/operator-log.md     every action during run 1, in order
 env.sh                   region, profile, pinned versions, cost limits
-01-preflight.sh          read-only account and capacity checks
-02-provision.sh          VPC, subnet, key, server, floating IP, watchdog
-03-run-remote.sh         run, attach, or collect on the server
-99-teardown.sh           delete all resources and verify
+01-preflight.sh … 99-teardown.sh   provision, run, collect, tear down
 node/                    on-server scripts: hardware check, timed install, experiments, load generator
 analyze.py               SLA capacity, cost per token, AMX ratio, routing calculation
 ```
+</details>
 
-The scripts are provided as-is. The Intel components are Apache 2.0, and model weights come from Hugging Face under their own licenses.
+The scripts are provided as-is. Intel components are Apache 2.0, and model weights come from Hugging Face under their own licenses.

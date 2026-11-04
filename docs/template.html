@@ -279,7 +279,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
       <li>Private and air-gapped deployments: the model runs on your server behind one authenticated, OpenAI-compatible endpoint, with no third-party API in the path<span class="tag meas">measured: 401 without token</span></li>
       <li>Fleets that already run Xeon: inference capacity without a new accelerator procurement<span class="tag judg">judgment</span></li>
     </ul></div>
-    <div class="col"><h3>Poor fit, or needs more hardware</h3><ul>
+    <div class="col"><h3>Needs more cores or an accelerator</h3><ul>
       <li>3B+ models for interactive users on a few cores: 5.2 tokens/s for one user against a target of 10<span class="tag meas">measured</span></li>
       <li>Loads past the saturation point: beyond ~30 users on 8 cores, throughput stops rising and latency climbs<span class="tag meas">measured</span></li>
       <li>Large models at high throughput, where an accelerator's memory bandwidth decides the outcome<span class="tag judg">judgment</span></li>
@@ -290,7 +290,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
 
 <section class="reveal" id="deployment">
   <div class="sec-h"><span class="num">08</span><h2>The deployment, minute by minute</h2></div>
-  <p class="lede">The install itself was solid: 468 Ansible tasks, none failed, 49 pods healthy, 0 restarts. The time went to the steps around it.</p>
+  <p class="lede">The install itself was solid: 468 Ansible tasks, none failed, 49 pods healthy, 0 restarts. The remaining minutes went to six small things, each with a simple fix.</p>
   <div class="panel"><h3>Bare server to first correct answer</h3><p class="sub" id="e1-sub"></p><div class="chart" id="c-gantt"></div></div>
   <div class="friction" id="friction"></div>
   <p style="font-size:14px;margin-top:16px">What worked as designed: NRI balloons pinned each model to whole cores on one NUMA node; pre-flight refused placements that would spill onto hyperthread siblings; the AI gateway routed by the <code>model</code> field with no per-model configuration.</p>
@@ -319,7 +319,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
   <ul class="limits">
     <li>One server and one run per configuration, so run-to-run variance has not been measured.</li>
     <li>The load generator ran on the same server. The model's cores were pinned; the client's were not.</li>
-    <li>No Intel accelerator was tested. IBM Cloud offers Gaudi 3 (8-accelerator servers only); the current Enterprise Inference release serves on Xeon, and Gaudi support exists only in the archived OPEA version.</li>
+    <li>Scope is Xeon only. Intel accelerators (Gaudi 3 is available on IBM Cloud in 8-accelerator servers) are candidates for a follow-up run.</li>
   </ul>
   <pre>ibmcloud login --sso
 ./01-preflight.sh                       # read-only checks
