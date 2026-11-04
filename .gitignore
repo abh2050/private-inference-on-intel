@@ -1,0 +1,4 @@
+# Local run state: server IP, resource IDs, watchdog PID
+.state/
+__pycache__/
+.DS_Store
