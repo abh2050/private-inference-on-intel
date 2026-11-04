@@ -15,8 +15,8 @@ deployment effort, SLA capacity, cost per token, and what Intel AMX contributes.
 
 ## In one minute
 
-- **24 concurrent users met the target** on 8 Xeon cores (Qwen3-0.6B), with p95 time to first token ≤ 2 s. At 32 users, p95 rose to 2.31 s. No request failed at any level. This is benchmark capacity from one run per configuration, not a production-certified SLA.
-- **About $2.50 per million output tokens (estimated)** at that sustained load, for this workload (~600-token prompts, 128-token answers) at an assumed $1.90 per server-hour.
+- **24 concurrent users met the target** on 8 Xeon cores (Qwen3-0.6B), with p95 time to first token ≤ 2 s. At 32 users, p95 rose to 2.31 s. No request failed at any level: 0 of 48 at 24 users, and 0 of 304 across the whole sweep. This is benchmark capacity from one run per configuration, not a production-certified SLA.
+- **About $2.50 per million output tokens (estimated)** at that load, which sustained about 211 output tokens/s, for this workload (~600-token prompts, 128-token answers) at an assumed $1.90 per server-hour.
 - **AMX: 24 users within target with it, 2 without it**, on the same 8 cores. Without AMX, p95 TTFT reached 2.15 s at 4 users. Throughput was up to 3.1× higher with AMX.
 - **49 minutes observed** from a bare server to an authenticated, OpenAI-compatible endpoint answering correctly; **33 minutes** of that was automation, the rest an unanswered prompt and manual checks. The install ran 468 Ansible tasks with none failing.
 - **Six small deployment observations**, each paired with a suggested improvement, and four ideas for what to build next.
@@ -132,7 +132,7 @@ The core install was solid: 468 Ansible tasks with none failing, 49 pods healthy
 
 ## What to build next
 
-1. **A one-command evaluation path.** A single-node install that never prompts, validates each component, and ends by printing a working `curl`. *Target:* first answer in under 15 minutes.
+1. **A one-command evaluation path.** A single-node install that never prompts, validates each component, and ends by printing a working `curl`. *Target:* about 30 minutes, which is today's 49 minus the 16 minutes of prompts and manual checks. Getting under 15 would also need a prebuilt image or pre-pulled containers, because the install step alone took 25 minutes.
 2. **SLA reporting in model-manager.** `model-manager bench --sla ttft=2s,tps=10` would report capacity, TTFT, TPOT, and cost per million tokens into the existing Grafana. *Target:* every deployment ships with a recorded SLA capacity.
 3. **A capacity planner.** Given a model and an SLA, recommend cores, replicas, and tensor parallelism, using the core inventory NRI pre-flight already has. *Target:* predictions within 15% of measured capacity.
 4. **SLA-aware routing in the AI gateway.** Route each request to the smallest model that passes an evaluation set for its task. As a scenario only: arithmetic on the measured throughputs puts a 70/30 split at about 60% lower cost. No router was built; the saving needs quality evaluation and routing validation before it means anything.
@@ -159,7 +159,7 @@ Scope and limits:
 
 ## Reproduce
 
-You need an IBM Cloud account and the IBM Cloud CLI. A full run takes about two hours of server time, roughly $3.80 at $1.90 per hour (run 1 used 1.5 hours, about $2.83).
+You need an IBM Cloud account and the IBM Cloud CLI. A full run takes about two hours of server time, about $4 at $1.90 to $2 per hour (run 1 used 1.5 hours, about $2.83).
 
 ```bash
 ibmcloud login --sso

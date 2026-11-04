@@ -20,7 +20,7 @@ Step-by-step instructions for reproducing run 1, with what to check at each step
 4. `99-teardown.sh` ends with a leftovers check that must report zero for every resource type.
 5. Set spending notifications in the IBM console under Manage → Billing and usage.
 
-Run 1 used 1.49 server-hours, about $2.83 at $1.90 per hour. A full run from scratch takes about two hours, roughly $3.80.
+Run 1 used 1.49 server-hours, about $2.83 at $1.90 per hour. A full run from scratch takes about two hours, about $4.
 
 ## Steps
 
