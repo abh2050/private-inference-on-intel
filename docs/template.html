@@ -162,16 +162,16 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
   <button class="toggle" id="theme" aria-label="Toggle light or dark theme">◐ theme</button>
   <div class="hero-in">
     <div>
-      <div class="kicker">Field report · Run 1 · 2026-11-04</div>
+      <div class="kicker">Field report · Run 1 · 2026-11-04 UTC</div>
       <h1>How far can <em>one Xeon node</em> take private LLM inference?</h1>
       <p>I deployed Intel AI for Enterprise Inference on a single IBM Cloud server, served open models through its authenticated, OpenAI-compatible gateway, and measured what a platform team would ask first: the effort, the capacity, the cost per token, and what AMX is worth.</p>
     </div>
     <div class="bignum">
       <div class="n" id="hero-users">24<small>users</small></div>
-      <div class="l">observed within target on <b>8 Xeon cores</b>: p95 time-to-first-token under 2 s, no failed requests</div>
+      <div class="l">met the target on <b>8 Xeon cores</b> (p95 time-to-first-token ≤ 2 s). At 32 users, p95 rose to 2.31 s.</div>
       <div class="stats">
         <div><b id="hero-cost">$2.50</b><span>est. per 1M output tokens*</span></div>
-        <div><b id="hero-amx">12×</b><span>more users than with AMX off</span></div>
+        <div><b id="hero-amx">24 vs 2</b><span>users within target, AMX on vs. off</span></div>
         <div><b id="hero-e1">49 min</b><span>bare server → first answer (33 automated)</span></div>
       </div>
     </div>
@@ -184,7 +184,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
 
 <section class="reveal" id="problem">
   <div class="sec-h"><span class="num">01</span><h2>The problem</h2></div>
-  <p class="lede">Teams that move inference onto their own hardware, for cost, privacy, or air-gap reasons, have to answer four questions before they buy anything. Vendor documentation explains the install and gives no numbers for any of them.</p>
+  <p class="lede">Teams that move inference onto their own hardware, for cost, privacy, or air-gap reasons, have to answer four questions before they buy anything. I couldn't find published numbers for install time, capacity, or cost on this stack, so I measured them.</p>
   <div class="cols">
     <div class="q"><div class="k">Effort</div><h3>How long until it answers?</h3><p>From an empty machine to an authenticated, OpenAI-compatible endpoint. Where does it break?</p><div class="a" id="a-effort"></div></div>
     <div class="q"><div class="k">Capacity</div><h3>How many users per node?</h3><p>Before latency stops being acceptable.</p><div class="a" id="a-cap"></div></div>
@@ -197,7 +197,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
 
 <section class="reveal" id="deployed">
   <div class="sec-h"><span class="num">02</span><h2>What was deployed</h2></div>
-  <p>One server, single-node Kubernetes, and the full Intel stack. Every benchmark request goes through TLS, a Keycloak JWT check, and model routing before it reaches vLLM, the same path a production client would take.</p>
+  <p>One server, single-node Kubernetes, and the full Intel stack. Every benchmark request goes through TLS, a Keycloak JWT check, and model routing before it reaches vLLM: the same gateway and authentication path a client uses.</p>
   <figure><img src="architecture.png" alt="IBM Cloud VPC with one Xeon server running single-node Kubernetes. Requests pass through Envoy Gateway with a Keycloak JWT check, Envoy AI Gateway, an EPP scheduler, and a vLLM CPU pod pinned to 8 cores whose bf16 matrix math runs on AMX through oneDNN.">
     <figcaption>Client → Envoy Gateway (TLS, Keycloak JWT) → Envoy AI Gateway (reads <code>model</code> from the body) → EPP scheduler → vLLM on 8 NUMA-pinned cores → oneDNN → AMX. <a href="architecture.png">Full size</a> · <a href="architecture.drawio">draw.io source</a></figcaption></figure>
 </section>
@@ -241,7 +241,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
   <div class="evidence"><span class="c"># small oneDNN probe, run inside each serving pod with that pod&#39;s environment</span><br>
     <span class="on">AMX on </span> → isa: Intel AMX with bfloat16 and 8-bit integer support · <b>brg_matmul:avx10_1_512_amx</b><br>
     <span class="off">AMX off</span> → isa: AVX-512 with bfloat16 support · <b>brg_matmul:avx512_core_bf16</b>   <span class="c"># ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16</span></div>
-  <p style="font-size:14px;margin:-4px 0 12px">The probe confirms the instruction-set cap took effect in each pod. It does not trace every kernel vLLM ran; the end-to-end throughput and latency gap is the main evidence.</p>
+  <p style="font-size:14px;margin:-4px 0 12px"><b>How 24 vs. 2 was measured:</b> with AMX, every level up to 24 users met the target, and 32 missed it (p95 TTFT 2.31 s). Without AMX, 1 and 2 users met it, and 4 missed it (p95 TTFT 2.15 s). Same model, cores, and prompts. The probe confirms the instruction-set cap took effect in each pod. It does not trace every kernel vLLM ran; the end-to-end throughput and latency gap is the main evidence.</p>
   <div class="finding">
     <div><b id="f-amxx"></b>throughput at 16 users</div>
     <div><b>8.4 s → 1.2 s</b>TTFT p95 at 16 users</div>
@@ -278,8 +278,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
       <li>Small models at interactive load: a 0.6B model, 24 users observed within target on 8 cores<span class="tag meas">measured</span></li>
       <li>Prefill-heavy traffic such as RAG, summarization, and classification, where AMX matters most<span class="tag meas">measured: 3.1×</span></li>
       <li>Private deployments: the model runs on your own server behind one authenticated, OpenAI-compatible endpoint<span class="tag meas">demonstrated</span></li>
-      <li>Air-gapped deployments: plausible, but this install downloaded packages, images, and weights from the internet<span class="tag judg">not validated</span></li>
-      <li>Fleets that already run Xeon: inference capacity without a new accelerator procurement<span class="tag judg">judgment</span></li>
+            <li>Fleets that already run Xeon: inference capacity without a new accelerator procurement<span class="tag judg">judgment</span></li>
     </ul></div>
     <div class="col"><h3>Needs more cores or an accelerator</h3><ul>
       <li>3B+ models for interactive users on a few cores: 5.2 tokens/s for one user against a target of 10<span class="tag meas">measured</span></li>
@@ -309,7 +308,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
   <div class="sec-h"><span class="num">10</span><h2>What to build next</h2></div>
   <p class="lede">Ranked by how much each would cut the time and expertise a new team needs to reach a trusted, measured endpoint.</p>
   <div class="road">
-    <div class="it"><div class="n">1</div><div><h4>A one-command evaluation path</h4><p>Single-node install that never prompts, validates each component without aborting, and ends by printing a working <code>curl</code>. Removes friction items 1–3, which cost about 15 minutes of this run.</p></div><div class="kpi"><b>Measure</b>time to first answer: 49 min today, target under 15</div></div>
+    <div class="it"><div class="n">1</div><div><h4>A one-command evaluation path</h4><p>Single-node install that never prompts, validates each component without aborting, and ends by printing a working <code>curl</code>. Removes friction items 1–3, which cost about 16 minutes of this run.</p></div><div class="kpi"><b>Measure</b>time to first answer: 49 min today, target under 15</div></div>
     <div class="it"><div class="n">2</div><div><h4>An SLA report built into model-manager</h4><p><code>model-manager bench --sla ttft=2s,tps=10</code>: sweep concurrency, report capacity, TTFT, TPOT, and cost per million tokens, and export to the existing Grafana. The numbers on this page took a separate load generator to produce.</p></div><div class="kpi"><b>Measure</b>share of deployments with a recorded SLA capacity</div></div>
     <div class="it"><div class="n">3</div><div><h4>A capacity planner</h4><p>Given a model and an SLA, recommend cores, replicas, and tensor parallelism. NRI pre-flight already knows the free cores per NUMA node; benchmark data supplies tokens/s per core.</p></div><div class="kpi"><b>Measure</b>predicted vs. measured capacity, within 15%</div></div>
     <div class="it"><div class="n">4</div><div><h4>SLA-aware routing in the AI gateway</h4><p>The gateway already routes on the <code>model</code> field. Add a policy that sends a request to the smallest model that passes an evaluation set for its task, then measure the real saving against the 60% scenario in section 09.</p></div><div class="kpi"><b>Measure</b>blended $/1M tokens at equal eval score</div></div>
@@ -331,10 +330,10 @@ CONFIRM=yes ./02-provision.sh           # server + 4-hour auto-delete watchdog
 ./03-run-remote.sh &amp;&amp; ./03-run-remote.sh collect
 python3 analyze.py results/&lt;run&gt; --usd-per-hour &lt;rate&gt;
 CONFIRM=yes ./99-teardown.sh            # ends with a zero-leftovers check</pre>
-  <p style="font-size:14px">About two hours of server time, roughly $3. The <a href="https://github.com/abh2050/private-inference-on-intel/blob/main/logs/operator-log.md">operator log</a> records every action from run 1, including failures and fixes.</p>
+  <p style="font-size:14px">About two hours of server time, roughly $3.80 at $1.90 per hour (run 1 used 1.5 hours, about $2.83). The <a href="https://github.com/abh2050/private-inference-on-intel/blob/main/logs/operator-log.md">operator log</a> records every action from run 1, including failures and fixes.</p>
 </section>
 
-<footer>Private inference on Intel Xeon · run 1 · data in <a href="https://github.com/abh2050/private-inference-on-intel/tree/main/results/20261103-2026">results/20261103-2026</a></footer>
+<footer>Private inference on Intel Xeon · run 1 · data in <a href="https://github.com/abh2050/private-inference-on-intel/tree/main/results/2026-11-04-run1">results/2026-11-04-run1</a></footer>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
@@ -366,7 +365,7 @@ const SER=[{k:'on',name:'Qwen3-0.6B · AMX on',short:'AMX on',c:'--s1',rows:D.e2
 const capOn=D.cap_on, capOff=D.cap_off, rOn=D.e2.find(r=>r.concurrency===capOn), rOff=D.e3.find(r=>r.concurrency===capOff);
 document.getElementById('hero-users').innerHTML=capOn+'<small>users</small>';
 document.getElementById('hero-cost').textContent=fmt$(usdM(rOn,D.rate));
-document.getElementById('hero-amx').textContent=Math.round(capOn/capOff)+'×';
+document.getElementById('hero-amx').textContent=capOn+' vs '+capOff;
 document.getElementById('hero-e1').textContent=Math.round(D.e1.wall_clock_min)+' min';
 document.getElementById('a-effort').textContent=D.e1.wall_clock_min+' min observed · '+D.e1.automation_min+' automated';
 document.getElementById('a-cap').textContent=capOn+' users observed within target';

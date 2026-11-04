@@ -9,7 +9,7 @@ FIP=$(cat "$STATE_DIR/fip"); K="-i ${SSH_PUBKEY%.pub} -o StrictHostKeyChecking=a
 
 case "${1:-run}" in
   attach)  exec ssh $K -t ubuntu@"$FIP" tmux attach -t ei ;;
-  collect) d="results/$(date +%Y%m%d-%H%M)"; mkdir -p "$d"; scp $K -r ubuntu@"$FIP":results/. "$d/"; echo "Saved to $d"; exit 0 ;;
+  collect) d="results/$(date -u +%Y-%m-%d-%H%M)"; mkdir -p "$d"; scp $K -r ubuntu@"$FIP":results/. "$d/"; echo "Saved to $d"; exit 0 ;;
 esac
 
 scp $K -r node ubuntu@"$FIP":~/ >/dev/null

@@ -7,17 +7,17 @@ deployment effort, SLA capacity, cost per token, and what Intel AMX contributes.
 
 <p align="center">
 <a href="https://abh2050.github.io/private-inference-on-intel/"><b>Interactive results page →</b></a>
-&nbsp;·&nbsp; <a href="results/20261103-2026/summary.md">Raw results</a>
+&nbsp;·&nbsp; <a href="results/2026-11-04-run1/summary.md">Raw results</a>
 &nbsp;·&nbsp; <a href="logs/operator-log.md">Run log</a>
 </p>
 
-<p align="center"><a href="https://abh2050.github.io/private-inference-on-intel/"><img src="docs/preview-hero.png" alt="Results page header: 24 users observed within target on 8 Xeon cores; an estimated $2.50 per million output tokens; 12 times more users than with AMX off; 49 minutes from bare server to first answer, 33 of them automated." width="900"></a></p>
+<p align="center"><a href="https://abh2050.github.io/private-inference-on-intel/"><img src="docs/preview-hero.png" alt="Results page header: 24 users met the target on 8 Xeon cores; an estimated $2.50 per million output tokens; 24 users within target with AMX versus 2 without; 49 minutes from bare server to first answer, 33 of them automated." width="900"></a></p>
 
 ## In one minute
 
-- **24 concurrent users observed within target** on 8 Xeon cores (Qwen3-0.6B): p95 time to first token under 2 s and every request succeeded. This is benchmark capacity from one run per configuration, not a production-certified SLA.
+- **24 concurrent users met the target** on 8 Xeon cores (Qwen3-0.6B), with p95 time to first token ≤ 2 s. At 32 users, p95 rose to 2.31 s. No request failed at any level. This is benchmark capacity from one run per configuration, not a production-certified SLA.
 - **About $2.50 per million output tokens (estimated)** at that sustained load, for this workload (~600-token prompts, 128-token answers) at an assumed $1.90 per server-hour.
-- **AMX made a 12× difference in observed capacity.** With AMX disabled on the same cores, only 2 users stayed within the target; throughput was up to 3.1× higher with it.
+- **AMX: 24 users within target with it, 2 without it**, on the same 8 cores. Without AMX, p95 TTFT reached 2.15 s at 4 users. Throughput was up to 3.1× higher with AMX.
 - **49 minutes observed** from a bare server to an authenticated, OpenAI-compatible endpoint answering correctly; **33 minutes** of that was automation, the rest an unanswered prompt and manual checks. The install ran 468 Ansible tasks with none failing.
 - **Six small deployment observations**, each paired with a suggested improvement, and four ideas for what to build next.
 
@@ -63,11 +63,12 @@ Same model, same cores; the only change was `ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16
 | Users | Tok/s, AMX on | Tok/s, AMX off | Gain | TTFT p95, on → off |
 |---:|---:|---:|---:|---:|
 | 1 | 21.0 | 18.0 | 1.2× | 0.16 → 0.62 s |
+| 2 | 35.5 | 28.4 | 1.3× | 0.28 → 1.20 s |
 | 4 | 59.8 | 39.6 | 1.5× | 0.43 → 2.15 s |
 | 8 | 119.9 | 55.4 | 2.2× | 0.69 → 4.40 s |
 | 16 | 182.4 | 59.0 | 3.1× | 1.21 → 8.39 s |
 
-Decode is limited by memory bandwidth, so a single user sees little difference. Prefill is compute-bound and dominates under load, which is where the matrix unit pays off: **24 users at an estimated $2.50 per million tokens with AMX, against 2 users at about $18.58 without it.**
+Decode is limited by memory bandwidth, so a single user sees little difference. Without AMX, 1 and 2 users met the target and 4 missed it (p95 TTFT 2.15 s); with AMX, every level up to 24 met it. Prefill is compute-bound and dominates under load, which is where the matrix unit pays off: **24 users at an estimated $2.50 per million tokens with AMX, against 2 users at about $18.58 without it.**
 
 ### A larger model
 
@@ -158,7 +159,7 @@ Scope and limits:
 
 ## Reproduce
 
-You need an IBM Cloud account and the IBM Cloud CLI. A full run takes about two hours of server time, roughly $3.
+You need an IBM Cloud account and the IBM Cloud CLI. A full run takes about two hours of server time, roughly $3.80 at $1.90 per hour (run 1 used 1.5 hours, about $2.83).
 
 ```bash
 ibmcloud login --sso
@@ -178,7 +179,7 @@ CONFIRM=yes ./99-teardown.sh       # deletes everything and verifies nothing is 
 
 ```text
 docs/                    results page (GitHub Pages), architecture diagram, previews
-results/20261103-2026/   run 1: benchmarks, oneDNN probes, pod specs, install and session logs
+results/2026-11-04-run1/  run 1: benchmarks, oneDNN probes, pod specs, install and session logs
 logs/operator-log.md     every action during run 1, in order
 env.sh                   region, profile, pinned versions, cost limits
 01-preflight.sh … 99-teardown.sh   provision, run, collect, tear down

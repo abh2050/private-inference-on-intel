@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Builds docs/index.html (the GitHub Pages results page) from a results run.
 
-Usage: python3 docs/build_site.py results/20261103-2026
+Usage: python3 docs/build_site.py results/2026-11-04-run1
 Injects run data into docs/template.html. The page draws its charts with D3 (cdnjs, pinned 7.9.0)
 and falls back to data tables if D3 does not load.
 """
 import csv, json, pathlib, re, sys
 
-RUN = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "results/20261103-2026")
+RUN = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "results/2026-11-04-run1")
 HERE = pathlib.Path(__file__).parent
 S = json.loads((RUN / "summary.json").read_text())
 sw = S["sweeps"]
