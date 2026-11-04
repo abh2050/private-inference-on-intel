@@ -42,7 +42,7 @@ The stack comes from two Intel repositories. [intel/enterprise-ai-solutions](htt
 
 | Layer | Components | Job |
 |---|---|---|
-| Cluster | Kubernetes v1.35 (Kubespray), local-path storage | Single-node cluster on the VM |
+| Cluster | Kubernetes v1.34.3 (Kubespray; the docs say v1.35.4), local-path storage | Single-node cluster on the VM |
 | Edge | Envoy Gateway, MetalLB, cert-manager, Keycloak | TLS termination, a LoadBalancer IP, and JWT validation against Keycloak |
 | Routing | Envoy AI Gateway, EPP scheduler, KServe `LLMInferenceService` | Reads `"model"` from the request body and picks a serving endpoint |
 | Serving | vLLM CPU `v0.24.0` (OpenVINO Model Server is also available) | OpenAI-compatible `/v1/chat/completions` |
@@ -100,6 +100,8 @@ The friction log is a result in its own right. Items found so far:
 | 4 | IBM Cloud CLI | `key-create` rejected an Ed25519 key until `--key-type ed25519` was passed | One failed provision, cleaned up by the teardown script |
 | 5 | IBM Cloud billing | `bx3d` profiles include local instance storage, so IBM keeps billing while the server is stopped | Deleting the server is the only way to stop charges |
 | 6 | Intel installer | `es_auto_installer.sh configure` stops at an interactive `[y/N]` prompt. Over SSH or in CI it waits forever, or refuses when no terminal is attached. The `--force` flag skips it, but the quick start does not mention it. | The first run sat idle for about 12 minutes until the prompt was answered by hand |
+| 7 | Intel installer | `validate inference` aborts at `nfd` because the v1.1.0 release has no `validate.yaml` for that role. The 13 components before it pass; the inference components after it are never checked. | A healthy install reports failure. Each remaining component has to be validated by hand. |
+| 8 | Intel helper script | `get-keycloak-token.sh` leaves a `RETURN` trap that references an unset variable. Sourcing it from a script that uses `set -u` aborts that script. | Automation around the token helper needs a workaround |
 
 Install-phase friction (retries, ignored errors, unhealthy pods) is captured automatically in `results/<run>/friction.txt` and summarized under [Results](#results).
 

@@ -37,3 +37,9 @@ Every action taken from the operator workstation, in order, including failures a
 | 03:27 | Status check | Node `Ready`. Running: cert-manager, Istio, MetalLB, Envoy Gateway, Keycloak, PostgreSQL, Prometheus and Grafana, local-path storage. SeaweedFS deploying. |
 | 03:29 | Logging turned on | Per-minute cluster snapshots, plus step logging for `experiments.sh` (pushed before it started) |
 | 03:30 | Session log fixed | The first session log recorded only epoch numbers, because `tmux pipe-pane` expands `%` date codes itself. Moved the timestamping into `node/ts-log.sh`. The scrollback was re-captured, so nothing was lost. |
+| 03:39 | `install inference` finished | 24.9 min, exit 0. Ansible: ok=468, changed=147, failed=0. 49 pods Running or Completed, 0 restarts. |
+| 03:39 | `validate inference` | **Failed**, though not because of the cluster: 13 components passed, then the run aborted at `nfd` because `playbooks/validate.yaml` is missing for that role in v1.1.0. The components after it were never checked. |
+| 03:40 | Validated `kserve`, `envoy_ai_gateway`, `keycloak_config`, `llm_services` one by one | All passed, failed=0 |
+| 03:41 | `experiments.sh`, first start | Exited after 1 s. Intel's `get-keycloak-token.sh` leaves a `RETURN` trap that references an unset variable, which aborts any script running with `set -u`. Fixed with `trap - RETURN` after sourcing. |
+| 03:42 | `experiments.sh`, second start | Token OK; model download Job started. Stopped after 1 min: our script built the host as `inference.$GATEWAY_DOMAIN`, but the helper's value already includes `inference.`. Our bug, fixed. |
+| 03:43 | `experiments.sh`, third start | Deploy of `qwen3-0-6b` restarted; already-downloaded weights are reused |
