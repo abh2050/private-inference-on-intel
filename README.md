@@ -23,7 +23,7 @@ deployment effort, SLA capacity, cost per token, and what Intel AMX contributes.
 
 ## The problem
 
-Teams moving LLM inference onto their own infrastructure, for cost, data privacy, or air-gap reasons, have to answer four questions before committing hardware:
+Teams moving LLM inference onto their own infrastructure, for cost, data privacy, or air-gap reasons, have to answer four questions before committing hardware. I couldn't find published numbers for install time, capacity, or cost on this stack, so I measured them:
 
 | Question | What was measured |
 |---|---|
@@ -36,7 +36,7 @@ The service target was fixed before the run: **p95 time to first token ≤ 2 s, 
 
 ## Results
 
-All runs used the same 8 physical cores (one NUMA node), a ~600-token prompt, and 128 output tokens. Every request went through the authenticated gateway, and every request succeeded.
+All runs used the same 8 physical cores (one NUMA node), a ~600-token prompt, and 128 output tokens. Every request went through the same gateway and authentication path a client uses (TLS, Keycloak JWT, model routing), and every request succeeded: 0 of 304 failed in the Qwen3-0.6B sweep.
 
 <p align="center"><img src="docs/preview-capacity.png" alt="Two charts. Output throughput rises to about 217 tokens per second with AMX on, versus about 59 with AMX off and 30 for the 3B model. Time to first token p95 stays under 2 seconds up to 24 users with AMX on, but crosses it at 4 users with AMX off." width="900"></p>
 
