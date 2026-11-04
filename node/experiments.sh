@@ -7,7 +7,13 @@ export KUBECONFIG=~/eas/env/local/kubeconfig.yaml
 source .venv/bin/activate 2>/dev/null || true
 R=~/results; TL=$R/timeline.csv
 CPU=8
-log() { echo; echo "### $*  $(date -u +%T)"; }
+mkdir -p $R/logs
+# Full output of this script, every line timestamped, in addition to the terminal
+exec > >(while IFS= read -r l; do printf '%s %s\n' "$(date -u +%FT%TZ)" "$l"; done | tee -a $R/logs/experiments.log) 2>&1
+# One line per step in steps.log, so the run can be read at a glance
+log() { echo; echo "### $*  $(date -u +%T)"; echo "$(date -u +%FT%TZ)  $*" >> $R/logs/steps.log; }
+log "experiments.sh start (solutions $(git describe --tags 2>/dev/null))"
+trap 'log "experiments.sh exit code $?"' EXIT
 
 token() { source ./ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh --lifespan 7200 >/dev/null; }
 pod_of() { local p; p=$(kubectl get pods -n llm-inference -l "app.kubernetes.io/name=$1" -o name 2>/dev/null | head -1)
@@ -19,6 +25,7 @@ deploy() {  # deploy <served-name> <model-manager args...>   timed, so it adds t
   ./model-manager deploy "$@" --cpu $CPU --wait --wait-timeout 1800 2>&1 | tee "$R/deploy-$name.log"
   local rc=${PIPESTATUS[0]}
   echo "deploy_$name,$(date -u -d @$s +%T),$(date -u +%T),$(( $(date -u +%s)-s )),$rc" >> $TL
+  log "DEPLOY $name finished: exit $rc after $(( $(date -u +%s)-s )) s"
   return $rc
 }
 
@@ -30,6 +37,7 @@ ask() {  # ask <model> <question> <must-contain>   one correctness check
   if echo "$resp" | jq -e --arg w "$3" '.choices[0].message.content | test($w; "i")' >/dev/null; then
     echo "PASS $1: $(echo "$resp" | jq -r '.choices[0].message.content' | head -c 120)"
   else echo "FAIL $1: $(echo "$resp" | head -c 300)"; fi | tee -a "$R/smoke.txt"
+  log "SMOKE $1: $(tail -1 "$R/smoke.txt" | cut -c1-80)"
 }
 
 evidence() {  # evidence <served-name>   what the pod got, plus which oneDNN instruction set it actually uses
@@ -47,6 +55,7 @@ bench() {  # bench <served-name> <label> <requests> <levels...>
   python3 ~/node/bench.py --url "https://inference.$GATEWAY_DOMAIN" --model "$m" \
     --concurrency "$@" --requests "$n" --max-tokens 128 --out "$R/bench-$label.json" | tee "$R/bench-$label.txt"
   kill $sp 2>/dev/null
+  log "BENCH $label finished: $(jq -c '[.levels[] | {c:.concurrency, ok:.succeeded, tok_s:.output_tok_per_s, ttft95:.ttft_p95_s}]' "$R/bench-$label.json" 2>/dev/null)"
 }
 
 token
@@ -62,7 +71,7 @@ code=$(curl -sk -o /dev/null -w '%{http_code}' --noproxy '*' -H "Content-Type: a
 echo "No-token request -> HTTP $code (expect 401/403)" | tee $R/smoke-auth.txt
 evidence qwen3-0-6b
 bench qwen3-0-6b E2-qwen0.6b-amx 32 1 2 4 8 16
-./model-manager undeploy qwen3-0-6b
+log "UNDEPLOY qwen3-0-6b"; ./model-manager undeploy qwen3-0-6b
 
 # ---- E3: same model, AMX disabled in oneDNN ---------------------------------------------------
 deploy qwen3-noamx qwen3-0-6b --as qwen3-noamx --env ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16
@@ -70,7 +79,7 @@ token
 ask qwen3-noamx "What is the capital of France? Answer in one word." "Paris"
 evidence qwen3-noamx
 bench qwen3-noamx E3-qwen0.6b-noamx 32 1 2 4 8 16
-./model-manager undeploy qwen3-noamx
+log "UNDEPLOY qwen3-noamx"; ./model-manager undeploy qwen3-noamx
 
 # ---- E4: realistic 3B model, AMX on -----------------------------------------------------------
 deploy qwen2-5-3b --id Qwen/Qwen2.5-3B-Instruct --name qwen2-5-3b --memory 32Gi
@@ -78,7 +87,7 @@ token
 ask qwen2-5-3b "What is the capital of France? Answer in one word." "Paris"
 evidence qwen2-5-3b
 bench qwen2-5-3b E4-qwen2.5-3b-amx 16 1 2 4 8
-./model-manager undeploy qwen2-5-3b
+log "UNDEPLOY qwen2-5-3b"; ./model-manager undeploy qwen2-5-3b
 
 kubectl get nodes -o json | jq '.items[0].status.capacity' > $R/node-capacity.json
 log "EXPERIMENTS DONE"
