@@ -59,11 +59,24 @@ bench() {  # bench <served-name> <label> <requests> <levels...>
   log "BENCH $label finished: $(jq -c '[.levels[] | {c:.concurrency, ok:.succeeded, tok_s:.output_tok_per_s, ttft95:.ttft_p95_s}]' "$R/bench-$label.json" 2>/dev/null)"
 }
 
+# undeploy returns before the pod releases its pinned cores; wait until the namespace is empty,
+# otherwise the next deploy fails NRI pre-flight (seen in run 1, 03:52).
+undeploy() {
+  log "UNDEPLOY $1"; ./model-manager undeploy "$1"
+  for _ in $(seq 1 60); do
+    [[ -z "$(kubectl get pods -n llm-inference --no-headers 2>/dev/null | grep -v download)" ]] && break; sleep 5
+  done
+  log "UNDEPLOY $1 done: pods gone"
+}
+STAGES="${STAGES:-E2 E3 E4}"   # e.g. STAGES="E3 E4" to rerun only those
+run() { [[ " $STAGES " == *" $1 "* ]]; }
+
 token
 grep -q "$GATEWAY_DOMAIN" /etc/hosts || echo "$GATEWAY_IP $GATEWAY_DOMAIN" | sudo tee -a /etc/hosts >/dev/null
 
 # ---- E1 tail + E2: small model, AMX on ------------------------------------------------------
-deploy qwen3-0-6b qwen3-0-6b
+if run E2; then
+deploy qwen3-0-6b qwen3-0-6b || { log "ABORT: deploy qwen3-0-6b failed"; exit 1; }
 token
 ask qwen3-0-6b "What is the capital of France? Answer in one word." "Paris"
 echo "First correct answer at $(date -u +%T) UTC" >> $R/timeline-notes.txt
@@ -72,23 +85,28 @@ code=$(curl -sk -o /dev/null -w '%{http_code}' --noproxy '*' -H "Content-Type: a
 echo "No-token request -> HTTP $code (expect 401/403)" | tee $R/smoke-auth.txt
 evidence qwen3-0-6b
 bench qwen3-0-6b E2-qwen0.6b-amx 32 1 2 4 8 16
-log "UNDEPLOY qwen3-0-6b"; ./model-manager undeploy qwen3-0-6b
+undeploy qwen3-0-6b
+fi
 
 # ---- E3: same model, AMX disabled in oneDNN ---------------------------------------------------
-deploy qwen3-noamx qwen3-0-6b --as qwen3-noamx --env ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16
+if run E3; then
+deploy qwen3-noamx qwen3-0-6b --as qwen3-noamx --env ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16 || { log "ABORT: deploy qwen3-noamx failed"; exit 1; }
 token
 ask qwen3-noamx "What is the capital of France? Answer in one word." "Paris"
 evidence qwen3-noamx
 bench qwen3-noamx E3-qwen0.6b-noamx 32 1 2 4 8 16
-log "UNDEPLOY qwen3-noamx"; ./model-manager undeploy qwen3-noamx
+undeploy qwen3-noamx
+fi
 
 # ---- E4: realistic 3B model, AMX on -----------------------------------------------------------
-deploy qwen2-5-3b --id Qwen/Qwen2.5-3B-Instruct --name qwen2-5-3b --memory 32Gi
+if run E4; then
+deploy qwen2-5-3b --id Qwen/Qwen2.5-3B-Instruct --name qwen2-5-3b --memory 32Gi || { log "ABORT: deploy qwen2-5-3b failed"; exit 1; }
 token
 ask qwen2-5-3b "What is the capital of France? Answer in one word." "Paris"
 evidence qwen2-5-3b
 bench qwen2-5-3b E4-qwen2.5-3b-amx 16 1 2 4 8
-log "UNDEPLOY qwen2-5-3b"; ./model-manager undeploy qwen2-5-3b
+undeploy qwen2-5-3b
+fi
 
 kubectl get nodes -o json | jq '.items[0].status.capacity' > $R/node-capacity.json
 log "EXPERIMENTS DONE"

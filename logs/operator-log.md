@@ -43,3 +43,8 @@ Every action taken from the operator workstation, in order, including failures a
 | 03:41 | `experiments.sh`, first start | Exited after 1 s. Intel's `get-keycloak-token.sh` leaves a `RETURN` trap that references an unset variable, which aborts any script running with `set -u`. Fixed with `trap - RETURN` after sourcing. |
 | 03:42 | `experiments.sh`, second start | Token OK; model download Job started. Stopped after 1 min: our script built the host as `inference.$GATEWAY_DOMAIN`, but the helper's value already includes `inference.`. Our bug, fixed. |
 | 03:43 | `experiments.sh`, third start | Deploy of `qwen3-0-6b` restarted; already-downloaded weights are reused |
+| 03:49 | `qwen3-0-6b` deployed | 366 s, including the weight download. Smoke test: "Paris" (PASS). Request without a token: HTTP 401 (PASS). |
+| 03:50–03:52 | **E2 benchmark** | 32/32 requests succeeded at every level (1, 2, 4, 8, 16 concurrent) |
+| 03:52 | E3 and E4 deploys, attempt 1 | Both failed NRI pre-flight within 2 s, reporting free per-NUMA balloon CPUs of [6, 6] against 8 needed. The script carried on and benchmarked nothing. |
+| 03:56 | Diagnosis | A dry-run of the same deploy passed once the namespace was empty. `model-manager undeploy` returns before the pod releases its pinned cores, so a deploy issued 1 s later sees them as busy. |
+| 03:57 | Fix and rerun | `experiments.sh` now waits for the pods to disappear after each undeploy, aborts on a failed deploy, and accepts `STAGES`. Failed outputs moved to `results/failed-attempt-1/`. Restarted with `STAGES="E3 E4"`. |

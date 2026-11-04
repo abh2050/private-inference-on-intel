@@ -102,6 +102,7 @@ The friction log is a result in its own right. Items found so far:
 | 6 | Intel installer | `es_auto_installer.sh configure` stops at an interactive `[y/N]` prompt. Over SSH or in CI it waits forever, or refuses when no terminal is attached. The `--force` flag skips it, but the quick start does not mention it. | The first run sat idle for about 12 minutes until the prompt was answered by hand |
 | 7 | Intel installer | `validate inference` aborts at `nfd` because the v1.1.0 release has no `validate.yaml` for that role. The 13 components before it pass; the inference components after it are never checked. | A healthy install reports failure. Each remaining component has to be validated by hand. |
 | 8 | Intel helper script | `get-keycloak-token.sh` leaves a `RETURN` trap that references an unset variable. Sourcing it from a script that uses `set -u` aborts that script. | Automation around the token helper needs a workaround |
+| 9 | Intel model-manager | `undeploy` returns while the pod still holds its pinned cores. A `deploy` issued straight afterwards fails the NRI pre-flight check with "not enough physical cores", even on an otherwise empty node. | Scripts that swap models have to poll until the pod is gone |
 
 Install-phase friction (retries, ignored errors, unhealthy pods) is captured automatically in `results/<run>/friction.txt` and summarized under [Results](#results).
 
