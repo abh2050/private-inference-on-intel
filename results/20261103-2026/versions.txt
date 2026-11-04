@@ -1,0 +1,2 @@
+solutions: v1.1.0 3393a1236e443caefb72b7e9845495393ba7323e
+inference: 5d92bef0e3a2bcfed9016746a87ddcc43f6a67fa

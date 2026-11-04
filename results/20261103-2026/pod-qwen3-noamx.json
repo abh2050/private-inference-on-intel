@@ -1,0 +1,61 @@
+{
+  "node": "localhost",
+  "containers": [
+    {
+      "name": "main",
+      "image": "docker.io/vllm/vllm-openai-cpu:v0.24.0",
+      "resources": {
+        "limits": {
+          "cpu": "8",
+          "memory": "16Gi"
+        },
+        "requests": {
+          "cpu": "8",
+          "memory": "16Gi"
+        }
+      },
+      "env": [
+        {
+          "name": "KMP_BLOCKTIME",
+          "value": "1"
+        },
+        {
+          "name": "ONEDNN_MAX_CPU_ISA",
+          "value": "AVX512_CORE_BF16"
+        },
+        {
+          "name": "USER",
+          "value": "vllm"
+        },
+        {
+          "name": "VLLM_CPU_KVCACHE_SPACE",
+          "value": "8"
+        },
+        {
+          "name": "VLLM_CPU_NUM_OF_RESERVED_CPU",
+          "value": "1"
+        },
+        {
+          "name": "VLLM_CPU_SGL_KERNEL",
+          "value": "1"
+        },
+        {
+          "name": "VLLM_NO_USAGE_STATS",
+          "value": "1"
+        },
+        {
+          "name": "HOME",
+          "value": "/home"
+        },
+        {
+          "name": "VLLM_LOGGING_LEVEL",
+          "value": "INFO"
+        },
+        {
+          "name": "HF_HUB_CACHE",
+          "value": "/models"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+configure waited at an interactive [y/N] prompt from 03:01:31 to 03:12:58 UTC; answered manually. Fix: pass --force. Subtract this wait from E1.
+PHASE validate FAILED (exit 1)
+validate inference: 13 components passed; aborted at nfd because playbooks/validate.yaml is missing for that role in v1.1.0 (installer bug). kserve, envoy_ai_gateway, keycloak_config, llm_services were not checked by the aborted run; validated individually instead.
+get-keycloak-token.sh (inference v1.0.1) leaves a RETURN trap referencing an unset variable; sourcing it from a script with set -u aborts that script. Worked around with trap - RETURN.
+Run restarted at 03:43:52: GATEWAY_DOMAIN from get-keycloak-token.sh already includes the inference. prefix (script bug on our side, fixed). Model download job had started at 03:42:49; deploy restarted, weights reused.
+E3/E4 attempt 1 (03:52): model-manager undeploy returned before the pod released its NRI-balloon cores; next deploy 1 s later failed pre-flight (free [6,6] < 8). Not a capacity limit: dry-run at 03:56 passed. Fix: wait until llm-inference has no pods after undeploy. Failed outputs kept in failed-attempt-1/.

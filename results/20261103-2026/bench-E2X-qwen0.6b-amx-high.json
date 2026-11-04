@@ -1,0 +1,55 @@
+{
+  "model": "qwen3-0-6b",
+  "max_tokens": 128,
+  "time": "2026-11-04T04:24:37Z",
+  "levels": [
+    {
+      "concurrency": 24,
+      "requests": 48,
+      "succeeded": 48,
+      "failed": 0,
+      "errors": [],
+      "wall_s": 10.71,
+      "req_per_s": 4.483,
+      "output_tok_per_s": 210.7,
+      "avg_in_tokens": 597,
+      "ttft_p50_s": 1.6949,
+      "ttft_p95_s": 1.7573,
+      "tpot_p50_ms": 79.6,
+      "latency_p50_s": 5.3089,
+      "latency_p95_s": 5.4263
+    },
+    {
+      "concurrency": 32,
+      "requests": 48,
+      "succeeded": 48,
+      "failed": 0,
+      "errors": [],
+      "wall_s": 10.43,
+      "req_per_s": 4.604,
+      "output_tok_per_s": 216.7,
+      "avg_in_tokens": 597,
+      "ttft_p50_s": 1.7511,
+      "ttft_p95_s": 2.3109,
+      "tpot_p50_ms": 96.9,
+      "latency_p50_s": 6.217,
+      "latency_p95_s": 6.3423
+    },
+    {
+      "concurrency": 48,
+      "requests": 48,
+      "succeeded": 48,
+      "failed": 0,
+      "errors": [],
+      "wall_s": 10.34,
+      "req_per_s": 4.643,
+      "output_tok_per_s": 218.2,
+      "avg_in_tokens": 597,
+      "ttft_p50_s": 1.8298,
+      "ttft_p95_s": 3.3862,
+      "tpot_p50_ms": 183.1,
+      "latency_p50_s": 10.2555,
+      "latency_p95_s": 10.325
+    }
+  ]
+}

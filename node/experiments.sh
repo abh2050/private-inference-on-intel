@@ -108,5 +108,14 @@ bench qwen2-5-3b E4-qwen2.5-3b-amx 16 1 2 4 8
 undeploy qwen2-5-3b
 fi
 
+# ---- E2X: find where the small model breaks the SLA (E2 still passed at 16) --------------------
+if run E2X; then
+deploy qwen3-0-6b qwen3-0-6b || { log "ABORT: deploy qwen3-0-6b failed"; exit 1; }
+token
+ask qwen3-0-6b "What is the capital of France? Answer in one word." "Paris"
+bench qwen3-0-6b E2X-qwen0.6b-amx-high 48 24 32 48
+undeploy qwen3-0-6b
+fi
+
 kubectl get nodes -o json | jq '.items[0].status.capacity' > $R/node-capacity.json
 log "EXPERIMENTS DONE"

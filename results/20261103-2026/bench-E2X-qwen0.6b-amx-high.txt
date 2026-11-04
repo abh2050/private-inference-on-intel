@@ -1,0 +1,8 @@
+{"concurrency": 24, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.71, "req_per_s": 4.483, "output_tok_per_s": 210.7, "avg_in_tokens": 597, "ttft_p50_s": 1.6949, "ttft_p95_s": 1.7573, "tpot_p50_ms": 79.6, "latency_p50_s": 5.3089, "latency_p95_s": 5.4263}
+{"concurrency": 32, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.43, "req_per_s": 4.604, "output_tok_per_s": 216.7, "avg_in_tokens": 597, "ttft_p50_s": 1.7511, "ttft_p95_s": 2.3109, "tpot_p50_ms": 96.9, "latency_p50_s": 6.217, "latency_p95_s": 6.3423}
+{"concurrency": 48, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.34, "req_per_s": 4.643, "output_tok_per_s": 218.2, "avg_in_tokens": 597, "ttft_p50_s": 1.8298, "ttft_p95_s": 3.3862, "tpot_p50_ms": 183.1, "latency_p50_s": 10.2555, "latency_p95_s": 10.325}
+
+conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+  24   48   4.483     210.7    1.6949    1.7573        79.6
+  32   48   4.604     216.7    1.7511    2.3109        96.9
+  48   48   4.643     218.2    1.8298    3.3862       183.1

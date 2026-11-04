@@ -36,20 +36,38 @@ def main():
     a = ap.parse_args(); d = pathlib.Path(a.run); usd = a.usd_per_hour
     out, md = {"usd_per_hour": usd, "sla": SLA}, ["# Results summary", f"Server cost assumed: ${usd}/h. SLA: p95 TTFT ≤ {SLA['ttft_p95_s']} s, ≥ {SLA['min_user_tok_s']} tok/s per user, 0 errors.", ""]
 
-    # E1: timeline
+    # E1: timeline. Wall clock vs. time the automation itself needed.
     tl = d / "timeline.csv"
     if tl.exists():
+        import re
         rows = list(csv.DictReader(tl.open()))
-        md += ["## E1: time to first request", "| phase | seconds | exit |", "|---|---|---|"]
-        md += [f"| {r['phase']} | {r['seconds']} | {r['exit']} |" for r in rows]
-        upto = 0
-        for r in rows:
-            upto += int(r["seconds"])
-            if r["phase"] == "deploy_qwen3-0-6b": break
-        out["e1_minutes_to_first_request"] = round(upto / 60, 1)
-        md += [f"\n**Bare server → first served model: {out['e1_minutes_to_first_request']} min** (sum of phases, excluding server boot)."]
-        fr = d / "friction.txt"
-        if fr.exists(): md += ["", "```", fr.read_text().strip(), "```"]
+        md += ["## E1: time to first request", "| phase | start (UTC) | seconds | exit |", "|---|---|---|---|"]
+        md += [f"| {r['phase']} | {r['start_utc']} | {r['seconds']} | {r['exit']} |" for r in rows]
+        sec = lambda t: sum(int(x) * m for x, m in zip(t.split(":"), (3600, 60, 1)))
+        first_ok = next((r for r in rows if r["phase"] == "deploy_qwen3-0-6b" and r["exit"] == "0"), None)
+        notes = (d / "timeline-notes.txt").read_text() if (d / "timeline-notes.txt").exists() else ""
+        fr = (d / "friction.txt").read_text() if (d / "friction.txt").exists() else ""
+        m = re.search(r"First correct answer at (\d\d:\d\d:\d\d)", notes)
+        if first_ok and m:
+            wall = sec(m.group(1)) - sec(rows[0]["start_utc"])
+            # machine time = install phases + the successful first deploy; excludes prompt waits and our restarts
+            idle = 0
+            w = re.search(r"prompt from (\d\d:\d\d:\d\d) to (\d\d:\d\d:\d\d)", fr)
+            if w: idle = sec(w.group(2)) - sec(w.group(1))
+            install = sum(int(r["seconds"]) for r in rows[: rows.index(first_ok)] if not r["phase"].startswith("deploy_"))
+            auto = install - idle + int(first_ok["seconds"])
+            out["e1"] = {"wall_clock_min": round(wall / 60, 1), "automation_min": round(auto / 60, 1),
+                         "idle_prompt_min": round(idle / 60, 1), "first_deploy_min": round(int(first_ok["seconds"]) / 60, 1)}
+            md += ["", f"**Wall clock, start of install to first correct answer: {out['e1']['wall_clock_min']} min.** "
+                   f"Time the automation needed (install phases minus the {out['e1']['idle_prompt_min']} min the `[y/N]` prompt sat unanswered, "
+                   f"plus the {out['e1']['first_deploy_min']} min first model deploy): **{out['e1']['automation_min']} min**. "
+                   "The difference is waiting on prompts and diagnosing failures by hand."]
+        il = d / "install.log"
+        if il.exists():
+            t = il.read_text(errors="replace")
+            out["install_retries"] = t.count("FAILED - RETRYING")
+            md += ["", f"Ansible retries during install: {out['install_retries']}."]
+        if fr: md += ["", "Friction notes from the run:", "```", fr.strip(), "```"]
 
     # E2-E4: sweeps
     runs = {"E2 Qwen3-0.6B, AMX on": "E2-qwen0.6b-amx", "E3 Qwen3-0.6B, AMX off": "E3-qwen0.6b-noamx",
@@ -57,6 +75,8 @@ def main():
     out["sweeps"] = {}
     for title, label in runs.items():
         lv = load(d, label)
+        if label == "E2-qwen0.6b-amx":  # E2X extends E2 to higher concurrency with the same setup
+            lv = sorted(lv + load(d, "E2X-qwen0.6b-amx-high"), key=lambda r: r["concurrency"])
         if not lv: continue
         md += ["", f"## {title}", "| users | ok/total | req/s | out tok/s | TTFT p50 | TTFT p95 | tok/s per user | $/1M out tok | SLA |",
                "|---|---|---|---|---|---|---|---|---|"]
@@ -96,6 +116,7 @@ def main():
             blend = share * small + (1 - share) * large
             out["routing"].append({"small_share": share, "usd_per_m": round(blend, 2), "saving_pct": round(100 * (1 - blend / large))})
             md.append(f"| {int(share*100)}% | ${blend:.2f} | {round(100*(1-blend/large))}% |")
+        md.append("\nThe 3B figure uses its peak measured throughput (8 users), where it already misses the latency target on 8 cores.")
         md.append("\nThis is a calculation, not a measured router. Quality on the routed share has to be checked with an eval set before claiming the saving.")
 
     (d / "summary.md").write_text("\n".join(md) + "\n"); (d / "summary.json").write_text(json.dumps(out, indent=2))

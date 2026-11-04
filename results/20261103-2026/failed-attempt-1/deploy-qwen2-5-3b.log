@@ -1,0 +1,11 @@
+[INFO] Using environment: local
+[INFO ]  Category: llm (auto-detected)
+[INFO ]  Deploying qwen2-5-3b (LLMInferenceService)
+[INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+[INFO ]    CPU: 8 | Memory: 32Gi | Replicas: 1
+[INFO ]    CPU policy: nri-balloons
+[INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+[INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+[WARN ]  NRI pre-flight issues detected:
+[WARN ]    - cluster cannot host 1 replica(s) of eff_cpu=8 tp=1 (balloon='vllm-balloon-tp1'): only 0 balloon slot(s) free across 1 node(s). localhost: tp=1 needs 1 NUMA node(s) with >= 8 balloon CPU each, only 0 qualify (per-NUMA balloon pool free: [6, 6]). Lower cpu/--replicas, raise --tp, undeploy a model, or add a node.
+[ERROR]  NRI pre-flight failed: not enough physical cores to place qwen2-5-3b (cpu=8 tp=1 replicas=1) without spilling onto reserved hyperthread-sibling cores. Lower --cpu/--replicas, raise --tp, undeploy a model, or add a node. Override with MM_NRI_PREFLIGHT=warn (proceed anyway) or MM_NRI_SKIP_PREFLIGHT=1 (skip check).

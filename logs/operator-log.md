@@ -48,3 +48,11 @@ Every action taken from the operator workstation, in order, including failures a
 | 03:52 | E3 and E4 deploys, attempt 1 | Both failed NRI pre-flight within 2 s, reporting free per-NUMA balloon CPUs of [6, 6] against 8 needed. The script carried on and benchmarked nothing. |
 | 03:56 | Diagnosis | A dry-run of the same deploy passed once the namespace was empty. `model-manager undeploy` returns before the pod releases its pinned cores, so a deploy issued 1 s later sees them as busy. |
 | 03:57 | Fix and rerun | `experiments.sh` now waits for the pods to disappear after each undeploy, aborts on a failed deploy, and accepts `STAGES`. Failed outputs moved to `results/failed-attempt-1/`. Restarted with `STAGES="E3 E4"`. |
+| 03:59 | E3 deployed (AMX off) | 280 s. Smoke test PASS. oneDNN probe in the pod: `avx512_core_bf16`, no AMX. |
+| 04:05 | E3 benchmark finished | 32/32 at every level. Undeploy waited 36 s for the pod to go. |
+| 04:12 | E4 deployed (Qwen2.5-3B) | 404 s, including the download. Smoke test PASS. |
+| 04:18 | E4 benchmark finished | 16/16 at every level |
+| 04:20 | Added E2X (24, 32, 48 users) | E2 still met the target at 16, so the limit had not been found |
+| 04:25 | E2X finished | Passes at 24 users, fails at 32 (TTFT p95 2.31 s). Throughput levels off near 217 tok/s. |
+| 04:26 | Collected results (1.5 MB) | Scanned for tokens, credentials, and personal data; only task names and cluster-internal IPs found |
+| 04:27 | `99-teardown.sh` | Server, floating IP, volume, subnet, VPC, and key deleted. Leftovers check: all 0. Server time 1.49 h, about $2.83 at the estimated rate. |

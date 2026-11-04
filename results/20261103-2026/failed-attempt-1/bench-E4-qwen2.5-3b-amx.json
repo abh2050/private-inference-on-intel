@@ -1,0 +1,79 @@
+{
+  "model": "qwen2-5-3b",
+  "max_tokens": 128,
+  "time": "2026-11-04T03:53:02Z",
+  "levels": [
+    {
+      "concurrency": 1,
+      "requests": 16,
+      "succeeded": 0,
+      "failed": 16,
+      "errors": [
+        "HTTP Error 404: Not Found"
+      ],
+      "wall_s": 0.06,
+      "req_per_s": 0.0,
+      "output_tok_per_s": 0.0,
+      "avg_in_tokens": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "tpot_p50_ms": null,
+      "latency_p50_s": null,
+      "latency_p95_s": null
+    },
+    {
+      "concurrency": 2,
+      "requests": 16,
+      "succeeded": 0,
+      "failed": 16,
+      "errors": [
+        "HTTP Error 404: Not Found"
+      ],
+      "wall_s": 0.04,
+      "req_per_s": 0.0,
+      "output_tok_per_s": 0.0,
+      "avg_in_tokens": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "tpot_p50_ms": null,
+      "latency_p50_s": null,
+      "latency_p95_s": null
+    },
+    {
+      "concurrency": 4,
+      "requests": 16,
+      "succeeded": 0,
+      "failed": 16,
+      "errors": [
+        "HTTP Error 404: Not Found"
+      ],
+      "wall_s": 0.02,
+      "req_per_s": 0.0,
+      "output_tok_per_s": 0.0,
+      "avg_in_tokens": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "tpot_p50_ms": null,
+      "latency_p50_s": null,
+      "latency_p95_s": null
+    },
+    {
+      "concurrency": 8,
+      "requests": 16,
+      "succeeded": 0,
+      "failed": 16,
+      "errors": [
+        "HTTP Error 404: Not Found"
+      ],
+      "wall_s": 0.02,
+      "req_per_s": 0.0,
+      "output_tok_per_s": 0.0,
+      "avg_in_tokens": null,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "tpot_p50_ms": null,
+      "latency_p50_s": null,
+      "latency_p95_s": null
+    }
+  ]
+}

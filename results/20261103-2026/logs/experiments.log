@@ -1,0 +1,451 @@
+2026-11-04T03:41:34Z 
+2026-11-04T03:41:34Z ### experiments.sh start (solutions v1.1.0)  03:41:34
+2026-11-04T03:41:35Z ./ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh: line 20: _gt_oldopts: unbound variable
+2026-11-04T03:41:35Z 
+2026-11-04T03:41:35Z ### experiments.sh exit code 1  03:41:35
+2026-11-04T03:42:48Z 
+2026-11-04T03:42:48Z ### experiments.sh start (solutions v1.1.0)  03:42:48
+2026-11-04T03:42:49Z 
+2026-11-04T03:42:49Z ### TOKEN ok (gateway inference.solutions.ai)  03:42:49
+2026-11-04T03:42:49Z 
+2026-11-04T03:42:49Z ### DEPLOY qwen3-0-6b  03:42:49
+2026-11-04T03:42:49Z [INFO] Using environment: local
+2026-11-04T03:42:49Z [INFO ]  Deploying qwen3-0-6b (LLMInferenceService)
+2026-11-04T03:42:49Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:42:49Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T03:42:49Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:42:49Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:42:50Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:42:51Z [  OK ]  Storage ready: model-store (Pending — binds on first consumer, StorageClass 'local-path' uses WaitForFirstConsumer)
+2026-11-04T03:42:51Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-0-6b
+2026-11-04T03:42:51Z job.batch/download-qwen3-0-6b created
+2026-11-04T03:42:51Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+2026-11-04T03:42:51Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T03:42:51Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T03:43:52Z 
+2026-11-04T03:43:52Z ### experiments.sh start (solutions v1.1.0)  03:43:52
+2026-11-04T03:43:53Z 
+2026-11-04T03:43:53Z ### TOKEN ok (gateway inference.solutions.ai)  03:43:53
+2026-11-04T03:43:53Z 
+2026-11-04T03:43:53Z ### DEPLOY qwen3-0-6b  03:43:53
+2026-11-04T03:43:53Z [INFO] Using environment: local
+2026-11-04T03:43:53Z [INFO ]  Deploying qwen3-0-6b (LLMInferenceService)
+2026-11-04T03:43:53Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:43:53Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T03:43:54Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:43:54Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:43:54Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:43:56Z [  OK ]  Storage ready: model-store (Bound)
+2026-11-04T03:43:56Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-0-6b
+2026-11-04T03:43:56Z job.batch/download-qwen3-0-6b created
+2026-11-04T03:43:56Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+2026-11-04T03:43:56Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T03:43:56Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T03:46:50Z job.batch/download-qwen3-0-6b condition met
+2026-11-04T03:46:50Z [  OK ]  Download complete: qwen3-0-6b
+2026-11-04T03:46:50Z llminferenceservice.serving.kserve.io/qwen3-0-6b serverside-applied
+2026-11-04T03:46:50Z [  OK ]  Manifest applied: LLMInferenceService/qwen3-0-6b in llm-inference
+2026-11-04T03:46:50Z [INFO ]  Creating AIGatewayRoute aigw-qwen3-0-6b (EPP → qwen3-0-6b-inference-pool)
+2026-11-04T03:46:50Z aigatewayroute.aigateway.envoyproxy.io/aigw-qwen3-0-6b serverside-applied
+2026-11-04T03:46:50Z [INFO ]  Waiting for qwen3-0-6b to become Ready (timeout: 1800s)...
+2026-11-04T03:46:50Z [INFO ]    [0s] qwen3-0-6b: waiting for pod to be created
+2026-11-04T03:47:05Z [INFO ]    [15s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T03:47:51Z [INFO ]    [1m 1s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T03:48:52Z [INFO ]    [2m 2s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T03:49:54Z [INFO ]    [3m 4s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T03:49:59Z [  OK ]  qwen3-0-6b is Ready
+2026-11-04T03:49:59Z inferencepool.inference.networking.k8s.io/qwen3-0-6b-inference-pool patched
+2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z   ────────────────────────────────────────────────────────
+2026-11-04T03:49:59Z   Model:    qwen3-0-6b  |  Kind: LLMInferenceService  |  Category: llm
+2026-11-04T03:49:59Z   Auth:     keycloak
+2026-11-04T03:49:59Z   Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+2026-11-04T03:49:59Z   Endpoint: https://inference.solutions.ai/v1/chat/completions
+2026-11-04T03:49:59Z   Note:     Pass "model": "qwen3-0-6b" in the request body
+2026-11-04T03:49:59Z   ────────────────────────────────────────────────────────
+2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z   1. Get a Keycloak token:
+2026-11-04T03:49:59Z   source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+2026-11-04T03:49:59Z   # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z   2. Call the model:
+2026-11-04T03:49:59Z   curl -sk --noproxy "*" \
+2026-11-04T03:49:59Z     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+2026-11-04T03:49:59Z     --resolve "inference.solutions.ai:443:10.241.0.4" \
+2026-11-04T03:49:59Z     -d '{"model":"qwen3-0-6b","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+2026-11-04T03:49:59Z     https://inference.solutions.ai/v1/chat/completions
+2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z ### DEPLOY qwen3-0-6b finished: exit 0 after 366 s  03:49:59
+2026-11-04T03:50:00Z 
+2026-11-04T03:50:00Z ### TOKEN ok (gateway inference.solutions.ai)  03:50:00
+2026-11-04T03:50:08Z PASS qwen3-0-6b: Paris
+2026-11-04T03:50:08Z 
+2026-11-04T03:50:08Z ### SMOKE qwen3-0-6b: PASS qwen3-0-6b: Paris  03:50:08
+2026-11-04T03:50:08Z No-token request -> HTTP 401 (expect 401/403)
+2026-11-04T03:50:11Z 
+2026-11-04T03:50:11Z ### BENCH E2-qwen0.6b-amx  03:50:11
+2026-11-04T03:52:54Z {"concurrency": 1, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 71.53, "req_per_s": 0.447, "output_tok_per_s": 21.0, "avg_in_tokens": 597, "ttft_p50_s": 0.1494, "ttft_p95_s": 0.1599, "tpot_p50_ms": 45.4, "latency_p50_s": 2.2357, "latency_p95_s": 2.2669}
+2026-11-04T03:52:54Z {"concurrency": 2, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 42.41, "req_per_s": 0.755, "output_tok_per_s": 35.5, "avg_in_tokens": 597, "ttft_p50_s": 0.2473, "ttft_p95_s": 0.2839, "tpot_p50_ms": 52.9, "latency_p50_s": 2.6534, "latency_p95_s": 2.6744}
+2026-11-04T03:52:54Z {"concurrency": 4, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 25.15, "req_per_s": 1.272, "output_tok_per_s": 59.8, "avg_in_tokens": 597, "ttft_p50_s": 0.3721, "ttft_p95_s": 0.4252, "tpot_p50_ms": 60.1, "latency_p50_s": 3.1289, "latency_p95_s": 3.207}
+2026-11-04T03:52:54Z {"concurrency": 8, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 12.55, "req_per_s": 2.55, "output_tok_per_s": 119.9, "avg_in_tokens": 597, "ttft_p50_s": 0.659, "ttft_p95_s": 0.6884, "tpot_p50_ms": 54.1, "latency_p50_s": 3.1326, "latency_p95_s": 3.1899}
+2026-11-04T03:52:54Z {"concurrency": 16, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 8.26, "req_per_s": 3.873, "output_tok_per_s": 182.4, "avg_in_tokens": 597, "ttft_p50_s": 1.108, "ttft_p95_s": 1.2072, "tpot_p50_ms": 64.1, "latency_p50_s": 4.0585, "latency_p95_s": 4.0799}
+2026-11-04T03:52:54Z 
+2026-11-04T03:52:54Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T03:52:54Z    1   32   0.447      21.0    0.1494    0.1599        45.4
+2026-11-04T03:52:54Z    2   32   0.755      35.5    0.2473    0.2839        52.9
+2026-11-04T03:52:54Z    4   32   1.272      59.8    0.3721    0.4252        60.1
+2026-11-04T03:52:54Z    8   32    2.55     119.9     0.659    0.6884        54.1
+2026-11-04T03:52:54Z   16   32   3.873     182.4     1.108    1.2072        64.1
+2026-11-04T03:52:54Z 
+2026-11-04T03:52:54Z ### BENCH E2-qwen0.6b-amx finished: [{"c":1,"ok":32,"tok_s":21.0,"ttft95":0.1599},{"c":2,"ok":32,"tok_s":35.5,"ttft95":0.2839},{"c":4,"ok":32,"tok_s":59.8,"ttft95":0.4252},{"c":8,"ok":32,"tok_s":119.9,"ttft95":0.6884},{"c":16,"ok":32,"tok_s":182.4,"ttft95":1.2072}]  03:52:54
+2026-11-04T03:52:54Z 
+2026-11-04T03:52:54Z ### UNDEPLOY qwen3-0-6b  03:52:54
+2026-11-04T03:52:54Z [INFO] Using environment: local
+2026-11-04T03:52:54Z [INFO ]  Undeploying qwen3-0-6b
+2026-11-04T03:52:54Z llminferenceservice.serving.kserve.io "qwen3-0-6b" deleted from llm-inference namespace
+2026-11-04T03:52:55Z aigatewayroute.aigateway.envoyproxy.io "aigw-qwen3-0-6b" deleted from llm-inference namespace
+2026-11-04T03:52:55Z [  OK ]  qwen3-0-6b undeployed
+2026-11-04T03:52:55Z 
+2026-11-04T03:52:55Z ### DEPLOY qwen3-noamx  03:52:55
+2026-11-04T03:52:55Z [INFO] Using environment: local
+2026-11-04T03:52:55Z [INFO ]  Deploying qwen3-noamx (LLMInferenceService)
+2026-11-04T03:52:55Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:52:55Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T03:52:55Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:52:56Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:52:56Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:52:57Z [WARN ]  NRI pre-flight issues detected:
+2026-11-04T03:52:57Z [WARN ]    - cluster cannot host 1 replica(s) of eff_cpu=8 tp=1 (balloon='vllm-balloon-tp1'): only 0 balloon slot(s) free across 1 node(s). localhost: tp=1 needs 1 NUMA node(s) with >= 8 balloon CPU each, only 0 qualify (per-NUMA balloon pool free: [6, 6]). Lower cpu/--replicas, raise --tp, undeploy a model, or add a node.
+2026-11-04T03:52:57Z [ERROR]  NRI pre-flight failed: not enough physical cores to place qwen3-noamx (cpu=8 tp=1 replicas=1) without spilling onto reserved hyperthread-sibling cores. Lower --cpu/--replicas, raise --tp, undeploy a model, or add a node. Override with MM_NRI_PREFLIGHT=warn (proceed anyway) or MM_NRI_SKIP_PREFLIGHT=1 (skip check).
+2026-11-04T03:52:57Z 
+2026-11-04T03:52:57Z ### DEPLOY qwen3-noamx finished: exit 1 after 2 s  03:52:57
+2026-11-04T03:52:58Z 
+2026-11-04T03:52:58Z ### TOKEN ok (gateway inference.solutions.ai)  03:52:58
+2026-11-04T03:52:58Z FAIL qwen3-noamx: 
+2026-11-04T03:52:58Z 
+2026-11-04T03:52:58Z ### SMOKE qwen3-noamx: FAIL qwen3-noamx:   03:52:58
+2026-11-04T03:52:58Z error: the server doesn't have a resource type ""
+2026-11-04T03:52:58Z 
+2026-11-04T03:52:58Z ### BENCH E3-qwen0.6b-noamx  03:52:58
+2026-11-04T03:52:59Z {"concurrency": 1, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.13, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z {"concurrency": 2, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.08, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z {"concurrency": 4, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.06, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z {"concurrency": 8, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.05, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z {"concurrency": 16, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.04, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z 
+2026-11-04T03:52:59Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T03:52:59Z    1    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z    2    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z    4    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z    8    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z   16    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z 
+2026-11-04T03:52:59Z ### BENCH E3-qwen0.6b-noamx finished: [{"c":1,"ok":0,"tok_s":0.0,"ttft95":null},{"c":2,"ok":0,"tok_s":0.0,"ttft95":null},{"c":4,"ok":0,"tok_s":0.0,"ttft95":null},{"c":8,"ok":0,"tok_s":0.0,"ttft95":null},{"c":16,"ok":0,"tok_s":0.0,"ttft95":null}]  03:52:59
+2026-11-04T03:52:59Z 
+2026-11-04T03:52:59Z ### UNDEPLOY qwen3-noamx  03:52:59
+2026-11-04T03:52:59Z [INFO] Using environment: local
+2026-11-04T03:52:59Z [ERROR]  No catalog entry or deployed resource named 'qwen3-noamx' found.
+2026-11-04T03:52:59Z 
+2026-11-04T03:52:59Z ### DEPLOY qwen2-5-3b  03:52:59
+2026-11-04T03:52:59Z [INFO] Using environment: local
+2026-11-04T03:52:59Z [INFO ]  Category: llm (auto-detected)
+2026-11-04T03:52:59Z [INFO ]  Deploying qwen2-5-3b (LLMInferenceService)
+2026-11-04T03:52:59Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:52:59Z [INFO ]    CPU: 8 | Memory: 32Gi | Replicas: 1
+2026-11-04T03:52:59Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:53:00Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:53:00Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:53:01Z [WARN ]  NRI pre-flight issues detected:
+2026-11-04T03:53:01Z [WARN ]    - cluster cannot host 1 replica(s) of eff_cpu=8 tp=1 (balloon='vllm-balloon-tp1'): only 0 balloon slot(s) free across 1 node(s). localhost: tp=1 needs 1 NUMA node(s) with >= 8 balloon CPU each, only 0 qualify (per-NUMA balloon pool free: [6, 6]). Lower cpu/--replicas, raise --tp, undeploy a model, or add a node.
+2026-11-04T03:53:01Z [ERROR]  NRI pre-flight failed: not enough physical cores to place qwen2-5-3b (cpu=8 tp=1 replicas=1) without spilling onto reserved hyperthread-sibling cores. Lower --cpu/--replicas, raise --tp, undeploy a model, or add a node. Override with MM_NRI_PREFLIGHT=warn (proceed anyway) or MM_NRI_SKIP_PREFLIGHT=1 (skip check).
+2026-11-04T03:53:01Z 
+2026-11-04T03:53:01Z ### DEPLOY qwen2-5-3b finished: exit 1 after 2 s  03:53:01
+2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z ### TOKEN ok (gateway inference.solutions.ai)  03:53:02
+2026-11-04T03:53:02Z FAIL qwen2-5-3b: 
+2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z ### SMOKE qwen2-5-3b: FAIL qwen2-5-3b:   03:53:02
+2026-11-04T03:53:02Z error: the server doesn't have a resource type ""
+2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z ### BENCH E4-qwen2.5-3b-amx  03:53:02
+2026-11-04T03:53:02Z {"concurrency": 1, "requests": 16, "succeeded": 0, "failed": 16, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.06, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:53:02Z {"concurrency": 2, "requests": 16, "succeeded": 0, "failed": 16, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.04, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:53:02Z {"concurrency": 4, "requests": 16, "succeeded": 0, "failed": 16, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.02, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:53:02Z {"concurrency": 8, "requests": 16, "succeeded": 0, "failed": 16, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.02, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T03:53:02Z    1    0     0.0       0.0      None      None        None
+2026-11-04T03:53:02Z    2    0     0.0       0.0      None      None        None
+2026-11-04T03:53:02Z    4    0     0.0       0.0      None      None        None
+2026-11-04T03:53:02Z    8    0     0.0       0.0      None      None        None
+2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z ### BENCH E4-qwen2.5-3b-amx finished: [{"c":1,"ok":0,"tok_s":0.0,"ttft95":null},{"c":2,"ok":0,"tok_s":0.0,"ttft95":null},{"c":4,"ok":0,"tok_s":0.0,"ttft95":null},{"c":8,"ok":0,"tok_s":0.0,"ttft95":null}]  03:53:02
+2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z ### UNDEPLOY qwen2-5-3b  03:53:02
+2026-11-04T03:53:02Z [INFO] Using environment: local
+2026-11-04T03:53:03Z [ERROR]  No catalog entry or deployed resource named 'qwen2-5-3b' found.
+2026-11-04T03:53:03Z 
+2026-11-04T03:53:03Z ### EXPERIMENTS DONE  03:53:03
+2026-11-04T03:53:03Z 
+2026-11-04T03:53:03Z ### experiments.sh exit code 0  03:53:03
+2026-11-04T03:54:53Z 
+2026-11-04T03:54:53Z ### experiments.sh start (solutions v1.1.0)  03:54:53
+2026-11-04T03:54:54Z 
+2026-11-04T03:54:54Z ### TOKEN ok (gateway inference.solutions.ai)  03:54:54
+2026-11-04T03:54:54Z 
+2026-11-04T03:54:54Z ### DEPLOY qwen3-noamx  03:54:54
+2026-11-04T03:54:54Z [INFO] Using environment: local
+2026-11-04T03:54:54Z [INFO ]  Deploying qwen3-noamx (LLMInferenceService)
+2026-11-04T03:54:54Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:54:54Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T03:54:54Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:54:54Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:54:54Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:54:56Z [  OK ]  Storage ready: model-store (Bound)
+2026-11-04T03:54:56Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-noamx
+2026-11-04T03:54:56Z job.batch/download-qwen3-noamx created
+2026-11-04T03:54:56Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+2026-11-04T03:54:56Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T03:54:56Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T03:54:59Z sh: 4: cannot create {{DOWNLOAD_CMD}}1: Permission denied
+2026-11-04T03:56:13Z failed to create fsnotify watcher: too many open filesjob.batch/download-qwen3-noamx condition met
+2026-11-04T03:56:13Z [  OK ]  Download complete: qwen3-noamx
+2026-11-04T03:56:13Z llminferenceservice.serving.kserve.io/qwen3-noamx serverside-applied
+2026-11-04T03:56:13Z [  OK ]  Manifest applied: LLMInferenceService/qwen3-noamx in llm-inference
+2026-11-04T03:56:13Z [INFO ]  Creating AIGatewayRoute aigw-qwen3-noamx (EPP → qwen3-noamx-inference-pool)
+2026-11-04T03:56:13Z aigatewayroute.aigateway.envoyproxy.io/aigw-qwen3-noamx serverside-applied
+2026-11-04T03:56:13Z [INFO ]  Waiting for qwen3-noamx to become Ready (timeout: 1800s)...
+2026-11-04T03:56:13Z [INFO ]    [0s] qwen3-noamx: waiting for pod to be created
+2026-11-04T03:56:29Z [INFO ]    [16s] qwen3-noamx: running — loading model / warming up
+2026-11-04T03:57:15Z [INFO ]    [1m 1s] qwen3-noamx: running — loading model / warming up
+2026-11-04T03:58:16Z [INFO ]    [2m 3s] qwen3-noamx: running — loading model / warming up
+2026-11-04T03:59:17Z [INFO ]    [3m 4s] qwen3-noamx: running — loading model / warming up
+2026-11-04T03:59:33Z [  OK ]  qwen3-noamx is Ready
+2026-11-04T03:59:34Z inferencepool.inference.networking.k8s.io/qwen3-noamx-inference-pool patched
+2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z   ────────────────────────────────────────────────────────
+2026-11-04T03:59:34Z   Model:    qwen3-noamx  |  Kind: LLMInferenceService  |  Category: llm
+2026-11-04T03:59:34Z   Auth:     keycloak
+2026-11-04T03:59:34Z   Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+2026-11-04T03:59:34Z   Endpoint: https://inference.solutions.ai/v1/chat/completions
+2026-11-04T03:59:34Z   Note:     Pass "model": "qwen3-noamx" in the request body
+2026-11-04T03:59:34Z   ────────────────────────────────────────────────────────
+2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z   1. Get a Keycloak token:
+2026-11-04T03:59:34Z   source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+2026-11-04T03:59:34Z   # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z   2. Call the model:
+2026-11-04T03:59:34Z   curl -sk --noproxy "*" \
+2026-11-04T03:59:34Z     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+2026-11-04T03:59:34Z     --resolve "inference.solutions.ai:443:10.241.0.4" \
+2026-11-04T03:59:34Z     -d '{"model":"qwen3-noamx","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+2026-11-04T03:59:34Z     https://inference.solutions.ai/v1/chat/completions
+2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z ### DEPLOY qwen3-noamx finished: exit 0 after 280 s  03:59:34
+2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z ### TOKEN ok (gateway inference.solutions.ai)  03:59:34
+2026-11-04T03:59:41Z PASS qwen3-noamx: Paris
+2026-11-04T03:59:41Z 
+2026-11-04T03:59:41Z ### SMOKE qwen3-noamx: PASS qwen3-noamx: Paris  03:59:41
+2026-11-04T03:59:44Z 
+2026-11-04T03:59:44Z ### BENCH E3-qwen0.6b-noamx  03:59:44
+2026-11-04T04:04:57Z {"concurrency": 1, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 108.67, "req_per_s": 0.294, "output_tok_per_s": 18.0, "avg_in_tokens": 597, "ttft_p50_s": 0.6069, "ttft_p95_s": 0.6179, "tpot_p50_ms": 46.7, "latency_p50_s": 3.3975, "latency_p95_s": 3.4476}
+2026-11-04T04:04:57Z {"concurrency": 2, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 77.85, "req_per_s": 0.411, "output_tok_per_s": 28.4, "avg_in_tokens": 597, "ttft_p50_s": 1.143, "ttft_p95_s": 1.1999, "tpot_p50_ms": 59.6, "latency_p50_s": 4.9054, "latency_p95_s": 4.9747}
+2026-11-04T04:04:57Z {"concurrency": 4, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 50.96, "req_per_s": 0.628, "output_tok_per_s": 39.6, "avg_in_tokens": 597, "ttft_p50_s": 0.6758, "ttft_p95_s": 2.1465, "tpot_p50_ms": 88.3, "latency_p50_s": 6.5437, "latency_p95_s": 7.1161}
+2026-11-04T04:04:57Z {"concurrency": 8, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 34.92, "req_per_s": 0.916, "output_tok_per_s": 55.4, "avg_in_tokens": 597, "ttft_p50_s": 2.7801, "ttft_p95_s": 4.4009, "tpot_p50_ms": 99.3, "latency_p50_s": 8.6555, "latency_p95_s": 9.7622}
+2026-11-04T04:04:57Z {"concurrency": 16, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 32.44, "req_per_s": 0.986, "output_tok_per_s": 59.0, "avg_in_tokens": 597, "ttft_p50_s": 7.4442, "ttft_p95_s": 8.3893, "tpot_p50_ms": 151.1, "latency_p50_s": 15.7835, "latency_p95_s": 17.4564}
+2026-11-04T04:04:57Z 
+2026-11-04T04:04:57Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T04:04:57Z    1   32   0.294      18.0    0.6069    0.6179        46.7
+2026-11-04T04:04:57Z    2   32   0.411      28.4     1.143    1.1999        59.6
+2026-11-04T04:04:57Z    4   32   0.628      39.6    0.6758    2.1465        88.3
+2026-11-04T04:04:57Z    8   32   0.916      55.4    2.7801    4.4009        99.3
+2026-11-04T04:04:57Z   16   32   0.986      59.0    7.4442    8.3893       151.1
+2026-11-04T04:04:57Z 
+2026-11-04T04:04:57Z ### BENCH E3-qwen0.6b-noamx finished: [{"c":1,"ok":32,"tok_s":18.0,"ttft95":0.6179},{"c":2,"ok":32,"tok_s":28.4,"ttft95":1.1999},{"c":4,"ok":32,"tok_s":39.6,"ttft95":2.1465},{"c":8,"ok":32,"tok_s":55.4,"ttft95":4.4009},{"c":16,"ok":32,"tok_s":59.0,"ttft95":8.3893}]  04:04:57
+2026-11-04T04:04:57Z 
+2026-11-04T04:04:57Z ### UNDEPLOY qwen3-noamx  04:04:57
+2026-11-04T04:04:57Z [INFO] Using environment: local
+2026-11-04T04:04:57Z [INFO ]  Discovered live LLMInferenceService/qwen3-noamx in llm-inference (no catalog entry)
+2026-11-04T04:04:57Z [INFO ]  Undeploying qwen3-noamx
+2026-11-04T04:04:57Z llminferenceservice.serving.kserve.io "qwen3-noamx" deleted from llm-inference namespace
+2026-11-04T04:04:58Z aigatewayroute.aigateway.envoyproxy.io "aigw-qwen3-noamx" deleted from llm-inference namespace
+2026-11-04T04:04:58Z [  OK ]  qwen3-noamx undeployed
+2026-11-04T04:05:33Z 
+2026-11-04T04:05:33Z ### UNDEPLOY qwen3-noamx done: pods gone  04:05:33
+2026-11-04T04:05:33Z 
+2026-11-04T04:05:33Z ### DEPLOY qwen2-5-3b  04:05:33
+2026-11-04T04:05:33Z [INFO] Using environment: local
+2026-11-04T04:05:34Z [INFO ]  Category: llm (auto-detected)
+2026-11-04T04:05:34Z [INFO ]  Deploying qwen2-5-3b (LLMInferenceService)
+2026-11-04T04:05:34Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T04:05:34Z [INFO ]    CPU: 8 | Memory: 32Gi | Replicas: 1
+2026-11-04T04:05:34Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T04:05:34Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T04:05:34Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T04:05:36Z [  OK ]  Storage ready: model-store (Bound)
+2026-11-04T04:05:36Z [INFO ]  Downloading model weights: Qwen/Qwen2.5-3B-Instruct → PVC:/qwen2-5-3b
+2026-11-04T04:05:36Z job.batch/download-qwen2-5-3b created
+2026-11-04T04:05:36Z [INFO ]  Downloading model weights: Qwen/Qwen2.5-3B-Instruct
+2026-11-04T04:05:36Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T04:05:36Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T04:05:39Z sh: 4: cannot create {{DOWNLOAD_CMD}}1: Permission denied
+2026-11-04T04:08:47Z failed to create fsnotify watcher: too many open filesjob.batch/download-qwen2-5-3b condition met
+2026-11-04T04:08:47Z [  OK ]  Download complete: qwen2-5-3b
+2026-11-04T04:08:48Z llminferenceservice.serving.kserve.io/qwen2-5-3b serverside-applied
+2026-11-04T04:08:48Z [  OK ]  Manifest applied: LLMInferenceService/qwen2-5-3b in llm-inference
+2026-11-04T04:08:48Z [INFO ]  Creating AIGatewayRoute aigw-qwen2-5-3b (EPP → qwen2-5-3b-inference-pool)
+2026-11-04T04:08:48Z aigatewayroute.aigateway.envoyproxy.io/aigw-qwen2-5-3b serverside-applied
+2026-11-04T04:08:48Z [INFO ]  Waiting for qwen2-5-3b to become Ready (timeout: 1800s)...
+2026-11-04T04:08:48Z [INFO ]    [0s] qwen2-5-3b: waiting for pod to be created
+2026-11-04T04:09:03Z [INFO ]    [15s] qwen2-5-3b: pending (waiting to be scheduled)
+2026-11-04T04:09:18Z [INFO ]    [30s] qwen2-5-3b: running — loading model / warming up
+2026-11-04T04:09:49Z [INFO ]    [1m 1s] qwen2-5-3b: running — loading model / warming up
+2026-11-04T04:10:50Z [INFO ]    [2m 2s] qwen2-5-3b: running — loading model / warming up
+2026-11-04T04:11:51Z [INFO ]    [3m 3s] qwen2-5-3b: running — loading model / warming up
+2026-11-04T04:12:17Z [  OK ]  qwen2-5-3b is Ready
+2026-11-04T04:12:17Z inferencepool.inference.networking.k8s.io/qwen2-5-3b-inference-pool patched
+2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z   ────────────────────────────────────────────────────────
+2026-11-04T04:12:17Z   Model:    qwen2-5-3b  |  Kind: LLMInferenceService  |  Category: llm
+2026-11-04T04:12:17Z   Auth:     keycloak
+2026-11-04T04:12:17Z   Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+2026-11-04T04:12:17Z   Endpoint: https://inference.solutions.ai/v1/chat/completions
+2026-11-04T04:12:17Z   Note:     Pass "model": "qwen2-5-3b" in the request body
+2026-11-04T04:12:17Z   ────────────────────────────────────────────────────────
+2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z   1. Get a Keycloak token:
+2026-11-04T04:12:17Z   source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+2026-11-04T04:12:17Z   # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z   2. Call the model:
+2026-11-04T04:12:17Z   curl -sk --noproxy "*" \
+2026-11-04T04:12:17Z     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+2026-11-04T04:12:17Z     --resolve "inference.solutions.ai:443:10.241.0.4" \
+2026-11-04T04:12:17Z     -d '{"model":"qwen2-5-3b","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+2026-11-04T04:12:17Z     https://inference.solutions.ai/v1/chat/completions
+2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z ### DEPLOY qwen2-5-3b finished: exit 0 after 404 s  04:12:17
+2026-11-04T04:12:18Z 
+2026-11-04T04:12:18Z ### TOKEN ok (gateway inference.solutions.ai)  04:12:18
+2026-11-04T04:12:20Z PASS qwen2-5-3b: Paris
+2026-11-04T04:12:20Z 
+2026-11-04T04:12:20Z ### SMOKE qwen2-5-3b: PASS qwen2-5-3b: Paris  04:12:20
+2026-11-04T04:12:24Z 
+2026-11-04T04:12:24Z ### BENCH E4-qwen2.5-3b-amx  04:12:24
+2026-11-04T04:18:29Z {"concurrency": 1, "requests": 16, "succeeded": 16, "failed": 0, "errors": [], "wall_s": 169.0, "req_per_s": 0.095, "output_tok_per_s": 4.9, "avg_in_tokens": 614, "ttft_p50_s": 0.7001, "ttft_p95_s": 0.7583, "tpot_p50_ms": 194.0, "latency_p50_s": 10.6244, "latency_p95_s": 10.746}
+2026-11-04T04:18:30Z {"concurrency": 2, "requests": 16, "succeeded": 16, "failed": 0, "errors": [], "wall_s": 98.03, "req_per_s": 0.163, "output_tok_per_s": 8.5, "avg_in_tokens": 614, "ttft_p50_s": 1.3004, "ttft_p95_s": 1.4458, "tpot_p50_ms": 217.2, "latency_p50_s": 12.3018, "latency_p95_s": 12.6165}
+2026-11-04T04:18:30Z {"concurrency": 4, "requests": 16, "succeeded": 16, "failed": 0, "errors": [], "wall_s": 60.16, "req_per_s": 0.266, "output_tok_per_s": 13.8, "avg_in_tokens": 614, "ttft_p50_s": 2.18, "ttft_p95_s": 2.2829, "tpot_p50_ms": 255.1, "latency_p50_s": 14.9531, "latency_p95_s": 15.3356}
+2026-11-04T04:18:30Z {"concurrency": 8, "requests": 16, "succeeded": 16, "failed": 0, "errors": [], "wall_s": 28.03, "req_per_s": 0.571, "output_tok_per_s": 29.7, "avg_in_tokens": 614, "ttft_p50_s": 3.6212, "ttft_p95_s": 3.6821, "tpot_p50_ms": 205.4, "latency_p50_s": 14.1541, "latency_p95_s": 14.1578}
+2026-11-04T04:18:30Z 
+2026-11-04T04:18:30Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T04:18:30Z    1   16   0.095       4.9    0.7001    0.7583       194.0
+2026-11-04T04:18:30Z    2   16   0.163       8.5    1.3004    1.4458       217.2
+2026-11-04T04:18:30Z    4   16   0.266      13.8      2.18    2.2829       255.1
+2026-11-04T04:18:30Z    8   16   0.571      29.7    3.6212    3.6821       205.4
+2026-11-04T04:18:30Z 
+2026-11-04T04:18:30Z ### BENCH E4-qwen2.5-3b-amx finished: [{"c":1,"ok":16,"tok_s":4.9,"ttft95":0.7583},{"c":2,"ok":16,"tok_s":8.5,"ttft95":1.4458},{"c":4,"ok":16,"tok_s":13.8,"ttft95":2.2829},{"c":8,"ok":16,"tok_s":29.7,"ttft95":3.6821}]  04:18:30
+2026-11-04T04:18:30Z 
+2026-11-04T04:18:30Z ### UNDEPLOY qwen2-5-3b  04:18:30
+2026-11-04T04:18:30Z [INFO] Using environment: local
+2026-11-04T04:18:30Z [INFO ]  Discovered live LLMInferenceService/qwen2-5-3b in llm-inference (no catalog entry)
+2026-11-04T04:18:30Z [INFO ]  Undeploying qwen2-5-3b
+2026-11-04T04:18:30Z llminferenceservice.serving.kserve.io "qwen2-5-3b" deleted from llm-inference namespace
+2026-11-04T04:18:30Z aigatewayroute.aigateway.envoyproxy.io "aigw-qwen2-5-3b" deleted from llm-inference namespace
+2026-11-04T04:18:30Z [  OK ]  qwen2-5-3b undeployed
+2026-11-04T04:19:06Z 
+2026-11-04T04:19:06Z ### UNDEPLOY qwen2-5-3b done: pods gone  04:19:06
+2026-11-04T04:19:06Z 
+2026-11-04T04:19:06Z ### EXPERIMENTS DONE  04:19:06
+2026-11-04T04:19:06Z 
+2026-11-04T04:19:06Z ### experiments.sh exit code 0  04:19:06
+2026-11-04T04:20:29Z 
+2026-11-04T04:20:29Z ### experiments.sh start (solutions v1.1.0)  04:20:29
+2026-11-04T04:20:29Z 
+2026-11-04T04:20:29Z ### TOKEN ok (gateway inference.solutions.ai)  04:20:29
+2026-11-04T04:20:29Z 
+2026-11-04T04:20:29Z ### DEPLOY qwen3-0-6b  04:20:29
+2026-11-04T04:20:29Z [INFO] Using environment: local
+2026-11-04T04:20:30Z [INFO ]  Deploying qwen3-0-6b (LLMInferenceService)
+2026-11-04T04:20:30Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T04:20:30Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T04:20:30Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T04:20:30Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T04:20:30Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T04:20:32Z [  OK ]  Storage ready: model-store (Bound)
+2026-11-04T04:20:32Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-0-6b
+2026-11-04T04:20:32Z job.batch/download-qwen3-0-6b created
+2026-11-04T04:20:32Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+2026-11-04T04:20:32Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T04:20:32Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T04:20:35Z Weights already present, skipping download
+2026-11-04T04:20:36Z failed to create fsnotify watcher: too many open filesjob.batch/download-qwen3-0-6b condition met
+2026-11-04T04:20:36Z [  OK ]  Download complete: qwen3-0-6b
+2026-11-04T04:20:36Z llminferenceservice.serving.kserve.io/qwen3-0-6b serverside-applied
+2026-11-04T04:20:36Z [  OK ]  Manifest applied: LLMInferenceService/qwen3-0-6b in llm-inference
+2026-11-04T04:20:36Z [INFO ]  Creating AIGatewayRoute aigw-qwen3-0-6b (EPP → qwen3-0-6b-inference-pool)
+2026-11-04T04:20:36Z aigatewayroute.aigateway.envoyproxy.io/aigw-qwen3-0-6b serverside-applied
+2026-11-04T04:20:36Z [INFO ]  Waiting for qwen3-0-6b to become Ready (timeout: 1800s)...
+2026-11-04T04:20:46Z [INFO ]    [10s] qwen3-0-6b: waiting for pod to be created
+2026-11-04T04:21:02Z [INFO ]    [26s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T04:21:48Z [INFO ]    [1m 11s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T04:22:49Z [INFO ]    [2m 13s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T04:23:50Z [INFO ]    [3m 14s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T04:23:56Z [  OK ]  qwen3-0-6b is Ready
+2026-11-04T04:23:56Z inferencepool.inference.networking.k8s.io/qwen3-0-6b-inference-pool patched
+2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z   ────────────────────────────────────────────────────────
+2026-11-04T04:23:57Z   Model:    qwen3-0-6b  |  Kind: LLMInferenceService  |  Category: llm
+2026-11-04T04:23:57Z   Auth:     keycloak
+2026-11-04T04:23:57Z   Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+2026-11-04T04:23:57Z   Endpoint: https://inference.solutions.ai/v1/chat/completions
+2026-11-04T04:23:57Z   Note:     Pass "model": "qwen3-0-6b" in the request body
+2026-11-04T04:23:57Z   ────────────────────────────────────────────────────────
+2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z   1. Get a Keycloak token:
+2026-11-04T04:23:57Z   source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+2026-11-04T04:23:57Z   # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z   2. Call the model:
+2026-11-04T04:23:57Z   curl -sk --noproxy "*" \
+2026-11-04T04:23:57Z     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+2026-11-04T04:23:57Z     --resolve "inference.solutions.ai:443:10.241.0.4" \
+2026-11-04T04:23:57Z     -d '{"model":"qwen3-0-6b","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+2026-11-04T04:23:57Z     https://inference.solutions.ai/v1/chat/completions
+2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z ### DEPLOY qwen3-0-6b finished: exit 0 after 208 s  04:23:57
+2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z ### TOKEN ok (gateway inference.solutions.ai)  04:23:57
+2026-11-04T04:24:04Z PASS qwen3-0-6b: Paris
+2026-11-04T04:24:04Z 
+2026-11-04T04:24:04Z ### SMOKE qwen3-0-6b: PASS qwen3-0-6b: Paris  04:24:04
+2026-11-04T04:24:04Z 
+2026-11-04T04:24:04Z ### BENCH E2X-qwen0.6b-amx-high  04:24:04
+2026-11-04T04:24:37Z {"concurrency": 24, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.71, "req_per_s": 4.483, "output_tok_per_s": 210.7, "avg_in_tokens": 597, "ttft_p50_s": 1.6949, "ttft_p95_s": 1.7573, "tpot_p50_ms": 79.6, "latency_p50_s": 5.3089, "latency_p95_s": 5.4263}
+2026-11-04T04:24:37Z {"concurrency": 32, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.43, "req_per_s": 4.604, "output_tok_per_s": 216.7, "avg_in_tokens": 597, "ttft_p50_s": 1.7511, "ttft_p95_s": 2.3109, "tpot_p50_ms": 96.9, "latency_p50_s": 6.217, "latency_p95_s": 6.3423}
+2026-11-04T04:24:37Z {"concurrency": 48, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.34, "req_per_s": 4.643, "output_tok_per_s": 218.2, "avg_in_tokens": 597, "ttft_p50_s": 1.8298, "ttft_p95_s": 3.3862, "tpot_p50_ms": 183.1, "latency_p50_s": 10.2555, "latency_p95_s": 10.325}
+2026-11-04T04:24:37Z 
+2026-11-04T04:24:37Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T04:24:37Z   24   48   4.483     210.7    1.6949    1.7573        79.6
+2026-11-04T04:24:37Z   32   48   4.604     216.7    1.7511    2.3109        96.9
+2026-11-04T04:24:37Z   48   48   4.643     218.2    1.8298    3.3862       183.1
+2026-11-04T04:24:37Z 
+2026-11-04T04:24:37Z ### BENCH E2X-qwen0.6b-amx-high finished: [{"c":24,"ok":48,"tok_s":210.7,"ttft95":1.7573},{"c":32,"ok":48,"tok_s":216.7,"ttft95":2.3109},{"c":48,"ok":48,"tok_s":218.2,"ttft95":3.3862}]  04:24:37
+2026-11-04T04:24:37Z 
+2026-11-04T04:24:37Z ### UNDEPLOY qwen3-0-6b  04:24:37
+2026-11-04T04:24:37Z [INFO] Using environment: local
+2026-11-04T04:24:38Z [INFO ]  Undeploying qwen3-0-6b
+2026-11-04T04:24:38Z llminferenceservice.serving.kserve.io "qwen3-0-6b" deleted from llm-inference namespace
+2026-11-04T04:24:38Z aigatewayroute.aigateway.envoyproxy.io "aigw-qwen3-0-6b" deleted from llm-inference namespace
+2026-11-04T04:24:38Z [  OK ]  qwen3-0-6b undeployed
+2026-11-04T04:25:14Z 
+2026-11-04T04:25:14Z ### UNDEPLOY qwen3-0-6b done: pods gone  04:25:14
+2026-11-04T04:25:14Z 
+2026-11-04T04:25:14Z ### EXPERIMENTS DONE  04:25:14
+2026-11-04T04:25:14Z 
+2026-11-04T04:25:14Z ### experiments.sh exit code 0  04:25:14

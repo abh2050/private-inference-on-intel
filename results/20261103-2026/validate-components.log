@@ -1,0 +1,982 @@
+Validate: kserve  (env=local, installer 1.1.0)
+Using existing venv: /home/ubuntu/eas/.venv
+Inventory: /home/ubuntu/eas/env/local/inventory/hosts.yaml
+
+PLAY [AI-solutions] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight] ***************************************************************
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/preflight.yaml for localhost[0m
+
+TASK [Preflight - Load ai-solutions component registry] ************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Ensure log and tmp directories exist] ************************
+[0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs)[0m
+[0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs/tmp)[0m
+
+TASK [Preflight - Note which layers ai-solutions declares itself] **************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Check for ext directory] *************************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Discover ext component manifests] ****************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Merge ext components + layers] *******************************
+[0;32mok: [localhost] => (item=components.yaml (enterprise.ai-inference))[0m
+
+TASK [Preflight - Proxy: fail fast if proxy set without no_proxy] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Check internet connectivity] *********************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Show proxy status] *******************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Abort on no connectivity] ************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Object store: reject legacy MinIO configuration for object store] ***
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Object store: validate backend value] ************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: validate value] **********************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: warn that accelerator overrides pinning] *********
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: downgrade to best-effort] ************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for nri-balloons] ****************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for kubelet-static] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for best-effort] *****************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: announce] ****************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'CPU policy: nri-balloons → kubelet_cpu_manager_policy=none, kubelet_topology_manager_policy=none,[0m
+[0;32m        nri_cpu_balloons_enabled=True'[0m
+
+TASK [Preflight - Define workload affinity (soft, label-based)] ****************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Empty affinity when topology disabled] ***********************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Storage: resolve backend] ************************************
+[0;36mincluded: storage for localhost[0m
+
+TASK [storage : storage | resolve | normalize selector] ************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | detect multi-node] *************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | collect missing ONTAP values] **************
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | assert the ONTAP configuration is complete] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | assert the custom StorageClass is named] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | reject an RWO-only custom class on multi-node] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | reject local-path on multi-node] ***********
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | look up backend in registry] ***************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | reject unknown backend] ********************
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: All assertions passed[0m
+
+TASK [storage : storage | resolve | derive role] *******************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | announce] **********************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'Storage backend: local-path -> role=(none - local-path)'[0m
+
+TASK [Preflight - Verify required CLI tools] ***********************************
+[0;32mok: [localhost] => (item=kubectl)[0m
+[0;32mok: [localhost] => (item=helm)[0m
+
+TASK [Preflight - Warn about missing CLI tools] ********************************
+[0;36mskipping: [localhost] => (item=kubectl) [0m
+[0;36mskipping: [localhost] => (item=helm) [0m
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Resolve active components (see filter_plugins/resolve_components.py)] ***
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Refuse layers this env was not provisioned for] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Show skipped components] *************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'Skipped (disabled): agentgateway'[0m
+
+TASK [Preflight - Display execution plan] **************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ━━━ Validate Plan ━━━[0m
+[0;32m        Action: validate[0m
+[0;32m        Target: kserve[0m
+[0;32m        Components: envoy_ai_gateway, kserve[0m
+
+TASK [Execute components] ******************************************************
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=envoy_ai_gateway)[0m
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=kserve)[0m
+
+TASK [VALIDATE: envoy_ai_gateway] **********************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  VALIDATE: envoy_ai_gateway                                               ┃[0m
+[0;32m        ┃  Layer: inference                                                         ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Execute envoy_ai_gateway] ************************************************
+[0;36mincluded: envoy_ai_gateway for localhost[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Dispatch action: validate] *********
+[0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/envoy_ai_gateway/tasks/validate.yaml for localhost[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Check controller deployment] *******
+[0;32mok: [localhost][0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Assert controller running] *********
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: AI Gateway controller has 1 ready replica(s)[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Validation passed] *****************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: Envoy AI Gateway validation passed.[0m
+
+TASK [envoy_ai_gateway — validate complete] ************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  ✓ envoy_ai_gateway — validate complete                                   ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Reset prep-only flag] ****************************************************
+[0;36mskipping: [localhost][0m
+
+TASK [VALIDATE: kserve] ********************************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  VALIDATE: kserve                                                         ┃[0m
+[0;32m        ┃  Layer: inference                                                         ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Execute kserve] **********************************************************
+[0;36mincluded: kserve for localhost[0m
+
+TASK [kserve : kserve | Dispatch action: validate] *****************************
+[0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/kserve/tasks/validate.yaml for localhost[0m
+
+TASK [kserve : kserve | Check InferenceService CRD] ****************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check controller deployment] ***************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check controller ready replicas] ***********************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Assert controller ready] *******************************
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: KServe controller has 1 ready replica(s)[0m
+
+TASK [kserve : kserve | Check cert-manager] ************************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check Istio (istiod)] **********************************
+[0;36mskipping: [localhost][0m
+
+TASK [kserve : kserve | Check Knative Serving controller] **********************
+[0;36mskipping: [localhost][0m
+
+TASK [kserve : kserve | Check LLMInferenceService CRD] *************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check LLMIsvc controller] ******************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check LWS operator] ************************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check Helm releases] ***********************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Display Helm releases] *********************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'KServe Helm releases: [''kserve-llmisvc-crd'', ''kserve-llmisvc-resources'',[0m
+[0;32m        ''kserve-resources'', ''kserve-runtime-configs'']'[0m
+
+TASK [kserve : kserve | Validation passed] *************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'KServe validation passed (mode: Standard) + LLMIsvc.'[0m
+
+TASK [kserve — validate complete] **********************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  ✓ kserve — validate complete                                             ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Reset prep-only flag] ****************************************************
+[0;36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[0;32mlocalhost[0m                  : [0;32mok=49  [0m changed=0    unreachable=0    failed=0    [0;36mskipped=20  [0m rescued=0    ignored=0   
+
+
+[0;32m╭──────────────────────────────────────────────────────────────────────────────╮[0m
+[0;32m│[0m VALIDATE COMPLETE                                                            [0;32m│[0m
+[0;32m│[0m                                                                              [0;32m│[0m
+[0;32m│[0m Target:  kserve                                                              [0;32m│[0m
+[0;32m│[0m Env:     local                                                               [0;32m│[0m
+[0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/validate-kserve-20261104-034059.log [0;32m│[0m
+[0;32m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+
+Validate: envoy_ai_gateway  (env=local, installer 1.1.0)
+Using existing venv: /home/ubuntu/eas/.venv
+Inventory: /home/ubuntu/eas/env/local/inventory/hosts.yaml
+
+PLAY [AI-solutions] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight] ***************************************************************
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/preflight.yaml for localhost[0m
+
+TASK [Preflight - Load ai-solutions component registry] ************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Ensure log and tmp directories exist] ************************
+[0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs)[0m
+[0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs/tmp)[0m
+
+TASK [Preflight - Note which layers ai-solutions declares itself] **************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Check for ext directory] *************************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Discover ext component manifests] ****************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Merge ext components + layers] *******************************
+[0;32mok: [localhost] => (item=components.yaml (enterprise.ai-inference))[0m
+
+TASK [Preflight - Proxy: fail fast if proxy set without no_proxy] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Check internet connectivity] *********************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Show proxy status] *******************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Abort on no connectivity] ************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Object store: reject legacy MinIO configuration for object store] ***
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Object store: validate backend value] ************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: validate value] **********************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: warn that accelerator overrides pinning] *********
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: downgrade to best-effort] ************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for nri-balloons] ****************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for kubelet-static] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for best-effort] *****************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: announce] ****************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'CPU policy: nri-balloons → kubelet_cpu_manager_policy=none, kubelet_topology_manager_policy=none,[0m
+[0;32m        nri_cpu_balloons_enabled=True'[0m
+
+TASK [Preflight - Define workload affinity (soft, label-based)] ****************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Empty affinity when topology disabled] ***********************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Storage: resolve backend] ************************************
+[0;36mincluded: storage for localhost[0m
+
+TASK [storage : storage | resolve | normalize selector] ************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | detect multi-node] *************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | collect missing ONTAP values] **************
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | assert the ONTAP configuration is complete] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | assert the custom StorageClass is named] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | reject an RWO-only custom class on multi-node] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | reject local-path on multi-node] ***********
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | look up backend in registry] ***************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | reject unknown backend] ********************
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: All assertions passed[0m
+
+TASK [storage : storage | resolve | derive role] *******************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | announce] **********************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'Storage backend: local-path -> role=(none - local-path)'[0m
+
+TASK [Preflight - Verify required CLI tools] ***********************************
+[0;32mok: [localhost] => (item=kubectl)[0m
+[0;32mok: [localhost] => (item=helm)[0m
+
+TASK [Preflight - Warn about missing CLI tools] ********************************
+[0;36mskipping: [localhost] => (item=kubectl) [0m
+[0;36mskipping: [localhost] => (item=helm) [0m
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Resolve active components (see filter_plugins/resolve_components.py)] ***
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Refuse layers this env was not provisioned for] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Show skipped components] *************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Display execution plan] **************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ━━━ Validate Plan ━━━[0m
+[0;32m        Action: validate[0m
+[0;32m        Target: envoy_ai_gateway[0m
+[0;32m        Components: envoy_ai_gateway[0m
+
+TASK [Execute components] ******************************************************
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=envoy_ai_gateway)[0m
+
+TASK [VALIDATE: envoy_ai_gateway] **********************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  VALIDATE: envoy_ai_gateway                                               ┃[0m
+[0;32m        ┃  Layer: inference                                                         ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Execute envoy_ai_gateway] ************************************************
+[0;36mincluded: envoy_ai_gateway for localhost[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Dispatch action: validate] *********
+[0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/envoy_ai_gateway/tasks/validate.yaml for localhost[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Check controller deployment] *******
+[0;32mok: [localhost][0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Assert controller running] *********
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: AI Gateway controller has 1 ready replica(s)[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Validation passed] *****************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: Envoy AI Gateway validation passed.[0m
+
+TASK [envoy_ai_gateway — validate complete] ************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  ✓ envoy_ai_gateway — validate complete                                   ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Reset prep-only flag] ****************************************************
+[0;36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[0;32mlocalhost[0m                  : [0;32mok=32  [0m changed=0    unreachable=0    failed=0    [0;36mskipped=18  [0m rescued=0    ignored=0   
+
+
+[0;32m╭────────────────────────────────────────────────────────────────────────────────────────╮[0m
+[0;32m│[0m VALIDATE COMPLETE                                                                      [0;32m│[0m
+[0;32m│[0m                                                                                        [0;32m│[0m
+[0;32m│[0m Target:  envoy_ai_gateway                                                              [0;32m│[0m
+[0;32m│[0m Env:     local                                                                         [0;32m│[0m
+[0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/validate-envoy_ai_gateway-20261104-034109.log [0;32m│[0m
+[0;32m╰────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+Validate: keycloak_config  (env=local, installer 1.1.0)
+Using existing venv: /home/ubuntu/eas/.venv
+Inventory: /home/ubuntu/eas/env/local/inventory/hosts.yaml
+
+PLAY [AI-solutions] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight] ***************************************************************
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/preflight.yaml for localhost[0m
+
+TASK [Preflight - Load ai-solutions component registry] ************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Ensure log and tmp directories exist] ************************
+[0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs)[0m
+[0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs/tmp)[0m
+
+TASK [Preflight - Note which layers ai-solutions declares itself] **************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Check for ext directory] *************************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Discover ext component manifests] ****************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Merge ext components + layers] *******************************
+[0;32mok: [localhost] => (item=components.yaml (enterprise.ai-inference))[0m
+
+TASK [Preflight - Proxy: fail fast if proxy set without no_proxy] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Check internet connectivity] *********************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Show proxy status] *******************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Abort on no connectivity] ************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Object store: reject legacy MinIO configuration for object store] ***
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Object store: validate backend value] ************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: validate value] **********************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: warn that accelerator overrides pinning] *********
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: downgrade to best-effort] ************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for nri-balloons] ****************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for kubelet-static] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for best-effort] *****************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: announce] ****************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'CPU policy: nri-balloons → kubelet_cpu_manager_policy=none, kubelet_topology_manager_policy=none,[0m
+[0;32m        nri_cpu_balloons_enabled=True'[0m
+
+TASK [Preflight - Define workload affinity (soft, label-based)] ****************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Empty affinity when topology disabled] ***********************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Storage: resolve backend] ************************************
+[0;36mincluded: storage for localhost[0m
+
+TASK [storage : storage | resolve | normalize selector] ************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | detect multi-node] *************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | collect missing ONTAP values] **************
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | assert the ONTAP configuration is complete] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | assert the custom StorageClass is named] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | reject an RWO-only custom class on multi-node] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | reject local-path on multi-node] ***********
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | look up backend in registry] ***************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | reject unknown backend] ********************
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: All assertions passed[0m
+
+TASK [storage : storage | resolve | derive role] *******************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | announce] **********************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'Storage backend: local-path -> role=(none - local-path)'[0m
+
+TASK [Preflight - Verify required CLI tools] ***********************************
+[0;32mok: [localhost] => (item=kubectl)[0m
+[0;32mok: [localhost] => (item=helm)[0m
+
+TASK [Preflight - Warn about missing CLI tools] ********************************
+[0;36mskipping: [localhost] => (item=kubectl) [0m
+[0;36mskipping: [localhost] => (item=helm) [0m
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Resolve active components (see filter_plugins/resolve_components.py)] ***
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Refuse layers this env was not provisioned for] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Show skipped components] *************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Display execution plan] **************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ━━━ Validate Plan ━━━[0m
+[0;32m        Action: validate[0m
+[0;32m        Target: keycloak_config[0m
+[0;32m        Components: keycloak_config[0m
+
+TASK [Execute components] ******************************************************
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=keycloak_config)[0m
+
+TASK [VALIDATE: keycloak_config] ***********************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  VALIDATE: keycloak_config                                                ┃[0m
+[0;32m        ┃  Layer: inference                                                         ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Execute keycloak_config] *************************************************
+[0;36mincluded: keycloak_config for localhost[0m
+
+TASK [keycloak_config : keycloak_config | Include validate] ********************
+[0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/keycloak_config/tasks/validate.yaml for localhost[0m
+
+TASK [keycloak_config : keycloak_config | Validate client secret exists] *******
+[0;32mok: [localhost][0m
+
+TASK [keycloak_config : keycloak_config | Client secret present] ***************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: keycloak-client-secret exists in keycloak.[0m
+
+TASK [keycloak_config — validate complete] *************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  ✓ keycloak_config — validate complete                                    ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Reset prep-only flag] ****************************************************
+[0;36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[0;32mlocalhost[0m                  : [0;32mok=31  [0m changed=0    unreachable=0    failed=0    [0;36mskipped=18  [0m rescued=0    ignored=0   
+
+
+[0;32m╭───────────────────────────────────────────────────────────────────────────────────────╮[0m
+[0;32m│[0m VALIDATE COMPLETE                                                                     [0;32m│[0m
+[0;32m│[0m                                                                                       [0;32m│[0m
+[0;32m│[0m Target:  keycloak_config                                                              [0;32m│[0m
+[0;32m│[0m Env:     local                                                                        [0;32m│[0m
+[0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/validate-keycloak_config-20261104-034115.log [0;32m│[0m
+[0;32m╰───────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+Validate: llm_services  (env=local, installer 1.1.0)
+Using existing venv: /home/ubuntu/eas/.venv
+Inventory: /home/ubuntu/eas/env/local/inventory/hosts.yaml
+
+PLAY [AI-solutions] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight] ***************************************************************
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/preflight.yaml for localhost[0m
+
+TASK [Preflight - Load ai-solutions component registry] ************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Ensure log and tmp directories exist] ************************
+[0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs)[0m
+[0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs/tmp)[0m
+
+TASK [Preflight - Note which layers ai-solutions declares itself] **************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Check for ext directory] *************************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Discover ext component manifests] ****************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Merge ext components + layers] *******************************
+[0;32mok: [localhost] => (item=components.yaml (enterprise.ai-inference))[0m
+
+TASK [Preflight - Proxy: fail fast if proxy set without no_proxy] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Check internet connectivity] *********************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Show proxy status] *******************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Abort on no connectivity] ************************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Object store: reject legacy MinIO configuration for object store] ***
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Object store: validate backend value] ************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: validate value] **********************************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: warn that accelerator overrides pinning] *********
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: downgrade to best-effort] ************************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for nri-balloons] ****************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for kubelet-static] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: derive settings for best-effort] *****************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - CPU policy: announce] ****************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'CPU policy: nri-balloons → kubelet_cpu_manager_policy=none, kubelet_topology_manager_policy=none,[0m
+[0;32m        nri_cpu_balloons_enabled=True'[0m
+
+TASK [Preflight - Define workload affinity (soft, label-based)] ****************
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Empty affinity when topology disabled] ***********************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Storage: resolve backend] ************************************
+[0;36mincluded: storage for localhost[0m
+
+TASK [storage : storage | resolve | normalize selector] ************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | detect multi-node] *************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | collect missing ONTAP values] **************
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | assert the ONTAP configuration is complete] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | assert the custom StorageClass is named] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | reject an RWO-only custom class on multi-node] ***
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | reject local-path on multi-node] ***********
+[0;36mskipping: [localhost][0m
+
+TASK [storage : storage | resolve | look up backend in registry] ***************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | reject unknown backend] ********************
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: All assertions passed[0m
+
+TASK [storage : storage | resolve | derive role] *******************************
+[0;32mok: [localhost][0m
+
+TASK [storage : storage | resolve | announce] **********************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'Storage backend: local-path -> role=(none - local-path)'[0m
+
+TASK [Preflight - Verify required CLI tools] ***********************************
+[0;32mok: [localhost] => (item=kubectl)[0m
+[0;32mok: [localhost] => (item=helm)[0m
+
+TASK [Preflight - Warn about missing CLI tools] ********************************
+[0;36mskipping: [localhost] => (item=kubectl) [0m
+[0;36mskipping: [localhost] => (item=helm) [0m
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Resolve active components (see filter_plugins/resolve_components.py)] ***
+[0;32mok: [localhost][0m
+
+TASK [Preflight - Refuse layers this env was not provisioned for] **************
+[0;36mskipping: [localhost][0m
+
+TASK [Preflight - Show skipped components] *************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'Skipped (disabled): agentgateway'[0m
+
+TASK [Preflight - Display execution plan] **************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ━━━ Validate Plan ━━━[0m
+[0;32m        Action: validate[0m
+[0;32m        Target: llm_services[0m
+[0;32m        Components: envoy_ai_gateway, kserve, llm_services[0m
+
+TASK [Execute components] ******************************************************
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=envoy_ai_gateway)[0m
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=kserve)[0m
+[0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=llm_services)[0m
+
+TASK [VALIDATE: envoy_ai_gateway] **********************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  VALIDATE: envoy_ai_gateway                                               ┃[0m
+[0;32m        ┃  Layer: inference                                                         ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Execute envoy_ai_gateway] ************************************************
+[0;36mincluded: envoy_ai_gateway for localhost[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Dispatch action: validate] *********
+[0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/envoy_ai_gateway/tasks/validate.yaml for localhost[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Check controller deployment] *******
+[0;32mok: [localhost][0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Assert controller running] *********
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: AI Gateway controller has 1 ready replica(s)[0m
+
+TASK [envoy_ai_gateway : envoy_ai_gateway | Validation passed] *****************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: Envoy AI Gateway validation passed.[0m
+
+TASK [envoy_ai_gateway — validate complete] ************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  ✓ envoy_ai_gateway — validate complete                                   ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Reset prep-only flag] ****************************************************
+[0;36mskipping: [localhost][0m
+
+TASK [VALIDATE: kserve] ********************************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  VALIDATE: kserve                                                         ┃[0m
+[0;32m        ┃  Layer: inference                                                         ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Execute kserve] **********************************************************
+[0;36mincluded: kserve for localhost[0m
+
+TASK [kserve : kserve | Dispatch action: validate] *****************************
+[0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/kserve/tasks/validate.yaml for localhost[0m
+
+TASK [kserve : kserve | Check InferenceService CRD] ****************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check controller deployment] ***************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check controller ready replicas] ***********************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Assert controller ready] *******************************
+[0;32mok: [localhost] => [0m
+[0;32m    changed: false[0m
+[0;32m    msg: KServe controller has 1 ready replica(s)[0m
+
+TASK [kserve : kserve | Check cert-manager] ************************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check Istio (istiod)] **********************************
+[0;36mskipping: [localhost][0m
+
+TASK [kserve : kserve | Check Knative Serving controller] **********************
+[0;36mskipping: [localhost][0m
+
+TASK [kserve : kserve | Check LLMInferenceService CRD] *************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check LLMIsvc controller] ******************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check LWS operator] ************************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Check Helm releases] ***********************************
+[0;32mok: [localhost][0m
+
+TASK [kserve : kserve | Display Helm releases] *********************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'KServe Helm releases: [''kserve-llmisvc-crd'', ''kserve-llmisvc-resources'',[0m
+[0;32m        ''kserve-resources'', ''kserve-runtime-configs'']'[0m
+
+TASK [kserve : kserve | Validation passed] *************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'KServe validation passed (mode: Standard) + LLMIsvc.'[0m
+
+TASK [kserve — validate complete] **********************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  ✓ kserve — validate complete                                             ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Reset prep-only flag] ****************************************************
+[0;36mskipping: [localhost][0m
+
+TASK [VALIDATE: llm_services] **************************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  VALIDATE: llm_services                                                   ┃[0m
+[0;32m        ┃  Layer: inference                                                         ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Execute llm_services] ****************************************************
+[0;36mincluded: llm_services for localhost[0m
+
+TASK [llm_services : llm_services | Dispatch action: validate] *****************
+[0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/llm_services/tasks/validate.yaml for localhost[0m
+
+TASK [llm_services : llm_services | Check namespace] ***************************
+[0;32mok: [localhost][0m
+
+TASK [llm_services : llm_services | List ServingRuntimes] **********************
+[0;32mok: [localhost][0m
+
+TASK [llm_services : llm_services | Report runtimes] ***************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg:[0m
+[0;32m    - vllm-runtime         vllm   kserve-container   2m34s[0m
+
+TASK [llm_services : llm_services | List InferenceServices] ********************
+[0;32mok: [localhost][0m
+
+TASK [llm_services : llm_services | Report InferenceServices] ******************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: [][0m
+
+TASK [llm_services : llm_services | List LLMInferenceServices] *****************
+[0;32mok: [localhost][0m
+
+TASK [llm_services : llm_services | Report LLMInferenceServices] ***************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: [][0m
+
+TASK [llm_services : llm_services | Check NRI balloons DaemonSet] **************
+[0;32mok: [localhost][0m
+
+TASK [llm_services : llm_services | Read kubelet cpuManagerPolicy from a node] ***
+[0;32mok: [localhost][0m
+
+TASK [llm_services : llm_services | Report CPU policy state] *******************
+[0;32mok: [localhost] => [0m
+[0;32m    msg:[0m
+[0;32m    - 'Configured kubernetes_cpu_policy: nri-balloons'[0m
+[0;32m    - 'NRI balloons DaemonSet: present'[0m
+[0;32m    - 'kubelet cpuManagerPolicy: none'[0m
+
+TASK [llm_services : llm_services | Warn when the CPU policy does not match the cluster] ***
+[0;36mskipping: [localhost][0m
+
+TASK [llm_services : llm_services | Validation passed] *************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: 'LLM services validation passed. CPU policy: nri-balloons. InferenceServices:[0m
+[0;32m        0, LLMInferenceServices: 0.'[0m
+
+TASK [llm_services — validate complete] ****************************************
+[0;32mok: [localhost] => [0m
+[0;32m    msg: |-[0m
+[0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[0;32m        ┃  ✓ llm_services — validate complete                                       ┃[0m
+[0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+
+TASK [Reset prep-only flag] ****************************************************
+[0;36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[0;32mlocalhost[0m                  : [0;32mok=65  [0m changed=0    unreachable=0    failed=0    [0;36mskipped=22  [0m rescued=0    ignored=0   
+
+
+[0;32m╭────────────────────────────────────────────────────────────────────────────────────╮[0m
+[0;32m│[0m VALIDATE COMPLETE                                                                  [0;32m│[0m
+[0;32m│[0m                                                                                    [0;32m│[0m
+[0;32m│[0m Target:  llm_services                                                              [0;32m│[0m
+[0;32m│[0m Env:     local                                                                     [0;32m│[0m
+[0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/validate-llm_services-20261104-034122.log [0;32m│[0m
+[0;32m╰────────────────────────────────────────────────────────────────────────────────────╯[0m
+

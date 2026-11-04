@@ -1,0 +1,48 @@
+[INFO] Using environment: local
+[INFO ]  Deploying qwen3-noamx (LLMInferenceService)
+[INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+[INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+[INFO ]    CPU policy: nri-balloons
+[INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+[INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+[  OK ]  Storage ready: model-store (Bound)
+[INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-noamx
+job.batch/download-qwen3-noamx created
+[INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+[INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+[INFO ]    Follow progress below — do not interrupt.
+sh: 4: cannot create {{DOWNLOAD_CMD}}1: Permission denied
+failed to create fsnotify watcher: too many open filesjob.batch/download-qwen3-noamx condition met
+[  OK ]  Download complete: qwen3-noamx
+llminferenceservice.serving.kserve.io/qwen3-noamx serverside-applied
+[  OK ]  Manifest applied: LLMInferenceService/qwen3-noamx in llm-inference
+[INFO ]  Creating AIGatewayRoute aigw-qwen3-noamx (EPP → qwen3-noamx-inference-pool)
+aigatewayroute.aigateway.envoyproxy.io/aigw-qwen3-noamx serverside-applied
+[INFO ]  Waiting for qwen3-noamx to become Ready (timeout: 1800s)...
+[INFO ]    [0s] qwen3-noamx: waiting for pod to be created
+[INFO ]    [16s] qwen3-noamx: running — loading model / warming up
+[INFO ]    [1m 1s] qwen3-noamx: running — loading model / warming up
+[INFO ]    [2m 3s] qwen3-noamx: running — loading model / warming up
+[INFO ]    [3m 4s] qwen3-noamx: running — loading model / warming up
+[  OK ]  qwen3-noamx is Ready
+inferencepool.inference.networking.k8s.io/qwen3-noamx-inference-pool patched
+
+  ────────────────────────────────────────────────────────
+  Model:    qwen3-noamx  |  Kind: LLMInferenceService  |  Category: llm
+  Auth:     keycloak
+  Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+  Endpoint: https://inference.solutions.ai/v1/chat/completions
+  Note:     Pass "model": "qwen3-noamx" in the request body
+  ────────────────────────────────────────────────────────
+
+  1. Get a Keycloak token:
+  source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+  # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+
+  2. Call the model:
+  curl -sk --noproxy "*" \
+    -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+    --resolve "inference.solutions.ai:443:10.241.0.4" \
+    -d '{"model":"qwen3-noamx","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+    https://inference.solutions.ai/v1/chat/completions
+

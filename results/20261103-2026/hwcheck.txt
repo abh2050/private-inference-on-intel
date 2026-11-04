@@ -1,0 +1,32 @@
+== date: 2026-11-04T02:58:27Z
+== CPU
+CPU(s):                                  32
+Model name:                              Intel Xeon Processor (SapphireRapids)
+Thread(s) per core:                      2
+Core(s) per socket:                      8
+Socket(s):                               2
+L3 cache:                                32 MiB (2 instances)
+NUMA node(s):                            2
+NUMA node0 CPU(s):                       0-15
+NUMA node1 CPU(s):                       16-31
+== AMX / AVX-512 flags
+  amx_tile: YES
+  amx_bf16: YES
+  amx_int8: YES
+  avx512f: YES
+  avx512_bf16: YES
+  avx512_vnni: YES
+== Memory
+               total        used        free      shared  buff/cache   available
+Mem:             157           1         156           0           0         155
+== Disks
+NAME   SIZE TYPE MODEL
+vda    250G disk 
+vdb  484.3G disk 
+vdc  484.3G disk 
+vdd    366K disk 
+vde     44K disk 
+== OS
+  Ubuntu 24.04.5 LTS, kernel 6.8.0-1067-ibm
+== Gaudi devices
+  none (expected on a Xeon VM)

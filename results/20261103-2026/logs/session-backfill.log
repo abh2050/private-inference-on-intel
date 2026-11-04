@@ -1,0 +1,1997 @@
+252806464455/.source.yml', 'dest': '/etc/kubernetes/addons/local_path_provisione
+r/local-path-storage-clusterrolebinding.yml', 'mode': '0644', 'follow': False, '
+_original_basename': 'local-path-storage-clusterrolebinding.yml.j2', 'checksum':
+ 'efeef0935202aa1006ff8cf25692ae069ddcaef4', 'backup': False, 'force': True, 'un
+safe_writes': False, 'content': None, 'validate': None, 'directory_mode': None,
+'remote_src': None, 'local_follow': None, 'owner': None, 'group': None, 'seuser'
+: None, 'serole': None, 'selevel': None, 'setype': None, 'attributes': None}}, '
+failed': False, 'item': {'name': 'local-path-storage-clusterrolebinding', 'file'
+: 'local-path-storage-clusterrolebinding.yml', 'type': 'clusterrolebinding'}, 'a
+nsible_loop_var': 'item'})
+ok: [localhost] => (item={'diff': [], 'dest': '/etc/kubernetes/addons/local_path
+_provisioner/local-path-storage-cm.yml', 'src': '/home/ubuntu/.ansible/tmp/ansib
+le-tmp-1793762392.5069847-25571-237396399134271/.source.yml', 'md5sum': '823cbbf
+6986e0e0ae22cd649caed9420', 'checksum': '5169892854635e228ee65dedf70c56ec4fcc390
+d', 'changed': True, 'uid': 0, 'gid': 0, 'owner': 'root', 'group': 'root', 'mode
+': '0644', 'state': 'file', 'size': 681, 'invocation': {'module_args': {'src': '
+/home/ubuntu/.ansible/tmp/ansible-tmp-1793762392.5069847-25571-237396399134271/.
+source.yml', 'dest': '/etc/kubernetes/addons/local_path_provisioner/local-path-s
+torage-cm.yml', 'mode': '0644', 'follow': False, '_original_basename': 'local-pa
+th-storage-cm.yml.j2', 'checksum': '5169892854635e228ee65dedf70c56ec4fcc390d', '
+backup': False, 'force': True, 'unsafe_writes': False, 'content': None, 'validat
+e': None, 'directory_mode': None, 'remote_src': None, 'local_follow': None, 'own
+er': None, 'group': None, 'seuser': None, 'serole': None, 'selevel': None, 'sety
+pe': None, 'attributes': None}}, 'failed': False, 'item': {'name': 'local-path-s
+torage-cm', 'file': 'local-path-storage-cm.yml', 'type': 'cm'}, 'ansible_loop_va
+r': 'item'})
+ok: [localhost] => (item={'diff': [], 'dest': '/etc/kubernetes/addons/local_path
+_provisioner/local-path-storage-deployment.yml', 'src': '/home/ubuntu/.ansible/t
+mp/ansible-tmp-1793762392.8489013-25571-47544523929102/.source.yml', 'md5sum': '
+012e4f01bd763b69e1b84da4a720dfb3', 'checksum': '84f7522873785f3c0a448cb3ca6cea54
+97a1c8ab', 'changed': True, 'uid': 0, 'gid': 0, 'owner': 'root', 'group': 'root'
+, 'mode': '0644', 'state': 'file', 'size': 942, 'invocation': {'module_args': {'
+src': '/home/ubuntu/.ansible/tmp/ansible-tmp-1793762392.8489013-25571-4754452392
+9102/.source.yml', 'dest': '/etc/kubernetes/addons/local_path_provisioner/local-
+path-storage-deployment.yml', 'mode': '0644', 'follow': False, '_original_basena
+me': 'local-path-storage-deployment.yml.j2', 'checksum': '84f7522873785f3c0a448c
+b3ca6cea5497a1c8ab', 'backup': False, 'force': True, 'unsafe_writes': False, 'co
+ntent': None, 'validate': None, 'directory_mode': None, 'remote_src': None, 'loc
+al_follow': None, 'owner': None, 'group': None, 'seuser': None, 'serole': None,
+'selevel': None, 'setype': None, 'attributes': None}}, 'failed': False, 'item':
+{'name': 'local-path-storage-deployment', 'file': 'local-path-storage-deployment
+.yml', 'type': 'deployment'}, 'ansible_loop_var': 'item'})
+ok: [localhost] => (item={'diff': [], 'dest': '/etc/kubernetes/addons/local_path
+_provisioner/local-path-storage-sc.yml', 'src': '/home/ubuntu/.ansible/tmp/ansib
+le-tmp-1793762393.1953702-25571-198436600842030/.source.yml', 'md5sum': 'b9f6171
+c525a51fc40443a4c386a0bd7', 'checksum': 'ba74f7e073ef2a7b5431257eb1edd3c06fec762
+5', 'changed': True, 'uid': 0, 'gid': 0, 'owner': 'root', 'group': 'root', 'mode
+': '0644', 'state': 'file', 'size': 250, 'invocation': {'module_args': {'src': '
+/home/ubuntu/.ansible/tmp/ansible-tmp-1793762393.1953702-25571-198436600842030/.
+source.yml', 'dest': '/etc/kubernetes/addons/local_path_provisioner/local-path-s
+torage-sc.yml', 'mode': '0644', 'follow': False, '_original_basename': 'local-pa
+th-storage-sc.yml.j2', 'checksum': 'ba74f7e073ef2a7b5431257eb1edd3c06fec7625', '
+backup': False, 'force': True, 'unsafe_writes': False, 'content': None, 'validat
+e': None, 'directory_mode': None, 'remote_src': None, 'local_follow': None, 'own
+er': None, 'group': None, 'seuser': None, 'serole': None, 'selevel': None, 'sety
+pe': None, 'attributes': None}}, 'failed': False, 'item': {'name': 'local-path-s
+torage-sc', 'file': 'local-path-storage-sc.yml', 'type': 'sc'}, 'ansible_loop_va
+r': 'item'})
+Wednesday 04 November 2026  03:19:55 +0000 (0:00:01.913)       0:04:47.869 ****
+
+TASK [kubernetes-apps/ansible : Kubernetes Apps | Wait for kube-apiserver] *****
+ok: [localhost]
+Wednesday 04 November 2026  03:19:55 +0000 (0:00:00.370)       0:04:48.240 ****
+
+TASK [kubernetes-apps/ansible : Kubernetes Apps | CoreDNS] *********************
+changed: [localhost] => (item=coredns-clusterrole.yml.j2)
+changed: [localhost] => (item=coredns-clusterrolebinding.yml.j2)
+changed: [localhost] => (item=coredns-config.yml.j2)
+changed: [localhost] => (item=coredns-deployment.yml.j2)
+changed: [localhost] => (item=coredns-sa.yml.j2)
+changed: [localhost] => (item=coredns-svc.yml.j2)
+changed: [localhost] => (item=dns-autoscaler-sa.yml.j2)
+changed: [localhost] => (item=dns-autoscaler.yml.j2)
+changed: [localhost] => (item=dns-autoscaler-clusterrole.yml.j2)
+changed: [localhost] => (item=dns-autoscaler-clusterrolebinding.yml.j2)
+Wednesday 04 November 2026  03:19:59 +0000 (0:00:03.853)       0:04:52.094 ****
+Wednesday 04 November 2026  03:19:59 +0000 (0:00:00.133)       0:04:52.227 ****
+
+TASK [kubernetes-apps/ansible : Kubernetes Apps | nodelocalDNS] ****************
+changed: [localhost] => (item=nodelocaldns-config.yml.j2)
+changed: [localhost] => (item=nodelocaldns-daemonset.yml.j2)
+changed: [localhost] => (item=nodelocaldns-sa.yml.j2)
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:01.370)       0:04:53.598 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.060)       0:04:53.659 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.126)       0:04:53.785 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.044)       0:04:53.830 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.037)       0:04:53.867 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.025)       0:04:53.893 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.025)       0:04:53.918 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.023)       0:04:53.942 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.023)       0:04:53.966 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.025)       0:04:53.991 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.029)       0:04:54.021 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.023)       0:04:54.044 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.025)       0:04:54.070 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.023)       0:04:54.093 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.023)       0:04:54.117 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.022)       0:04:54.140 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.026)       0:04:54.166 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.029)       0:04:54.195 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.025)       0:04:54.221 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.024)       0:04:54.245 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.034)       0:04:54.279 ****
+Wednesday 04 November 2026  03:20:01 +0000 (0:00:00.038)       0:04:54.317 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.028)       0:04:54.346 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.027)       0:04:54.374 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.024)       0:04:54.398 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.024)       0:04:54.423 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.032)       0:04:54.455 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.038)       0:04:54.494 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.045)       0:04:54.540 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.025)       0:04:54.565 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.026)       0:04:54.592 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.023)       0:04:54.615 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.023)       0:04:54.639 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.041)       0:04:54.680 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.049)       0:04:54.730 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.033)       0:04:54.763 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.043)       0:04:54.807 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.023)       0:04:54.831 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.023)       0:04:54.855 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.025)       0:04:54.881 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.041)       0:04:54.923 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.048)       0:04:54.971 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.026)       0:04:54.997 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.112)       0:04:55.110 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.025)       0:04:55.136 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.039)       0:04:55.175 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.049)       0:04:55.225 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.027)       0:04:55.253 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.025)       0:04:55.279 ****
+Wednesday 04 November 2026  03:20:02 +0000 (0:00:00.037)       0:04:55.316 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.048)       0:04:55.365 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.026)       0:04:55.391 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.027)       0:04:55.419 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.043)       0:04:55.462 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.044)       0:04:55.506 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.029)       0:04:55.536 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.037)       0:04:55.573 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.025)       0:04:55.599 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.031)       0:04:55.630 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.026)       0:04:55.657 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.031)       0:04:55.688 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.024)       0:04:55.713 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.032)       0:04:55.745 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.026)       0:04:55.772 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.034)       0:04:55.807 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.024)       0:04:55.832 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.038)       0:04:55.870 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.026)       0:04:55.896 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.034)       0:04:55.930 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.043)       0:04:55.974 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.025)       0:04:56.000 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.040)       0:04:56.041 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.025)       0:04:56.066 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.027)       0:04:56.094 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.026)       0:04:56.121 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.034)       0:04:56.155 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.024)       0:04:56.180 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.031)       0:04:56.212 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.027)       0:04:56.239 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.033)       0:04:56.273 ****
+Wednesday 04 November 2026  03:20:03 +0000 (0:00:00.028)       0:04:56.301 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.034)       0:04:56.336 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.026)       0:04:56.362 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.118)       0:04:56.481 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.032)       0:04:56.513 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.024)       0:04:56.538 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.024)       0:04:56.562 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.025)       0:04:56.588 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.029)       0:04:56.618 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.046)       0:04:56.664 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.037)       0:04:56.701 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.025)       0:04:56.726 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.025)       0:04:56.752 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.026)       0:04:56.778 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.024)       0:04:56.802 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.024)       0:04:56.827 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.032)       0:04:56.860 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.025)       0:04:56.886 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.031)       0:04:56.917 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.026)       0:04:56.943 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.050)       0:04:56.994 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.025)       0:04:57.019 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.026)       0:04:57.046 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.025)       0:04:57.071 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.024)       0:04:57.095 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.023)       0:04:57.119 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.026)       0:04:57.146 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.024)       0:04:57.170 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.024)       0:04:57.195 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.023)       0:04:57.219 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.025)       0:04:57.244 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.026)       0:04:57.271 ****
+Wednesday 04 November 2026  03:20:04 +0000 (0:00:00.033)       0:04:57.305 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.026)       0:04:57.332 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.036)       0:04:57.368 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.025)       0:04:57.394 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.028)       0:04:57.422 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.046)       0:04:57.469 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.027)       0:04:57.496 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.027)       0:04:57.524 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.026)       0:04:57.550 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.034)       0:04:57.585 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.025)       0:04:57.611 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.046)       0:04:57.657 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.050)       0:04:57.708 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.023)       0:04:57.732 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.030)       0:04:57.763 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.025)       0:04:57.789 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.024)       0:04:57.813 ****
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.024)       0:04:57.838 ****
+
+PLAY [Apply resolv.conf changes now that cluster DNS is up] ********************
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.070)       0:04:57.909 ****
+
+TASK [adduser : User | Create User Group] **************************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:05 +0000 (0:00:00.216)       0:04:58.125 ****
+
+TASK [adduser : User | Create User] ********************************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.273)       0:04:58.399 ****
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.024)       0:04:58.423 ****
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.110)       0:04:58.534 ****
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.025)       0:04:58.560 ****
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.024)       0:04:58.584 ****
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.024)       0:04:58.608 ****
+
+TASK [kubernetes/preinstall : Check resolvconf] ********************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.209)       0:04:58.818 ****
+
+TASK [kubernetes/preinstall : Check existence of /etc/resolvconf/resolv.conf.d]
+***
+ok: [localhost]
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.204)       0:04:59.022 ****
+
+TASK [kubernetes/preinstall : Check status of /etc/resolv.conf] ****************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:06 +0000 (0:00:00.204)       0:04:59.227 ****
+
+TASK [kubernetes/preinstall : Fetch resolv.conf] *******************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.202)       0:04:59.430 ****
+
+TASK [kubernetes/preinstall : NetworkManager | Check if host has NetworkManager]
+ ***
+ok: [localhost]
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.210)       0:04:59.640 ****
+
+TASK [kubernetes/preinstall : Check systemd-resolved] **************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.214)       0:04:59.855 ****
+
+TASK [kubernetes/preinstall : Set default dns if remove_default_searchdomains is
+ false] ***
+ok: [localhost]
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.035)       0:04:59.890 ****
+
+TASK [kubernetes/preinstall : Set dns facts] ***********************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.041)       0:04:59.931 ****
+
+TASK [kubernetes/preinstall : Check if kubelet is configured] ******************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.208)       0:05:00.140 ****
+
+TASK [kubernetes/preinstall : Check if early DNS configuration stage] **********
+ok: [localhost]
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.033)       0:05:00.173 ****
+
+TASK [kubernetes/preinstall : Target resolv.conf files] ************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.032)       0:05:00.206 ****
+Wednesday 04 November 2026  03:20:07 +0000 (0:00:00.024)       0:05:00.231 ****
+
+TASK [kubernetes/preinstall : Check if /etc/dhclient.conf exists] **************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.204)       0:05:00.436 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.025)       0:05:00.462 ****
+
+TASK [kubernetes/preinstall : Check if /etc/dhcp/dhclient.conf exists] *********
+ok: [localhost]
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.208)       0:05:00.670 ****
+
+TASK [kubernetes/preinstall : Target dhclient conf file for /etc/dhcp/dhclient.c
+onf] ***
+ok: [localhost]
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.032)       0:05:00.702 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.026)       0:05:00.729 ****
+
+TASK [kubernetes/preinstall : Target dhclient hook file for Debian family] *****
+ok: [localhost]
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.030)       0:05:00.759 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.023)       0:05:00.783 ****
+
+TASK [kubernetes/preinstall : Check /usr readonly] *****************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.203)       0:05:00.987 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.027)       0:05:01.014 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.024)       0:05:01.038 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.023)       0:05:01.062 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.023)       0:05:01.086 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.025)       0:05:01.112 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.026)       0:05:01.139 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.025)       0:05:01.164 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.025)       0:05:01.190 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.026)       0:05:01.217 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.024)       0:05:01.242 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.024)       0:05:01.266 ****
+Wednesday 04 November 2026  03:20:08 +0000 (0:00:00.032)       0:05:01.298 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.031)       0:05:01.330 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.025)       0:05:01.355 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.040)       0:05:01.395 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.034)       0:05:01.430 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.029)       0:05:01.460 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.025)       0:05:01.485 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.030)       0:05:01.516 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.027)       0:05:01.543 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.036)       0:05:01.580 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.026)       0:05:01.606 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.026)       0:05:01.632 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.045)       0:05:01.678 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.047)       0:05:01.725 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.026)       0:05:01.752 ****
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.026)       0:05:01.778 ****
+
+TASK [kubernetes/preinstall : Create systemd-resolved drop-in directory] *******
+ok: [localhost]
+Wednesday 04 November 2026  03:20:09 +0000 (0:00:00.217)       0:05:01.996 ****
+
+TASK [kubernetes/preinstall : Write Kubespray DNS settings to systemd-resolved]
+***
+changed: [localhost]
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.451)       0:05:02.447 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.025)       0:05:02.473 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.024)       0:05:02.497 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.027)       0:05:02.525 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.029)       0:05:02.555 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.029)       0:05:02.584 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.027)       0:05:02.612 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.026)       0:05:02.639 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.026)       0:05:02.665 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.024)       0:05:02.690 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.023)       0:05:02.714 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.029)       0:05:02.743 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.025)       0:05:02.769 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.123)       0:05:02.893 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.025)       0:05:02.919 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.024)       0:05:02.943 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.024)       0:05:02.968 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.025)       0:05:02.994 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.023)       0:05:03.017 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.041)       0:05:03.059 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.024)       0:05:03.083 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.023)       0:05:03.107 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.024)       0:05:03.131 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.023)       0:05:03.155 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.023)       0:05:03.179 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.025)       0:05:03.204 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.024)       0:05:03.229 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.024)       0:05:03.254 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.027)       0:05:03.281 ****
+Wednesday 04 November 2026  03:20:10 +0000 (0:00:00.026)       0:05:03.307 ****
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.024)       0:05:03.332 ****
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.024)       0:05:03.357 ****
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.024)       0:05:03.381 ****
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.025)       0:05:03.407 ****
+
+TASK [kubernetes/preinstall : Configure dhclient to supersede search/domain/name
+servers] ***
+changed: [localhost]
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.280)       0:05:03.687 ****
+
+TASK [kubernetes/preinstall : Configure dhclient hooks for resolv.conf (non-RH)]
+ ***
+ok: [localhost]
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.386)       0:05:04.074 ****
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.032)       0:05:04.107 ****
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.025)       0:05:04.133 ****
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.024)       0:05:04.157 ****
+Wednesday 04 November 2026  03:20:11 +0000 (0:00:00.012)       0:05:04.170 ****
+
+RUNNING HANDLER [kubernetes/preinstall : Preinstall | reload kubelet] **********
+changed: [localhost]
+Wednesday 04 November 2026  03:20:12 +0000 (0:00:00.386)       0:05:04.556 ****
+
+RUNNING HANDLER [kubernetes/preinstall : Preinstall | kube-apiserver configured]
+ ***
+ok: [localhost]
+Wednesday 04 November 2026  03:20:12 +0000 (0:00:00.213)       0:05:04.770 ****
+
+RUNNING HANDLER [kubernetes/preinstall : Preinstall | kube-controller configured
+] ***
+ok: [localhost]
+Wednesday 04 November 2026  03:20:12 +0000 (0:00:00.203)       0:05:04.974 ****
+Wednesday 04 November 2026  03:20:12 +0000 (0:00:00.025)       0:05:05.000 ****
+
+RUNNING HANDLER [kubernetes/preinstall : Preinstall | restart kube-controller-ma
+nager crio/containerd] ***
+changed: [localhost]
+Wednesday 04 November 2026  03:20:13 +0000 (0:00:00.407)       0:05:05.407 ****
+Wednesday 04 November 2026  03:20:13 +0000 (0:00:00.024)       0:05:05.432 ****
+
+RUNNING HANDLER [kubernetes/preinstall : Preinstall | restart kube-apiserver cri
+o/containerd] ***
+changed: [localhost]
+Wednesday 04 November 2026  03:20:13 +0000 (0:00:00.470)       0:05:05.903 ****
+FAILED - RETRYING: [localhost]: Preinstall | wait for the apiserver to be runnin
+g (60 retries left).
+FAILED - RETRYING: [localhost]: Preinstall | wait for the apiserver to be runnin
+g (59 retries left).
+
+RUNNING HANDLER [kubernetes/preinstall : Preinstall | wait for the apiserver to
+be running] ***
+ok: [localhost]
+Wednesday 04 November 2026  03:20:17 +0000 (0:00:03.461)       0:05:09.364 ****
+
+RUNNING HANDLER [kubernetes/preinstall : Preinstall | Restart systemd-resolved]
+***
+changed: [localhost]
+Wednesday 04 November 2026  03:20:17 +0000 (0:00:00.464)       0:05:09.829 ****
+Wednesday 04 November 2026  03:20:17 +0000 (0:00:00.025)       0:05:09.855 ****
+
+TASK [Run calico checks] *******************************************************
+included: network_plugin/calico for localhost
+Wednesday 04 November 2026  03:20:17 +0000 (0:00:00.088)       0:05:09.943 ****
+
+TASK [network_plugin/calico : Stop if legacy encapsulation variables are detecte
+d (ipip)] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:17 +0000 (0:00:00.045)       0:05:09.989 ****
+
+TASK [network_plugin/calico : Stop if legacy encapsulation variables are detecte
+d (ipip_mode)] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:17 +0000 (0:00:00.043)       0:05:10.032 ****
+
+TASK [network_plugin/calico : Stop if legacy encapsulation variables are detecte
+d (calcio_ipam_autoallocateblocks)] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:17 +0000 (0:00:00.042)       0:05:10.074 ****
+
+TASK [network_plugin/calico : Stop if supported Calico versions] ***************
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:17 +0000 (0:00:00.048)       0:05:10.123 ****
+
+TASK [network_plugin/calico : Check if calicoctl.sh exists] ********************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.223)       0:05:10.347 ****
+
+TASK [network_plugin/calico : Check if calico ready] ***************************
+changed: [localhost]
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.254)       0:05:10.602 ****
+
+TASK [network_plugin/calico : Get current calico version] **********************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.258)       0:05:10.860 ****
+
+TASK [network_plugin/calico : Assert that current calico version is enough for u
+pgrade] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.052)       0:05:10.912 ****
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.037)       0:05:10.950 ****
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.034)       0:05:10.985 ****
+
+TASK [network_plugin/calico : Check vars defined correctly] ********************
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.043)       0:05:11.028 ****
+
+TASK [network_plugin/calico : Check calico network backend defined correctly] **
+*
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.044)       0:05:11.073 ****
+
+TASK [network_plugin/calico : Check ipip and vxlan mode defined correctly] *****
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.041)       0:05:11.115 ****
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.033)       0:05:11.149 ****
+
+TASK [network_plugin/calico : Check ipip and vxlan mode if simultaneously enable
+d] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:18 +0000 (0:00:00.042)       0:05:11.191 ****
+
+TASK [network_plugin/calico : Get Calico default-pool configuration] ***********
+ok: [localhost]
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.264)       0:05:11.455 ****
+
+TASK [network_plugin/calico : Set calico_pool_conf] ****************************
+ok: [localhost]
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.049)       0:05:11.505 ****
+
+TASK [network_plugin/calico : Check if inventory match current cluster configura
+tion] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.057)       0:05:11.563 ****
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.039)       0:05:11.603 ****
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.040)       0:05:11.643 ****
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.037)       0:05:11.680 ****
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.033)       0:05:11.714 ****
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.032)       0:05:11.747 ****
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=661  changed=147  unreachable=0    failed=0    s
+kipped=1014 rescued=0    ignored=4
+
+Wednesday 04 November 2026  03:20:19 +0000 (0:00:00.046)       0:05:11.793 ****
+===============================================================================
+download : Download_container | Download image if required ------------- 11.09s
+download : Download_container | Download image if required ------------- 10.86s
+kubernetes/control-plane : Kubeadm | Initialize first control plane node (1st tr
+y) --- 7.91s
+download : Download_container | Download image if required -------------- 6.13s
+etcd : Restart etcd ----------------------------------------------------- 6.07s
+system_packages : Manage packages --------------------------------------- 5.83s
+download : Download_container | Download image if required -------------- 5.82s
+etcd : Configure | Check if etcd cluster is healthy --------------------- 5.29s
+download : Download_file | Download item -------------------------------- 4.85s
+container-engine/runc : Download_file | Download item ------------------- 4.25s
+container-engine/containerd : Download_file | Download item ------------- 4.20s
+container-engine/crictl : Download_file | Download item ----------------- 4.05s
+container-engine/nerdctl : Download_file | Download item ---------------- 4.01s
+kubernetes-apps/ansible : Kubernetes Apps | CoreDNS --------------------- 3.85s
+etcdctl_etcdutl : Download_file | Download item ------------------------- 3.77s
+container-engine/crictl : Extract_file | Unpacking archive -------------- 3.60s
+download : Download_container | Download image if required -------------- 3.56s
+etcdctl_etcdutl : Extract_file | Unpacking archive ---------------------- 3.49s
+kubernetes/preinstall : Preinstall | wait for the apiserver to be running --- 3.
+46s
+etcd : Configure | Ensure etcd is running ------------------------------- 3.34s
+Kubeconfig written to /home/ubuntu/eas/env/local/kubeconfig.yaml
+
+PLAY [AI-solutions] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Preflight] ***************************************************************
+included: /home/ubuntu/eas/playbooks/includes/preflight.yaml for localhost
+
+TASK [Preflight - Load ai-solutions component registry] ************************
+ok: [localhost]
+
+TASK [Preflight - Ensure log and tmp directories exist] ************************
+ok: [localhost] => (item=/home/ubuntu/eas/env/local/logs)
+ok: [localhost] => (item=/home/ubuntu/eas/env/local/logs/tmp)
+
+TASK [Preflight - Note which layers ai-solutions declares itself] **************
+ok: [localhost]
+
+TASK [Preflight - Check for ext directory] *************************************
+ok: [localhost]
+
+TASK [Preflight - Discover ext component manifests] ****************************
+ok: [localhost]
+
+TASK [Preflight - Merge ext components + layers] *******************************
+ok: [localhost] => (item=components.yaml (enterprise.ai-inference))
+
+TASK [Preflight - Proxy: fail fast if proxy set without no_proxy] **************
+skipping: [localhost]
+
+TASK [Preflight - Check internet connectivity] *********************************
+ok: [localhost]
+
+TASK [Preflight - Show proxy status] *******************************************
+skipping: [localhost]
+
+TASK [Preflight - Abort on no connectivity] ************************************
+skipping: [localhost]
+
+TASK [Preflight - Object store: reject legacy MinIO configuration for object sto
+re] ***
+ok: [localhost]
+
+TASK [Preflight - Object store: validate backend value] ************************
+ok: [localhost]
+
+TASK [Preflight - CPU policy: validate value] **********************************
+ok: [localhost]
+
+TASK [Preflight - CPU policy: warn that accelerator overrides pinning] *********
+skipping: [localhost]
+
+TASK [Preflight - CPU policy: downgrade to best-effort] ************************
+skipping: [localhost]
+
+TASK [Preflight - CPU policy: derive settings for nri-balloons] ****************
+ok: [localhost]
+
+TASK [Preflight - CPU policy: derive settings for kubelet-static] **************
+skipping: [localhost]
+
+TASK [Preflight - CPU policy: derive settings for best-effort] *****************
+skipping: [localhost]
+
+TASK [Preflight - CPU policy: announce] ****************************************
+ok: [localhost] =>
+    msg: 'CPU policy: nri-balloons → kubelet_cpu_manager_policy=none, kubelet_to
+pology_manager_policy=none,
+        nri_cpu_balloons_enabled=True'
+
+TASK [Preflight - Define workload affinity (soft, label-based)] ****************
+ok: [localhost]
+
+TASK [Preflight - Empty affinity when topology disabled] ***********************
+skipping: [localhost]
+
+TASK [Preflight - Storage: resolve backend] ************************************
+included: storage for localhost
+
+TASK [storage : storage | resolve | normalize selector] ************************
+ok: [localhost]
+
+TASK [storage : storage | resolve | detect multi-node] *************************
+ok: [localhost]
+
+TASK [storage : storage | resolve | collect missing ONTAP values] **************
+skipping: [localhost]
+
+TASK [storage : storage | resolve | assert the ONTAP configuration is complete]
+***
+skipping: [localhost]
+
+TASK [storage : storage | resolve | assert the custom StorageClass is named] ***
+skipping: [localhost]
+
+TASK [storage : storage | resolve | reject an RWO-only custom class on multi-nod
+e] ***
+skipping: [localhost]
+
+TASK [storage : storage | resolve | reject local-path on multi-node] ***********
+skipping: [localhost]
+
+TASK [storage : storage | resolve | look up backend in registry] ***************
+ok: [localhost]
+
+TASK [storage : storage | resolve | reject unknown backend] ********************
+ok: [localhost] =>
+    changed: false
+    msg: All assertions passed
+
+TASK [storage : storage | resolve | derive role] *******************************
+ok: [localhost]
+
+TASK [storage : storage | resolve | announce] **********************************
+ok: [localhost] =>
+    msg: 'Storage backend: local-path -> role=(none - local-path)'
+
+TASK [Preflight - Verify required CLI tools] ***********************************
+ok: [localhost] => (item=kubectl)
+ok: [localhost] => (item=helm)
+
+TASK [Preflight - Warn about missing CLI tools] ********************************
+skipping: [localhost] => (item=kubectl)
+skipping: [localhost] => (item=helm)
+skipping: [localhost]
+
+TASK [Preflight - Resolve active components (see filter_plugins/resolve_componen
+ts.py)] ***
+ok: [localhost]
+
+TASK [Preflight - Refuse layers this env was not provisioned for] **************
+skipping: [localhost]
+
+TASK [Preflight - Show skipped components] *************************************
+ok: [localhost] =>
+    msg: 'Skipped (disabled): velero, agentgateway, litellm, langfuse'
+
+TASK [Preflight - Display execution plan] **************************************
+ok: [localhost] =>
+    msg: |-
+        ━━━ Install Plan ━━━
+        Action: install
+        Target: inference
+        Components: kubernetes, storage, cert_manager, istio, metallb, envoy_gat
+eway, postgresql, keycloak, object_store, seaweedfs, observability, nri_cpu_ball
+oons, nfd, keycloak_config, envoy_ai_gateway, kserve, llm_services
+
+TASK [Execute components] ******************************************************
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=kubernetes)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=storage)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=cert_manager)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=istio)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=metallb)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=envoy_gateway)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=postgresql)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=keycloak)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=object_store)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=seaweedfs)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=observability)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=nri_cpu_balloons)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=nfd)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=keycloak_config)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=envoy_ai_gateway)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=kserve)
+included: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost =
+> (item=llm_services)
+
+TASK [INSTALL: kubernetes] *****************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: kubernetes
+    ┃
+        ┃  Layer: infrastructure
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute kubernetes] ******************************************************
+included: kubernetes for localhost
+
+TASK [kubernetes : kubernetes | Dispatch action: install] **********************
+included: /home/ubuntu/eas/roles/kubernetes/tasks/install.yaml for localhost
+
+TASK [kubernetes : kubernetes | BYO cluster — skip provisioning] ***************
+skipping: [localhost]
+
+TASK [kubernetes : kubernetes | Detect SSH requirement from inventory] *********
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | Compute execution phase] ***********************
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | ━━━ BEGIN ━━━] *********************************
+ok: [localhost] =>
+    msg: needs_ssh=False | phase=post-kubespray
+
+TASK [kubernetes : kubernetes | SSH pre-flight | Ping all cluster nodes] *******
+skipping: [localhost] => (item=localhost)
+skipping: [localhost]
+
+TASK [kubernetes : kubernetes | SSH pre-flight | Check internet on cluster nodes
+] ***
+skipping: [localhost] => (item=localhost)
+skipping: [localhost]
+
+TASK [kubernetes : kubernetes | SSH pre-flight | Report nodes without internet]
+***
+skipping: [localhost] => (item=localhost)
+skipping: [localhost]
+
+TASK [kubernetes : kubernetes | Setup kubeconfig] ******************************
+included: /home/ubuntu/eas/roles/kubernetes/tasks/setup_kubeconfig.yaml for loca
+lhost
+
+TASK [kubernetes : kubernetes | kubeconfig | Stat kubeconfig] ******************
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | kubeconfig | Verify kubeconfig exists] *********
+ok: [localhost] =>
+    changed: false
+    msg: All assertions passed
+
+TASK [kubernetes : kubernetes | kubeconfig | Read cluster name] ****************
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | kubeconfig | Read current server] **************
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | kubeconfig | Rewrite server to 127.0.0.1] ******
+changed: [localhost]
+
+TASK [kubernetes : kubernetes | kubeconfig | Verify cluster reachable] *********
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | kubeconfig | Display cluster info] *************
+ok: [localhost] =>
+    msg: Kubeconfig OK at /home/ubuntu/eas/env/local/kubeconfig.yaml
+
+TASK [kubernetes : kubernetes | Post-install validation] ***********************
+included: /home/ubuntu/eas/roles/kubernetes/tasks/post_install.yaml for localhos
+t
+
+TASK [kubernetes : kubernetes | post | Verify cluster connectivity] ************
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | post | Display cluster info] *******************
+ok: [localhost] =>
+    msg:
+    - Kubernetes control plane is running at https://127.0.0.1:6443
+    - ''
+    - To further debug and diagnose cluster problems, use 'kubectl cluster-info
+dump'.
+
+TASK [kubernetes : kubernetes | post | Get node status] ************************
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | post | Display nodes] **************************
+ok: [localhost] =>
+    msg:
+    - NAME        STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNA
+L-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+    - localhost   Ready    control-plane   81s   v1.34.3   10.241.0.4    <none>
+       Ubuntu
+        24.04.5 LTS   6.8.0-1067-ibm   containerd://2.2.1
+
+TASK [kubernetes : kubernetes | post | Wait for all nodes to be Ready] *********
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | post | Verify helm is available] ***************
+ok: [localhost]
+
+TASK [kubernetes : kubernetes | post | Display helm version] *******************
+ok: [localhost] =>
+    msg: 'Helm: v3.20.2+g8fb76d6'
+
+TASK [kubernetes : kubernetes | post | Apply node topology (multi-node only)] **
+*
+included: /home/ubuntu/eas/roles/kubernetes/tasks/apply_node_topology.yaml for l
+ocalhost
+
+TASK [kubernetes : node-topology | Skip — single-node] *************************
+ok: [localhost] =>
+    msg: Single-node inventory — node topology not applied.
+
+TASK [kubernetes : node-topology | Discover worker nodes] **********************
+skipping: [localhost]
+
+TASK [kubernetes : node-topology | Build control-plane list] *******************
+skipping: [localhost]
+
+TASK [kubernetes : node-topology | Build worker list] **************************
+skipping: [localhost]
+
+TASK [kubernetes : node-topology | Detected topology] **************************
+skipping: [localhost]
+
+TASK [kubernetes : node-topology | Skip — no workers found] ********************
+skipping: [localhost]
+
+TASK [kubernetes : node-topology | Label control-plane nodes (workload-class=pla
+tform)] ***
+skipping: [localhost]
+
+TASK [kubernetes : node-topology | Label worker nodes (workload-class=inference)
+] ***
+skipping: [localhost]
+
+TASK [kubernetes : node-topology | Done (soft affinity enabled)] ***************
+skipping: [localhost]
+
+TASK [kubernetes : kubernetes | post | Kubernetes is ready] ********************
+ok: [localhost] =>
+    msg:
+    - Kubernetes cluster is healthy.
+    - 'Version: 1.34.3'
+    - 'Nodes: 1'
+
+TASK [kubernetes : kubernetes | End role (post-kubespray)] *********************
+
+TASK [kubernetes — install complete] *******************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ kubernetes — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: storage] ********************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: storage
+    ┃
+        ┃  Layer: infrastructure
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute storage] *********************************************************
+included: storage for localhost
+
+TASK [storage : storage | ensure backend is resolved] **************************
+skipping: [localhost]
+
+TASK [storage : storage | no backend role to run (local-path)] *****************
+ok: [localhost] =>
+    msg: Backend 'local-path' has no role to run — handled by Kubespray. Skippin
+g.
+
+TASK [storage | dispatch to backend role ''] ***********************************
+skipping: [localhost]
+
+TASK [storage — install complete] **********************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ storage — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: cert_manager] ***************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: cert_manager
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute cert_manager] ****************************************************
+included: cert_manager for localhost
+
+TASK [cert_manager : cert_manager | Dispatch action: install] ******************
+included: /home/ubuntu/eas/roles/cert_manager/tasks/install.yaml for localhost
+
+TASK [cert_manager : cert_manager | Check for existing Helm release] ***********
+ok: [localhost]
+
+TASK [cert_manager : cert_manager | Already installed — skipping] **************
+skipping: [localhost]
+
+TASK [cert_manager : cert_manager | Add jetstack Helm repo] ********************
+changed: [localhost]
+
+TASK [cert_manager : cert_manager | Update Helm repos] *************************
+ok: [localhost]
+
+TASK [cert_manager : cert_manager | Check for Gateway API CRDs] ****************
+ok: [localhost]
+
+TASK [cert_manager : cert_manager | Label namespace — Istio] *******************
+changed: [localhost]
+
+TASK [cert_manager : cert_manager | Label namespace — PSS] *********************
+changed: [localhost]
+
+TASK [cert_manager : cert_manager | Install cert-manager] **********************
+changed: [localhost]
+
+TASK [cert_manager : cert_manager | Wait for webhook] **************************
+ok: [localhost]
+
+TASK [cert_manager : cert_manager | Pause for webhook readiness] ***************
+Pausing for 10 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [localhost]
+
+TASK [cert_manager : cert_manager | Check if Prometheus Operator CRDs are availa
+ble] ***
+ok: [localhost]
+
+TASK [cert_manager : cert_manager | Create ServiceMonitor for cert-manager contr
+oller] ***
+skipping: [localhost]
+
+TASK [cert_manager : cert_manager | Create ServiceMonitor for cert-manager cainj
+ector] ***
+skipping: [localhost]
+
+TASK [cert_manager : cert_manager | ServiceMonitor skipped (Prometheus Operator
+not yet installed)] ***
+ok: [localhost] =>
+    msg: Prometheus Operator CRDs not found — cert-manager ServiceMonitors will
+be created
+        by the observability role.
+
+TASK [cert_manager — install complete] *****************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ cert_manager — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: istio] **********************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: istio
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute istio] ***********************************************************
+included: istio for localhost
+
+TASK [istio : istio | Dispatch action: install] ********************************
+included: /home/ubuntu/eas/roles/istio/tasks/install.yaml for localhost
+
+TASK [istio : istio | Check for existing Helm release] *************************
+ok: [localhost]
+
+TASK [istio : istio | Already installed — skipping] ****************************
+skipping: [localhost]
+
+TASK [istio : istio | Add Helm repository] *************************************
+changed: [localhost]
+
+TASK [istio : istio | Ensure namespace exists] *********************************
+changed: [localhost]
+
+TASK [istio : istio | Label namespace — Istio] *********************************
+changed: [localhost]
+
+TASK [istio : istio | Label namespace — PSS] ***********************************
+changed: [localhost]
+
+TASK [istio : istio | Bootstrap cert-manager-istio-csr (CA bridge)] ************
+included: /home/ubuntu/eas/roles/istio/tasks/install_csr.yaml for localhost
+
+TASK [istio : istio | csr | Check for existing istio-csr Helm release] *********
+ok: [localhost]
+
+TASK [istio : istio | csr | Already installed — skipping] **********************
+skipping: [localhost]
+
+TASK [istio : istio | csr | Add jetstack Helm repo] ****************************
+ok: [localhost]
+
+TASK [istio : istio | csr | Create selfsigned-root ClusterIssuer] **************
+changed: [localhost]
+
+TASK [istio : istio | csr | Create istio-ca Certificate (intermediate CA)] *****
+changed: [localhost]
+
+TASK [istio : istio | csr | Wait for istio-ca Certificate to be ready] *********
+ok: [localhost]
+
+TASK [istio : istio | csr | Create istio-ca ClusterIssuer (backed by intermediat
+e CA)] ***
+changed: [localhost]
+
+TASK [istio : istio | csr | Install cert-manager-istio-csr Helm chart] *********
+changed: [localhost]
+
+TASK [istio : istio | csr | Create Role for istio-system permissions] **********
+changed: [localhost]
+
+TASK [istio : istio | csr | Bind Role to istio-csr ServiceAccount] *************
+ok: [localhost]
+
+TASK [istio : istio | csr | Wait for istio-csr deployment to be available] *****
+FAILED - RETRYING: [localhost]: istio | csr | Wait for istio-csr deployment to b
+e available (60 retries left).
+FAILED - RETRYING: [localhost]: istio | csr | Wait for istio-csr deployment to b
+e available (59 retries left).
+ok: [localhost]
+
+TASK [istio : istio | Install Gateway API CRDs] ********************************
+changed: [localhost]
+
+TASK [istio : istio | Install Helm chart] **************************************
+changed: [localhost]
+
+TASK [istio : istio | Allow plaintext at mesh-edge exceptions (STRICT overrides)
+] ***
+changed: [localhost] => (item=cert-manager/default)
+
+TASK [istio : istio | Enforce mesh-wide mutual TLS (STRICT)] *******************
+changed: [localhost]
+
+TASK [istio — install complete] ************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ istio — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: metallb] ********************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: metallb
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute metallb] *********************************************************
+included: metallb for localhost
+
+TASK [metallb : metallb | Dispatch action: install] ****************************
+included: /home/ubuntu/eas/roles/metallb/tasks/install.yaml for localhost
+
+TASK [metallb : metallb | Cloud environment — skipping MetalLB] ****************
+skipping: [localhost]
+
+TASK [metallb : metallb | Check for existing MetalLB] **************************
+ok: [localhost]
+
+TASK [metallb : metallb | Check for known LB controllers] **********************
+ok: [localhost] => (item=MetalLB)
+ok: [localhost] => (item=kube-vip)
+
+TASK [metallb : metallb | Detect existing LB] **********************************
+ok: [localhost]
+
+TASK [metallb : metallb | Existing LB controller detected:] ********************
+skipping: [localhost]
+
+TASK [metallb : metallb | Check for MetalLB IPAddressPool] *********************
+skipping: [localhost]
+
+TASK [metallb : metallb | Check existing LoadBalancer Services for external IPs]
+ ***
+skipping: [localhost]
+
+TASK [metallb : metallb | Determine LB health] *********************************
+skipping: [localhost]
+
+TASK [metallb : metallb | WARNING — existing LB may not be functional] *********
+skipping: [localhost]
+
+TASK [metallb : metallb | Existing LB validated] *******************************
+skipping: [localhost]
+
+TASK [metallb : metallb | ━━━ BEGIN: MetalLB ━━━] ******************************
+ok: [localhost] =>
+    msg: Installing MetalLB 0.15.3 (L2 mode)...
+
+TASK [metallb : metallb | Get all node IPs from cluster] ***********************
+ok: [localhost]
+
+TASK [metallb : metallb | Get control-plane node IPs] **************************
+ok: [localhost]
+
+TASK [metallb : metallb | Parse node IPs] **************************************
+ok: [localhost]
+
+TASK [metallb : metallb | Detect running kube-proxy mode] **********************
+ok: [localhost]
+
+TASK [metallb : metallb | Resolve kube-proxy mode] *****************************
+ok: [localhost]
+
+TASK [metallb : metallb | Pool — single-node (node IP/32)] *********************
+ok: [localhost]
+
+TASK [metallb : metallb | Pool — single-CP + workers / nftables (master IP/32, n
+o NAT)] ***
+skipping: [localhost]
+
+TASK [metallb : metallb | Pool — multi-CP / any mode (.240-.250 range, NAT at ed
+ge)] ***
+skipping: [localhost]
+
+TASK [metallb : metallb | Pool — multi-node / ipvs (.240-.250 range, avoid IPVS
+collision)] ***
+skipping: [localhost]
+
+TASK [metallb : metallb | Pool decision summary] *******************************
+skipping: [localhost]
+
+TASK [metallb : metallb | Fail — could not auto-detect a valid IP range] *******
+skipping: [localhost]
+
+TASK [metallb : metallb | IP pool range] ***************************************
+ok: [localhost] =>
+    msg: 'MetalLB IP pool: 10.241.0.4/32'
+
+TASK [metallb : metallb | Label namespace — PSS] *******************************
+changed: [localhost]
+
+TASK [metallb : metallb | Add Helm repo] ***************************************
+changed: [localhost]
+
+TASK [metallb : metallb | Install via Helm] ************************************
+changed: [localhost]
+
+TASK [metallb : metallb | Wait for controller] *********************************
+ok: [localhost]
+
+TASK [metallb : metallb | Wait for speaker DaemonSet] **************************
+FAILED - RETRYING: [localhost]: metallb | Wait for speaker DaemonSet (60 retries
+ left).
+FAILED - RETRYING: [localhost]: metallb | Wait for speaker DaemonSet (59 retries
+ left).
+FAILED - RETRYING: [localhost]: metallb | Wait for speaker DaemonSet (58 retries
+ left).
+ok: [localhost]
+
+TASK [metallb : metallb | Pause for webhook readiness] *************************
+Pausing for 5 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [localhost]
+
+TASK [metallb : metallb | Apply IPAddressPool and L2Advertisement] *************
+changed: [localhost]
+
+TASK [metallb : metallb | ━━━ DONE: MetalLB ━━━] *******************************
+ok: [localhost] =>
+    msg: 'MetalLB 0.15.3 installed. L2 pool: 10.241.0.4/32'
+
+TASK [metallb — install complete] **********************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ metallb — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: envoy_gateway] **************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: envoy_gateway
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute envoy_gateway] ***************************************************
+included: envoy_gateway for localhost
+
+TASK [envoy_gateway : envoy_gateway | Dispatch action: install] ****************
+included: /home/ubuntu/eas/roles/envoy_gateway/tasks/install.yaml for localhost
+
+TASK [envoy_gateway : envoy_gateway | Check for existing Helm release] *********
+ok: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Already installed — skipping] ************
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Install Envoy Gateway via Helm (OCI) — sta
+ndalone] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Wait for controller deployment] **********
+ok: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Label envoy-gateway-system namespace — Ist
+io] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Allow external ingress at eg-gateway edge
+(mTLS PERMISSIVE)] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Allow apiserver to reach controller webhoo
+k (port-level mTLS)] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Label envoy-gateway-system namespace — PSS
+] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Create gateway namespace (if different)] *
+**
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Label gateway namespace — Istio] *********
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Label gateway namespace — PSS] ***********
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Provision TLS serving certificate] *******
+included: /home/ubuntu/eas/roles/envoy_gateway/tasks/tls.yaml for localhost
+
+TASK [envoy_gateway : envoy_gateway | Validate TLS configuration] **************
+ok: [localhost] =>
+    changed: false
+    msg: TLS mode 'selfsigned' with domain 'solutions.ai'
+
+TASK [envoy_gateway : envoy_gateway | Validate custom cert files exist] ********
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Read custom TLS certificate] *************
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Read custom TLS key] *********************
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Create TLS secret from user-provided certs
+] ***
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Create self-signed bootstrap ClusterIssuer
+] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Create root CA Certificate] **************
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Wait for root CA secret] *****************
+ok: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Create CA ClusterIssuer (gateway-issuer)]
+***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Create Certificate for gateway TLS] ******
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Wait for TLS certificate to be ready] ****
+ok: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Export root CA certificate to /home/ubuntu
+/eas/env/local/logs/ai-solutions-ca.crt] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Root CA trust instructions] **************
+ok: [localhost] =>
+    msg:
+    - 'Root CA exported: /home/ubuntu/eas/env/local/logs/ai-solutions-ca.crt'
+    - Import it to stop browser warnings on https://*.solutions.ai
+    - 'Firefox:  Settings → Privacy & Security → Certificates → View Certificate
+s → Authorities
+        → Import'
+    - 'Chrome:   Settings → Privacy and security → Security → Manage certificate
+s → Authorities
+        → Import'
+    - 'Linux:    sudo cp /home/ubuntu/eas/env/local/logs/ai-solutions-ca.crt /us
+r/local/share/ca-certificates/ai-solutions-ca.crt
+        && sudo update-ca-certificates'
+
+TASK [envoy_gateway : envoy_gateway | Create EnvoyProxy config (DaemonSet on con
+trol-plane nodes)] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Create GatewayClass] *********************
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Apply Gateway resource] ******************
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Wait for Gateway to be accepted] *********
+ok: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Redirect all plaintext HTTP:80 traffic to
+HTTPS] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Exempt the HTTP→HTTPS redirect route from
+gateway auth] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Reserve platform hostnames to their owning
+ namespace] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Apply S3 listener ClientTrafficPolicy (Sig
+V4 path handling)] ***
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Remove the S3 listener ClientTrafficPolicy
+ when the listener is gone] ***
+ok: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Find routes still pinned to 'https' for th
+e S3 hostname] ***
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Report routes claiming the S3 hostname] **
+*
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | S3 path normalization not relaxed (routing
+_mode: path)] ***
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Apply gateway-default BackendTrafficPolicy
+ (timeout)] ***
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Apply SecurityPolicy (keycloak)] *********
+changed: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Apply no-auth SecurityPolicy overrides] **
+*
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Check if Prometheus Operator CRDs are avai
+lable] ***
+ok: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | Create ServiceMonitor for Envoy Gateway me
+trics] ***
+skipping: [localhost]
+
+TASK [envoy_gateway : envoy_gateway | ServiceMonitor skipped (Prometheus Operato
+r not yet installed)] ***
+ok: [localhost] =>
+    msg: Prometheus Operator CRDs not found — Envoy Gateway ServiceMonitor will
+be created
+        by the observability role.
+
+TASK [envoy_gateway : envoy_gateway | Install complete] ************************
+ok: [localhost] =>
+    msg: Envoy Gateway v1.7.1 installed in envoy-gateway-system. Gateway 'eg-gat
+eway'
+        created with TLS (selfsigned) + auth (keycloak).
+
+TASK [envoy_gateway — install complete] ****************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ envoy_gateway — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: postgresql] *****************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: postgresql
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute postgresql] ******************************************************
+included: postgresql for localhost
+
+TASK [postgresql : postgresql | Include install] *******************************
+included: /home/ubuntu/eas/roles/postgresql/tasks/install.yaml for localhost
+
+TASK [postgresql : postgresql | Check for existing CNPG Helm release] **********
+ok: [localhost]
+
+TASK [postgresql : postgresql | Add CNPG Helm repo] ****************************
+changed: [localhost]
+
+TASK [postgresql : postgresql | Label cnpg-system namespace — Istio] ***********
+changed: [localhost]
+
+TASK [postgresql : postgresql | Label cnpg-system namespace — PSS] *************
+changed: [localhost]
+
+TASK [postgresql : postgresql | Install CNPG operator] *************************
+changed: [localhost]
+
+TASK [postgresql : postgresql | Wait for CNPG operator readiness] **************
+ok: [localhost]
+
+TASK [postgresql : postgresql | CNPG operator already installed] ***************
+skipping: [localhost]
+
+TASK [postgresql : postgresql | Create namespace] ******************************
+changed: [localhost]
+
+TASK [postgresql : postgresql | Label namespace — Istio] ***********************
+changed: [localhost]
+
+TASK [postgresql : postgresql | Allow apiserver to reach CNPG webhook (port-leve
+l mTLS)] ***
+changed: [localhost]
+
+TASK [postgresql : postgresql | Label namespace — PSS] *************************
+changed: [localhost]
+
+TASK [postgresql : postgresql | Check existing per-database secrets] ***********
+ok: [localhost] => (item=keycloak)
+ok: [localhost] => (item=litellm)
+ok: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Create per-database credential secrets (only if
+missing)] ***
+changed: [localhost] => (item=keycloak)
+changed: [localhost] => (item=litellm)
+changed: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Read credential secrets for SQL generation] ****
+ok: [localhost] => (item=litellm)
+ok: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Create SQL init Secrets for additional users] **
+*
+changed: [localhost] => (item=litellm)
+changed: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Check for existing CNPG Cluster] ***************
+ok: [localhost]
+
+TASK [postgresql : postgresql | Already running — skipping cluster deploy] *****
+skipping: [localhost]
+
+TASK [postgresql : postgresql | Apply CNPG Cluster CR] *************************
+changed: [localhost]
+
+TASK [postgresql : postgresql | Wait for CNPG Cluster readiness] ***************
+FAILED - RETRYING: [localhost]: postgresql | Wait for CNPG Cluster readiness (60
+ retries left).
+FAILED - RETRYING: [localhost]: postgresql | Wait for CNPG Cluster readiness (59
+ retries left).
+FAILED - RETRYING: [localhost]: postgresql | Wait for CNPG Cluster readiness (58
+ retries left).
+FAILED - RETRYING: [localhost]: postgresql | Wait for CNPG Cluster readiness (57
+ retries left).
+FAILED - RETRYING: [localhost]: postgresql | Wait for CNPG Cluster readiness (56
+ retries left).
+ok: [localhost]
+
+TASK [postgresql : postgresql | Copy provisioning script to pod] ***************
+skipping: [localhost]
+
+TASK [postgresql : postgresql | Provision users/databases on existing cluster] *
+**
+skipping: [localhost] => (item=litellm)
+skipping: [localhost] => (item=langfuse)
+skipping: [localhost]
+
+TASK [postgresql : postgresql | Create additional databases via CNPG Database CR
+D] ***
+changed: [localhost] => (item=litellm)
+changed: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Wait for databases to be ready] ****************
+ok: [localhost] => (item=litellm)
+ok: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Install complete] ******************************
+ok: [localhost] =>
+    msg: 'CloudNativePG 0.25.0 operator + PostgreSQL 17 cluster ''postgresql'' d
+eployed
+        in postgresql (1 instance(s)). Databases: keycloak, litellm, langfuse.'
+
+TASK [postgresql : postgresql | Ensure consumer namespaces exist] **************
+changed: [localhost] => (item=keycloak)
+changed: [localhost] => (item=litellm)
+changed: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Label consumer namespaces — Istio] *************
+changed: [localhost] => (item=keycloak)
+changed: [localhost] => (item=litellm)
+changed: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Label consumer namespaces — PSS] ***************
+changed: [localhost] => (item=keycloak)
+changed: [localhost] => (item=litellm)
+changed: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Read per-database passwords] *******************
+ok: [localhost] => (item=keycloak)
+ok: [localhost] => (item=litellm)
+ok: [localhost] => (item=langfuse)
+
+TASK [postgresql : postgresql | Copy DB secrets to consumer namespaces] ********
+changed: [localhost] => (item=keycloak)
+changed: [localhost] => (item=litellm)
+changed: [localhost] => (item=langfuse)
+
+TASK [postgresql — install complete] *******************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ postgresql — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: keycloak] *******************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: keycloak
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute keycloak] ********************************************************
+included: keycloak for localhost
+
+TASK [keycloak : keycloak | Dispatch action: install] **************************
+included: /home/ubuntu/eas/roles/keycloak/tasks/install.yaml for localhost
+
+TASK [keycloak : keycloak | Check for existing operator deployment] ************
+ok: [localhost]
+
+TASK [keycloak : keycloak | Check for existing Keycloak StatefulSet] ***********
+ok: [localhost]
+
+TASK [keycloak : keycloak | Check for existing Keycloak CR] ********************
+ok: [localhost]
+
+TASK [keycloak : keycloak | Check for existing admin credentials secret] *******
+ok: [localhost]
+
+TASK [keycloak : keycloak | Already installed — skipping] **********************
+skipping: [localhost]
+
+TASK [keycloak : keycloak | Label namespace — Istio] ***************************
+ok: [localhost]
+
+TASK [keycloak : keycloak | Label namespace — PSS] *****************************
+changed: [localhost]
+
+TASK [keycloak : keycloak | Validate hostname is set] **************************
+ok: [localhost] =>
+    changed: false
+    msg: 'Keycloak hostname: keycloak.solutions.ai'
+
+TASK [keycloak : keycloak | Create namespace] **********************************
+ok: [localhost]
+
+TASK [keycloak : keycloak | Install Keycloak CRDs] *****************************
+changed: [localhost] => (item=keycloaks.k8s.keycloak.org-v1.yml)
+changed: [localhost] => (item=keycloakrealmimports.k8s.keycloak.org-v1.yml)
+
+TASK [keycloak : keycloak | Deploy Keycloak Operator] **************************
+changed: [localhost]
+
+TASK [keycloak : keycloak | Wait for operator rollout] *************************
+FAILED - RETRYING: [localhost]: keycloak | Wait for operator rollout (60 retries
+ left).
+FAILED - RETRYING: [localhost]: keycloak | Wait for operator rollout (59 retries
+ left).
+FAILED - RETRYING: [localhost]: keycloak | Wait for operator rollout (58 retries
+ left).
+FAILED - RETRYING: [localhost]: keycloak | Wait for operator rollout (57 retries
+ left).
+ok: [localhost]
+
+TASK [keycloak : keycloak | Verify DB credentials secret exists] ***************
+ok: [localhost]
+
+TASK [keycloak : keycloak | Create admin credentials secret] *******************
+changed: [localhost]
+
+TASK [keycloak : keycloak | Admin credentials secret already exists] ***********
+skipping: [localhost]
+
+TASK [keycloak : keycloak | Apply Keycloak CR] *********************************
+changed: [localhost]
+
+TASK [keycloak : keycloak | Wait for Keycloak StatefulSet readiness] ***********
+FAILED - RETRYING: [localhost]: keycloak | Wait for Keycloak StatefulSet readine
+ss (30 retries left).
+FAILED - RETRYING: [localhost]: keycloak | Wait for Keycloak StatefulSet readine
+ss (29 retries left).
+FAILED - RETRYING: [localhost]: keycloak | Wait for Keycloak StatefulSet readine
+ss (28 retries left).
+FAILED - RETRYING: [localhost]: keycloak | Wait for Keycloak StatefulSet readine
+ss (27 retries left).
+ok: [localhost]
+
+TASK [keycloak : keycloak | Install complete] **********************************
+ok: [localhost] =>
+    msg: Keycloak 26.6.0 operator + instance deployed in keycloak (1 instance(s)
+, db=postgres).
+        Realm/client configuration is owned by solution layers (e.g. keycloak_co
+nfig role).
+
+TASK [keycloak : keycloak | Create HTTPRoute for gateway] **********************
+changed: [localhost]
+
+TASK [keycloak : keycloak | Exclude Keycloak route from gateway JWT policy] ****
+changed: [localhost]
+
+TASK [keycloak — install complete] *********************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ keycloak — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: object_store] ***************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: object_store
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute object_store] ****************************************************
+included: object_store for localhost
+
+TASK [object_store : object_store | Interface role — no tasks] *****************
+ok: [localhost] =>
+    msg: 'object_store is an interface role. Active backend: seaweedfs'
+
+TASK [object_store — install complete] *****************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ object_store — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: seaweedfs] ******************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: seaweedfs
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute seaweedfs] *******************************************************
+included: seaweedfs for localhost
+
+TASK [seaweedfs : seaweedfs | Dispatch action: install] ************************
+included: /home/ubuntu/eas/roles/seaweedfs/tasks/install.yaml for localhost
+
+TASK [seaweedfs : seaweedfs | Load object_store interface vars] ****************
+ok: [localhost]
+
+TASK [seaweedfs : seaweedfs | Create namespace] ********************************
+changed: [localhost]
+
+TASK [seaweedfs : seaweedfs | Label namespace — Istio] *************************
+skipping: [localhost]
+
+TASK [seaweedfs : seaweedfs | Bootstrap credentials] ***************************
+included: /home/ubuntu/eas/roles/seaweedfs/tasks/credentials.yaml for localhost
+
+TASK [seaweedfs : seaweedfs | credentials | Check for existing credentials Secre
+t] ***
+ok: [localhost]
+
+TASK [seaweedfs : seaweedfs | credentials | Load passwords from existing Secret]
+ ***
+skipping: [localhost]
+
+TASK [seaweedfs : seaweedfs | credentials | Generate new passwords (first instal
+l)] ***
+ok: [localhost]
+
+TASK [seaweedfs : seaweedfs | credentials | Store credentials Secret] **********
+changed: [localhost]
+
+TASK [seaweedfs : seaweedfs | Build S3 config] *********************************
+ok: [localhost]
+
+TASK [seaweedfs : seaweedfs | Store S3 config Secret] **************************
+changed: [localhost]
+
+TASK [seaweedfs : seaweedfs | Add SeaweedFS Helm repo] *************************
+changed: [localhost]
+
+TASK [seaweedfs : seaweedfs | Deploy SeaweedFS] ********************************
+changed: [localhost]
+
+TASK [seaweedfs : seaweedfs | Set object_store_* facts] ************************
+ok: [localhost]
+
+TASK [seaweedfs : seaweedfs | Install complete] ********************************
+ok: [localhost] =>
+    msg: 'SeaweedFS deployed in namespace ''monitoring''. object_store_endpoint:
+ http://telemetry-seaweedfs-s3.monitoring.svc.cluster.local:8333
+        Consumers: loki, tempo, langfuse Buckets: loki-chunks, loki-ruler, tempo
+-traces,
+        langfuse'
+
+TASK [seaweedfs — install complete] ********************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  ✓ seaweedfs — install complete
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Reset prep-only flag] ****************************************************
+skipping: [localhost]
+
+TASK [INSTALL: observability] **************************************************
+ok: [localhost] =>
+    msg: |-
+        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┓
+        ┃  INSTALL: observability
+    ┃
+        ┃  Layer: platform
+    ┃
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━┛
+
+TASK [Execute observability] ***************************************************
+included: observability for localhost
+
+TASK [observability : observability | Dispatch action: install] ****************
+included: /home/ubuntu/eas/roles/observability/tasks/install.yaml for localhost
+
+TASK [observability : observability | Check kube-prometheus-stack release] *****
+ok: [localhost]
+
+TASK [observability : observability | Check Loki release] **********************
+ok: [localhost]
+
+TASK [observability : observability | Check Tempo release] *********************
+ok: [localhost]
+
+TASK [observability : observability | Check OTel Collector release] ************
+ok: [localhost]
+
+TASK [observability : observability | Check Prometheus Adapter release] ********
+ok: [localhost]
+
+TASK [observability : observability | Create namespace] ************************
+ok: [localhost]
+
+TASK [observability : observability | Label namespace — Istio] *****************
+changed: [localhost]
+
+TASK [observability : observability | Allow apiserver to reach operator webhook
++ metrics adapter (port-level mTLS)] ***
+changed: [localhost] => (item=allow-webhook-operator:10250)
+changed: [localhost] => (item=allow-metrics-adapter:6443)
+
+TASK [observability : observability | Read node internal IPs (apiserver webhook
+source)] ***
+ok: [localhost]
+
+TASK [observability : observability | Collect node internal IPs] ***************
+ok: [localhost]
+
+TASK [observability : observability | Restrict the mesh-edge ports to the apiser
+ver and Prometheus] ***
+changed: [localhost] => (item=authz-webhook-operator)
+changed: [localhost] => (item=authz-metrics-adapter)
+
+TASK [observability : observability | Remove the previously named authorization
+policy] ***
+ok: [localhost]
+
+TASK [observability : observability | Label namespace — PSS] *******************
+changed: [localhost]
+
+TASK [observability : observability | Bootstrap credentials] *******************
+included: /home/ubuntu/eas/roles/observability/tasks/credentials.yaml for localh
+ost
+
+TASK [observability : observability | credentials | Check for existing credentia
+ls Secret] ***
+ok: [localhost]
+
+TASK [observability : observability | credentials | Load passwords from existing
+ Secret] ***
+skipping: [localhost]
+
+TASK [observability : observability | credentials | Generate new passwords (firs
+t install)] ***
+ok: [localhost]
+
+TASK [observability : observability | credentials | Store credentials Secret] **
+*
+changed: [localhost]
+
+TASK [observability : observability | Load object_store credentials Secret] ****
+ok: [localhost]
+
+TASK [observability : observability | Set object_store credentials from Secret]
+***
+ok: [localhost]
+
+TASK [observability : observability | Add prometheus-community Helm repo] ******
+changed: [localhost]
+
+TASK [observability : observability | Add grafana-community Helm repo] *********
+changed: [localhost]
+
+TASK [observability : observability | Add open-telemetry Helm repo] ************
+changed: [localhost]
+
+TASK [observability : observability | Deploy kube-prometheus-stack] ************
+changed: [localhost]
+
+TASK [observability : observability | Wait for Prometheus Operator] ************
+ok: [localhost]
+
+TASK [observability : observability | Wait for Grafana] ************************
+ok: [localhost]
+
+TASK [observability : observability | Wait for Node Exporter DaemonSet] ********
+ok: [localhost]
+
+TASK [observability : observability | kube-prometheus-stack already installed —
+skipping] ***
+skipping: [localhost]
+
+TASK [observability : observability | Deploy Loki] *****************************
+changed: [localhost]
+
+TASK [observability : observability | Wait for Loki StatefulSet] ***************
+ok: [localhost]
+
+TASK [observability : observability | Loki already installed — skipping] *******
+skipping: [localhost]
+
+TASK [observability : observability | Apply Loki PVC usage PrometheusRule] *****
+changed: [localhost]
+
+TASK [observability : observability | Deploy Tempo] ****************************
+

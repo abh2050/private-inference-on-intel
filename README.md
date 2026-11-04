@@ -71,7 +71,7 @@ The benchmark client runs on the same server, so the numbers exclude internet la
 | ID | What we do | Question it answers | Measured |
 |---|---|---|---|
 | E1 | Time each install phase on a fresh server, and log every retry, ignored error, and manual fix | How hard is deployment? | Minutes per phase, minutes to first correct answer, friction log |
-| E2 | Serve Qwen3-0.6B at 1, 2, 4, 8, and 16 concurrent streams | What does one node deliver? | TTFT p50/p95, time per output token, output tokens/s, errors |
+| E2 | Serve Qwen3-0.6B at 1, 2, 4, 8, and 16 concurrent streams, then 24, 32, and 48 (E2X) to find the limit | What does one node deliver? | TTFT p50/p95, time per output token, output tokens/s, errors |
 | E3 | Repeat E2 with oneDNN capped below AMX (`ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16`) | What does AMX contribute? | E2 metrics, plus a oneDNN probe showing which instruction set ran |
 | E4 | Serve Qwen2.5-3B-Instruct at 1, 2, 4, and 8 streams | Does a CPU hold up at a more realistic model size? | E2 metrics |
 | E5 | Calculate the cost of routing some traffic to the small model and the rest to the 3B model | Is routing worth building? | Blended cost per million tokens at 50%, 70%, and 90% small-model share |
@@ -88,9 +88,9 @@ Cost per million output tokens = hourly server price ÷ (output tokens per secon
 
 E5 is arithmetic on the E2 and E4 throughput numbers, not a deployed router. Whether a small model can answer a given share of real traffic has to be tested with an evaluation set first.
 
-## Deployment friction found so far
+## Deployment friction
 
-The friction log is a result in its own right. Items found so far:
+The friction log is a result in its own right. Items 6 to 9 came up during run 1; the per-minute record is in [logs/operator-log.md](logs/operator-log.md).
 
 | # | Where | What happened | Effect |
 |---|---|---|---|
@@ -104,16 +104,66 @@ The friction log is a result in its own right. Items found so far:
 | 8 | Intel helper script | `get-keycloak-token.sh` leaves a `RETURN` trap that references an unset variable. Sourcing it from a script that uses `set -u` aborts that script. | Automation around the token helper needs a workaround |
 | 9 | Intel model-manager | `undeploy` returns while the pod still holds its pinned cores. A `deploy` issued straight afterwards fails the NRI pre-flight check with "not enough physical cores", even on an otherwise empty node. | Scripts that swap models have to poll until the pod is gone |
 
-Install-phase friction (retries, ignored errors, unhealthy pods) is captured automatically in `results/<run>/friction.txt` and summarized under [Results](#results).
 
 ## Results
 
-The first run is in progress. This section will be filled from `results/<run>/summary.md`, which `analyze.py` generates, and will report:
+Run 1 took place on 2026-11-04 (UTC). The server ran for 1.5 hours. Raw data, logs, and the generated [summary](results/20261103-2026/summary.md) are in [`results/20261103-2026/`](results/20261103-2026/).
 
-- minutes from bare server to first correct answer (E1);
-- SLA capacity and cost per million tokens for each model (E2, E4);
-- AMX on/off throughput ratio, with the oneDNN evidence (E3);
-- blended cost at each routing share (E5).
+Costs use an assumed $1.90 per server-hour, an estimate rather than an IBM invoice. Rerun `analyze.py` with the real rate; the ratios between rows will not change.
+
+### E1: deployment effort
+
+| Measure | Value |
+|---|---|
+| Wall clock, start of install to first correct answer | **48.8 min** |
+| Time the automation needed (excludes 11.4 min an unanswered `[y/N]` prompt sat idle) | **32.9 min** |
+| `install inference` alone (Kubernetes, platform, and inference layers) | 24.9 min; 468 Ansible tasks, 0 failed |
+| First model deploy (weight download, pod start, gateway registration) | 6.1 min |
+| Manual interventions before the first answer | 3: the `[y/N]` prompt, the `validate` abort, and the token-helper trap |
+
+The 36 Ansible retries during install were readiness polling, not errors. The most frequent were the KServe image pre-pull (9), the PostgreSQL cluster (5), and the Keycloak rollout (8 across two tasks).
+
+### E2: one 8-core Xeon node serving Qwen3-0.6B, AMX on
+
+| Concurrent users | Output tok/s | TTFT p95 | Tok/s per user | $ per 1M output tokens | Meets target |
+|---|---|---|---|---|---|
+| 1 | 21.0 | 0.16 s | 22.0 | 25.13 | yes |
+| 4 | 59.8 | 0.43 s | 16.6 | 8.83 | yes |
+| 8 | 119.9 | 0.69 s | 18.5 | 4.40 | yes |
+| 16 | 182.4 | 1.21 s | 15.6 | 2.89 | yes |
+| **24** | **210.7** | **1.76 s** | **12.6** | **2.50** | **yes** |
+| 32 | 216.7 | 2.31 s | 10.3 | 2.44 | no (TTFT) |
+| 48 | 218.2 | 3.39 s | 5.5 | 2.42 | no |
+
+Every request succeeded at every level. Throughput levels off near 217 tokens/s at about 30 users. Past that point, extra users wait longer instead of getting more throughput. **Capacity within the target is 24 concurrent users, at $2.50 per million output tokens.**
+
+### E3: what AMX contributes
+
+The same model ran on the same 8 cores. The only change was `ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16` on the pod. A oneDNN probe inside each pod confirms what ran: `brg_matmul:avx10_1_512_amx` with AMX, and `brg_matmul:avx512_core_bf16` with it disabled.
+
+| Concurrent users | Tok/s, AMX on | Tok/s, AMX off | Ratio | TTFT p95, on → off |
+|---|---|---|---|---|
+| 1 | 21.0 | 18.0 | 1.2× | 0.16 → 0.62 s |
+| 4 | 59.8 | 39.6 | 1.5× | 0.43 → 2.15 s |
+| 8 | 119.9 | 55.4 | 2.2× | 0.69 → 4.40 s |
+| 16 | 182.4 | 59.0 | 3.1× | 1.21 → 8.39 s |
+
+With one user, AMX adds little, because generating tokens is limited by memory bandwidth. The gap grows with load, because prompt processing (prefill) is compute-bound and AMX is a compute unit. Without AMX the node meets the target for 2 users ($18.58 per million tokens); with AMX it meets it for 24 ($2.50).
+
+### E4: a 3B model on the same 8 cores
+
+Qwen2.5-3B-Instruct answered correctly, but no load level met the target. A single user got 5.2 tokens/s, against the 10 required, and throughput peaked at 29.7 tokens/s with 8 users ($17.77 per million tokens). A model this size needs more cores per replica, or a different accelerator, to serve interactive traffic.
+
+### E5: routing what-if
+
+These figures are calculated from E2 and E4 peak throughput; no router was measured. Sending 70% of requests to the 0.6B model and 30% to the 3B model would cost $7.03 per million tokens, against $17.77 for all-3B, a 60% saving. Whether the small model can answer 70% of real traffic acceptably has to be shown with an evaluation set before that saving is real.
+
+### Limits of this run
+
+- One server, one run per configuration. The run-to-run variance has not been measured.
+- The benchmark client ran on the same server, sharing it with the model. The model's 8 cores were pinned, but the client was not.
+- The 6.1-minute first deploy may be slightly short: a stopped attempt a minute earlier had already started the weight download.
+- 8 cores is one NUMA node's worth. Larger models and higher loads would use more cores, `--tp` across sockets, or more replicas.
 
 ## Intel GPU
 

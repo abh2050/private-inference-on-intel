@@ -1,0 +1,50 @@
+[INFO] Using environment: local
+[INFO ]  Category: llm (auto-detected)
+[INFO ]  Deploying qwen2-5-3b (LLMInferenceService)
+[INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+[INFO ]    CPU: 8 | Memory: 32Gi | Replicas: 1
+[INFO ]    CPU policy: nri-balloons
+[INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+[INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+[  OK ]  Storage ready: model-store (Bound)
+[INFO ]  Downloading model weights: Qwen/Qwen2.5-3B-Instruct → PVC:/qwen2-5-3b
+job.batch/download-qwen2-5-3b created
+[INFO ]  Downloading model weights: Qwen/Qwen2.5-3B-Instruct
+[INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+[INFO ]    Follow progress below — do not interrupt.
+sh: 4: cannot create {{DOWNLOAD_CMD}}1: Permission denied
+failed to create fsnotify watcher: too many open filesjob.batch/download-qwen2-5-3b condition met
+[  OK ]  Download complete: qwen2-5-3b
+llminferenceservice.serving.kserve.io/qwen2-5-3b serverside-applied
+[  OK ]  Manifest applied: LLMInferenceService/qwen2-5-3b in llm-inference
+[INFO ]  Creating AIGatewayRoute aigw-qwen2-5-3b (EPP → qwen2-5-3b-inference-pool)
+aigatewayroute.aigateway.envoyproxy.io/aigw-qwen2-5-3b serverside-applied
+[INFO ]  Waiting for qwen2-5-3b to become Ready (timeout: 1800s)...
+[INFO ]    [0s] qwen2-5-3b: waiting for pod to be created
+[INFO ]    [15s] qwen2-5-3b: pending (waiting to be scheduled)
+[INFO ]    [30s] qwen2-5-3b: running — loading model / warming up
+[INFO ]    [1m 1s] qwen2-5-3b: running — loading model / warming up
+[INFO ]    [2m 2s] qwen2-5-3b: running — loading model / warming up
+[INFO ]    [3m 3s] qwen2-5-3b: running — loading model / warming up
+[  OK ]  qwen2-5-3b is Ready
+inferencepool.inference.networking.k8s.io/qwen2-5-3b-inference-pool patched
+
+  ────────────────────────────────────────────────────────
+  Model:    qwen2-5-3b  |  Kind: LLMInferenceService  |  Category: llm
+  Auth:     keycloak
+  Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+  Endpoint: https://inference.solutions.ai/v1/chat/completions
+  Note:     Pass "model": "qwen2-5-3b" in the request body
+  ────────────────────────────────────────────────────────
+
+  1. Get a Keycloak token:
+  source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+  # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+
+  2. Call the model:
+  curl -sk --noproxy "*" \
+    -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+    --resolve "inference.solutions.ai:443:10.241.0.4" \
+    -d '{"model":"qwen2-5-3b","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+    https://inference.solutions.ai/v1/chat/completions
+

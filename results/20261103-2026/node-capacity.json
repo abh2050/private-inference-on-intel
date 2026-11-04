@@ -1,0 +1,8 @@
+{
+  "cpu": "32",
+  "ephemeral-storage": "252838256Ki",
+  "hugepages-1Gi": "0",
+  "hugepages-2Mi": "0",
+  "memory": "165019520Ki",
+  "pods": "110"
+}

@@ -1,0 +1,12 @@
+{"concurrency": 1, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.13, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+{"concurrency": 2, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.08, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+{"concurrency": 4, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.06, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+{"concurrency": 8, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.05, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+{"concurrency": 16, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.04, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+
+conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+   1    0     0.0       0.0      None      None        None
+   2    0     0.0       0.0      None      None        None
+   4    0     0.0       0.0      None      None        None
+   8    0     0.0       0.0      None      None        None
+  16    0     0.0       0.0      None      None        None

@@ -1,0 +1,2234 @@
+2026-11-04T03:31:10Z [0;33mchanged: [localhost][0m
+2026-11-04T03:31:10Z 
+2026-11-04T03:31:10Z TASK [observability : observability | Wait for Tempo StatefulSet] **************
+2026-11-04T03:31:11Z [0;32mok: [localhost][0m
+2026-11-04T03:31:11Z 
+2026-11-04T03:31:11Z TASK [observability : observability | Tempo already installed — skipping] ******
+2026-11-04T03:31:11Z [0;36mskipping: [localhost][0m
+2026-11-04T03:31:11Z 
+2026-11-04T03:31:11Z TASK [observability : observability | Deploy OpenTelemetry Collector] **********
+2026-11-04T03:31:15Z [0;33mchanged: [localhost][0m
+2026-11-04T03:31:15Z 
+2026-11-04T03:31:15Z TASK [observability : observability | Wait for OTel Collector DaemonSet] *******
+2026-11-04T03:31:15Z [1;30mFAILED - RETRYING: [localhost]: observability | Wait for OTel Collector DaemonSet (60 retries left).[0m
+2026-11-04T03:31:21Z [0;32mok: [localhost][0m
+2026-11-04T03:31:21Z 
+2026-11-04T03:31:21Z TASK [observability : observability | OTel Collector already installed — skipping] ***
+2026-11-04T03:31:21Z [0;36mskipping: [localhost][0m
+2026-11-04T03:31:21Z 
+2026-11-04T03:31:21Z TASK [observability : observability | Deploy Prometheus Adapter] ***************
+2026-11-04T03:31:58Z [0;33mchanged: [localhost][0m
+2026-11-04T03:31:58Z 
+2026-11-04T03:31:58Z TASK [observability : observability | Wait for Prometheus Adapter] *************
+2026-11-04T03:31:58Z [0;32mok: [localhost][0m
+2026-11-04T03:31:58Z 
+2026-11-04T03:31:58Z TASK [observability : observability | Prometheus Adapter already installed — skipping] ***
+2026-11-04T03:31:58Z [0;36mskipping: [localhost][0m
+2026-11-04T03:31:58Z 
+2026-11-04T03:31:58Z TASK [observability : observability | Expose Grafana via gateway HTTPRoute] ****
+2026-11-04T03:31:59Z [0;33mchanged: [localhost][0m
+2026-11-04T03:31:59Z 
+2026-11-04T03:31:59Z TASK [observability : observability | Bypass gateway auth for Grafana (Grafana has its own login)] ***
+2026-11-04T03:32:00Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:00Z 
+2026-11-04T03:32:00Z TASK [observability : observability | Store Grafana admin credentials as a cluster Secret] ***
+2026-11-04T03:32:00Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:00Z 
+2026-11-04T03:32:00Z TASK [observability : observability | Create Loki ServiceMonitor] **************
+2026-11-04T03:32:01Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:01Z 
+2026-11-04T03:32:01Z TASK [observability : observability | Create OTel Collector ServiceMonitor] ****
+2026-11-04T03:32:02Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [observability : observability | Install complete] ************************
+2026-11-04T03:32:02Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:02Z [0;32m    msg: 'Observability stack deployed in namespace ''monitoring''. Components: kube-prometheus-stack[0m
+2026-11-04T03:32:02Z [0;32m        85.3.3, Loki 6.55.0, Tempo 1.24.4, OTel Collector 0.153.0. Grafana: https://grafana.solutions.ai[0m
+2026-11-04T03:32:02Z [0;32m        OTLP gRPC: opentelemetry-collector.monitoring.svc.cluster.local:4317 OTLP HTTP:[0m
+2026-11-04T03:32:02Z [0;32m        opentelemetry-collector.monitoring.svc.cluster.local:4318'[0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [observability — install complete] ****************************************
+2026-11-04T03:32:02Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:02Z [0;32m    msg: |-[0m
+2026-11-04T03:32:02Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:32:02Z [0;32m        ┃  ✓ observability — install complete                                       ┃[0m
+2026-11-04T03:32:02Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:32:02Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [INSTALL: nri_cpu_balloons] ***********************************************
+2026-11-04T03:32:02Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:02Z [0;32m    msg: |-[0m
+2026-11-04T03:32:02Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:32:02Z [0;32m        ┃  INSTALL: nri_cpu_balloons                                                ┃[0m
+2026-11-04T03:32:02Z [0;32m        ┃  Layer: inference                                                         ┃[0m
+2026-11-04T03:32:02Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [Execute nri_cpu_balloons] ************************************************
+2026-11-04T03:32:02Z [0;36mincluded: nri_cpu_balloons for localhost[0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [nri_cpu_balloons : nri_cpu_balloons | Dispatch action: install] **********
+2026-11-04T03:32:02Z [0;36mincluded: /home/ubuntu/eas/roles/nri_cpu_balloons/tasks/install.yaml for localhost[0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [nri_cpu_balloons : nri_cpu_balloons | Not CPU — skipping] ****************
+2026-11-04T03:32:02Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [nri_cpu_balloons : nri_cpu_balloons | End play] **************************
+2026-11-04T03:32:02Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [nri_cpu_balloons : nri_cpu_balloons | Run topology-aware install] ********
+2026-11-04T03:32:02Z [0;36mincluded: /home/ubuntu/eas/roles/nri_cpu_balloons/tasks/install_advanced.yaml for localhost[0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [nri_cpu_balloons : nri_cpu_balloons | Banner] ****************************
+2026-11-04T03:32:02Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:02Z [0;32m    msg:[0m
+2026-11-04T03:32:02Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:02Z [0;32m    - NRI Balloon Policy (multi-model, topology-aware)[0m
+2026-11-04T03:32:02Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:02Z [0;32m    - 'Deployment profile:       siblings'[0m
+2026-11-04T03:32:02Z [0;32m    - 'Max TP size:              8 (auto-capped by NUMA)'[0m
+2026-11-04T03:32:02Z [0;32m    - 'Operator cpuset override: no'[0m
+2026-11-04T03:32:02Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [nri_cpu_balloons : nri_cpu_balloons | Generate balloon types] ************
+2026-11-04T03:32:02Z [0;36mincluded: /home/ubuntu/eas/roles/nri_cpu_balloons/tasks/generate_balloon_types.yaml for localhost[0m
+2026-11-04T03:32:02Z 
+2026-11-04T03:32:02Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Ensure topology-probe DaemonSet (minimal, non-root)] ***
+2026-11-04T03:32:03Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:03Z 
+2026-11-04T03:32:03Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Wait for probe pods Running] ***
+2026-11-04T03:32:03Z [1;30mFAILED - RETRYING: [localhost]: nri_cpu_balloons | advanced | Wait for probe pods Running (30 retries left).[0m
+2026-11-04T03:32:09Z [0;32mok: [localhost][0m
+2026-11-04T03:32:09Z 
+2026-11-04T03:32:09Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Filter Running probe pods (one per node)] ***
+2026-11-04T03:32:09Z [0;32mok: [localhost][0m
+2026-11-04T03:32:09Z 
+2026-11-04T03:32:09Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Assert at least one probe pod ready] ***
+2026-11-04T03:32:09Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:09Z [0;32m    changed: false[0m
+2026-11-04T03:32:09Z [0;32m    msg: All assertions passed[0m
+2026-11-04T03:32:09Z 
+2026-11-04T03:32:09Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Pick a pod for cluster-wide tasks (first Running)] ***
+2026-11-04T03:32:09Z [0;32mok: [localhost][0m
+2026-11-04T03:32:09Z 
+2026-11-04T03:32:09Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Load probe script] ******
+2026-11-04T03:32:09Z [0;32mok: [localhost][0m
+2026-11-04T03:32:09Z 
+2026-11-04T03:32:09Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Probe topology on every node (/sys, unprivileged)] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost] => (item=localhost)[0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Build per-node topology map] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost][0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Validate probe results] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost] => (item=localhost) => [0m
+2026-11-04T03:32:11Z [0;32m    ansible_loop_var: item[0m
+2026-11-04T03:32:11Z [0;32m    changed: false[0m
+2026-11-04T03:32:11Z [0;32m    item:[0m
+2026-11-04T03:32:11Z [0;32m        key: localhost[0m
+2026-11-04T03:32:11Z [0;32m        value:[0m
+2026-11-04T03:32:11Z [0;32m            logical_cpus: 32[0m
+2026-11-04T03:32:11Z [0;32m            max_tp: 2[0m
+2026-11-04T03:32:11Z [0;32m            node_cpus:[0m
+2026-11-04T03:32:11Z [0;32m                0: 0-15[0m
+2026-11-04T03:32:11Z [0;32m                1: 16-31[0m
+2026-11-04T03:32:11Z [0;32m            nodecpus_str: 0:0-15;1:16-31[0m
+2026-11-04T03:32:11Z [0;32m            numa: 2[0m
+2026-11-04T03:32:11Z [0;32m            physical_cpus: 32[0m
+2026-11-04T03:32:11Z [0;32m            pkgnode: '{0:[0],1:[1]}'[0m
+2026-11-04T03:32:11Z [0;32m            siblings: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31[0m
+2026-11-04T03:32:11Z [0;32m            threads_per_core: 1[0m
+2026-11-04T03:32:11Z [0;32m    msg: All assertions passed[0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Derive cluster-wide topology facts] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost][0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Per-node topology summary] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost] => (item=localhost) => [0m
+2026-11-04T03:32:11Z [0;32m    msg: node=localhost numa=2 physical_cpus=32 threads_per_core=1 max_tp=2 pkgnode={0:[0],1:[1]}[0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Cluster topology banner] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:11Z [0;32m    msg:[0m
+2026-11-04T03:32:11Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:11Z [0;32m    - Cluster topology (1 node(s))[0m
+2026-11-04T03:32:11Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:11Z [0;32m    - 'NUMA nodes:        min=2  max=2'[0m
+2026-11-04T03:32:11Z [0;32m    - 'Physical CPUs:     min=32  max=32'[0m
+2026-11-04T03:32:11Z [0;32m    - 'Max TP supported:  min=2    max=2'[0m
+2026-11-04T03:32:11Z [0;32m    - 'Heterogeneous:     False'[0m
+2026-11-04T03:32:11Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Warn on heterogeneous topology] ***
+2026-11-04T03:32:11Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Pick PKG_NODE of the most-capable node] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost][0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Run gen-balloon-types.py on controller (cluster MAX_TP)] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost][0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Validate generated output] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:11Z [0;32m    changed: false[0m
+2026-11-04T03:32:11Z [0;32m    msg: All assertions passed[0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Export balloon types fact] ***
+2026-11-04T03:32:11Z [0;32mok: [localhost][0m
+2026-11-04T03:32:11Z 
+2026-11-04T03:32:11Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Run gen-balloon-types.py per node (controller)] ***
+2026-11-04T03:32:12Z [0;32mok: [localhost] => (item=localhost (max_tp=2))[0m
+2026-11-04T03:32:12Z 
+2026-11-04T03:32:12Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Merge per-node balloon types into topology fact] ***
+2026-11-04T03:32:12Z [0;32mok: [localhost][0m
+2026-11-04T03:32:12Z 
+2026-11-04T03:32:12Z TASK [nri_cpu_balloons : nri_cpu_balloons | advanced | Label nodes with NRI capability] ***
+2026-11-04T03:32:12Z [0;33mchanged: [localhost] => (item=localhost (max_tp=2))[0m
+2026-11-04T03:32:12Z 
+2026-11-04T03:32:12Z TASK [nri_cpu_balloons : nri_cpu_balloons | Compute dynamic reserved CPU list per node] ***
+2026-11-04T03:32:12Z [0;36mincluded: /home/ubuntu/eas/roles/nri_cpu_balloons/tasks/compute_advanced_reserved_cpus.yaml for localhost[0m
+2026-11-04T03:32:12Z 
+2026-11-04T03:32:12Z TASK [nri_cpu_balloons : nri_cpu_balloons | Select representative node for cluster-default reserved calc] ***
+2026-11-04T03:32:12Z [0;32mok: [localhost][0m
+2026-11-04T03:32:12Z 
+2026-11-04T03:32:12Z TASK [nri_cpu_balloons : nri_cpu_balloons | Compute cluster-default reserved CPU list (profile=siblings)] ***
+2026-11-04T03:32:13Z [0;32mok: [localhost][0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Reservation exceeds 25% of total CPUs] ***
+2026-11-04T03:32:13Z [0;33mchanged: [localhost] => [0m
+2026-11-04T03:32:13Z [0;33m    msg:[0m
+2026-11-04T03:32:13Z [0;33m    - '[WARNING] Profile ''siblings'' reserves more than 25% of total vCPUs.'[0m
+2026-11-04T03:32:13Z [0;33m    - '[WARNING] SMT/Hyperthreading disabled — no siblings to reserve. [WARNING] Falling[0m
+2026-11-04T03:32:13Z [0;33m        back to ''standard'' profile. [WARNING] Reserved vCPUs (12) exceeds 25% of total[0m
+2026-11-04T03:32:13Z [0;33m        (8). [WARNING] There may not be sufficient CPUs available for inference workloads.[0m
+2026-11-04T03:32:13Z [0;33m        [WARNING] Consider using a larger machine or a smaller reservation profile. [WARNING][0m
+2026-11-04T03:32:13Z [0;33m        Proceeding with deployment...'[0m
+2026-11-04T03:32:13Z [0;33m    - Remaining CPUs for inference may be limited. Proceeding with deployment.[0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Parse NRI_RESERVED_CPU_LIST] *******
+2026-11-04T03:32:13Z [0;32mok: [localhost][0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Validate reserved CPU list] ********
+2026-11-04T03:32:13Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:13Z [0;32m    changed: false[0m
+2026-11-04T03:32:13Z [0;32m    msg: All assertions passed[0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Reserved CPU summary] **************
+2026-11-04T03:32:13Z [0;32mok: [localhost][0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Display cluster-default reserved CPU plan] ***
+2026-11-04T03:32:13Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:13Z [0;32m    msg:[0m
+2026-11-04T03:32:13Z [0;32m    - 'Profile:                   siblings'[0m
+2026-11-04T03:32:13Z [0;32m    - 'Reserved cpuset:           0,1,2,3,4,5,16,17,18,19,20,21'[0m
+2026-11-04T03:32:13Z [0;32m    - 'Reserved CPUs (count):     12'[0m
+2026-11-04T03:32:13Z [0;32m    - 'Workload CPUs available:   20'[0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Compute reserved CPUs per node (controller, injected topology)] ***
+2026-11-04T03:32:13Z [0;32mok: [localhost] => (item=localhost (profile=siblings))[0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Per-node reservation exceeds 25% of total CPUs] ***
+2026-11-04T03:32:13Z [0;33mchanged: [localhost] => (item=localhost) => [0m
+2026-11-04T03:32:13Z [0;33m    msg:[0m
+2026-11-04T03:32:13Z [0;33m    - '[WARNING] Node ''localhost'' — profile ''siblings'' reserves more than 25% of total[0m
+2026-11-04T03:32:13Z [0;33m        vCPUs.'[0m
+2026-11-04T03:32:13Z [0;33m    - '[WARNING] SMT/Hyperthreading disabled — no siblings to reserve. [WARNING] Falling[0m
+2026-11-04T03:32:13Z [0;33m        back to ''standard'' profile. [WARNING] Reserved vCPUs (12) exceeds 25% of total[0m
+2026-11-04T03:32:13Z [0;33m        (8). [WARNING] There may not be sufficient CPUs available for inference workloads.[0m
+2026-11-04T03:32:13Z [0;33m        [WARNING] Consider using a larger machine or a smaller reservation profile. [WARNING][0m
+2026-11-04T03:32:13Z [0;33m        Proceeding with deployment...'[0m
+2026-11-04T03:32:13Z [0;33m    - Remaining CPUs for inference may be limited. Proceeding with deployment.[0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Merge per-node reserved into topology fact] ***
+2026-11-04T03:32:13Z [0;32mok: [localhost][0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Per-node reserved summary] *********
+2026-11-04T03:32:13Z [0;32mok: [localhost] => (item=localhost) => [0m
+2026-11-04T03:32:13Z [0;32m    msg: node=localhost numa=2 threads_per_core=1 profile=siblings reserved_count=12 cpuset=0,1,2,3,4,5,16,17,18,19,20,21[0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Use operator-supplied reserved CPU list] ***
+2026-11-04T03:32:13Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Validate reserved CPU list format] ***
+2026-11-04T03:32:13Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:13Z [0;32m    changed: false[0m
+2026-11-04T03:32:13Z [0;32m    msg: All assertions passed[0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Select reservedResources form] *****
+2026-11-04T03:32:13Z [0;32mok: [localhost][0m
+2026-11-04T03:32:13Z 
+2026-11-04T03:32:13Z TASK [nri_cpu_balloons : nri_cpu_balloons | Reserved resources form banner] ****
+2026-11-04T03:32:14Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:14Z [0;32m    msg:[0m
+2026-11-04T03:32:14Z [0;32m    - 'Reserved form:     count'[0m
+2026-11-04T03:32:14Z [0;32m    - 'Reserved cpuset:   0,1,2,3,4,5,16,17,18,19,20,21'[0m
+2026-11-04T03:32:14Z [0;32m    - 'Reserved count:    12'[0m
+2026-11-04T03:32:14Z [0;32m    - 'Heterogeneous:     False'[0m
+2026-11-04T03:32:14Z 
+2026-11-04T03:32:14Z TASK [nri_cpu_balloons : nri_cpu_balloons | Inject operator reserved cpuset into per-node topology] ***
+2026-11-04T03:32:14Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:14Z 
+2026-11-04T03:32:14Z TASK [nri_cpu_balloons : nri_cpu_balloons | Delete topology optimizer DaemonSet] ***
+2026-11-04T03:32:14Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:14Z 
+2026-11-04T03:32:14Z TASK [nri_cpu_balloons : nri_cpu_balloons | Ensure tmp dir exists] *************
+2026-11-04T03:32:15Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:15Z 
+2026-11-04T03:32:15Z TASK [nri_cpu_balloons : nri_cpu_balloons | Render values file] ****************
+2026-11-04T03:32:15Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:15Z 
+2026-11-04T03:32:15Z TASK [nri_cpu_balloons : nri_cpu_balloons | Add Helm repo] *********************
+2026-11-04T03:32:16Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:16Z 
+2026-11-04T03:32:16Z TASK [nri_cpu_balloons : nri_cpu_balloons | Ensure namespace exists] ***********
+2026-11-04T03:32:16Z [0;32mok: [localhost][0m
+2026-11-04T03:32:16Z 
+2026-11-04T03:32:16Z TASK [nri_cpu_balloons : nri_cpu_balloons | Apply policy ConfigMap] ************
+2026-11-04T03:32:17Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:17Z 
+2026-11-04T03:32:17Z TASK [nri_cpu_balloons : nri_cpu_balloons | Install / upgrade Helm release] ****
+2026-11-04T03:32:20Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:20Z 
+2026-11-04T03:32:20Z TASK [nri_cpu_balloons : nri_cpu_balloons | Wait for DaemonSet readiness] ******
+2026-11-04T03:32:21Z [1;30mFAILED - RETRYING: [localhost]: nri_cpu_balloons | Wait for DaemonSet readiness (30 retries left).[0m
+2026-11-04T03:32:31Z [0;32mok: [localhost][0m
+2026-11-04T03:32:31Z 
+2026-11-04T03:32:31Z TASK [nri_cpu_balloons : nri_cpu_balloons | Wait for BalloonsPolicy CRD] *******
+2026-11-04T03:32:32Z [0;32mok: [localhost][0m
+2026-11-04T03:32:32Z 
+2026-11-04T03:32:32Z TASK [nri_cpu_balloons : nri_cpu_balloons | Render per-node BalloonsPolicy CRs] ***
+2026-11-04T03:32:33Z [0;33mchanged: [localhost] => (item=localhost)[0m
+2026-11-04T03:32:33Z 
+2026-11-04T03:32:33Z TASK [nri_cpu_balloons : nri_cpu_balloons | Apply per-node BalloonsPolicy CRs] ***
+2026-11-04T03:32:33Z [0;33mchanged: [localhost] => (item=node.localhost (max_tp=2, reserved=12))[0m
+2026-11-04T03:32:33Z 
+2026-11-04T03:32:33Z TASK [nri_cpu_balloons : nri_cpu_balloons | List existing per-node BalloonsPolicy CRs] ***
+2026-11-04T03:32:34Z [0;32mok: [localhost][0m
+2026-11-04T03:32:34Z 
+2026-11-04T03:32:34Z TASK [nri_cpu_balloons : nri_cpu_balloons | Compute stale per-node BalloonsPolicy CRs] ***
+2026-11-04T03:32:34Z [0;32mok: [localhost][0m
+2026-11-04T03:32:34Z 
+2026-11-04T03:32:34Z TASK [nri_cpu_balloons : nri_cpu_balloons | Delete stale per-node BalloonsPolicy CRs] ***
+2026-11-04T03:32:34Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:34Z 
+2026-11-04T03:32:34Z TASK [nri_cpu_balloons : nri_cpu_balloons | List nodes currently carrying nri.intel.com/balloons-enabled] ***
+2026-11-04T03:32:35Z [0;32mok: [localhost][0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Strip NRI labels from nodes no longer in topology] ***
+2026-11-04T03:32:35Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Per-node BalloonsPolicy summary] ***
+2026-11-04T03:32:35Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:35Z [0;32m    msg: |-[0m
+2026-11-04T03:32:35Z [0;32m        ============================================================[0m
+2026-11-04T03:32:35Z [0;32m        Per-node BalloonsPolicy CRs reconciled[0m
+2026-11-04T03:32:35Z [0;32m        ============================================================[0m
+2026-11-04T03:32:35Z [0;32m        Applied / refreshed (1):[0m
+2026-11-04T03:32:35Z [0;32m          - node.localhost: max_tp=2, reserved=12, numa=2[0m
+2026-11-04T03:32:35Z [0;32m        Pruned stale (0):[0m
+2026-11-04T03:32:35Z [0;32m          - (none)[0m
+2026-11-04T03:32:35Z [0;32m        ------------------------------------------------------------[0m
+2026-11-04T03:32:35Z [0;32m        Plugin precedence: node.<NAME> > group.<NAME> > default[0m
+2026-11-04T03:32:35Z [0;32m        Default CR remains as safety-net for undiscovered nodes.[0m
+2026-11-04T03:32:35Z [0;32m        ============================================================[0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Export policy stats] ***************
+2026-11-04T03:32:35Z [0;32mok: [localhost][0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Final summary] *********************
+2026-11-04T03:32:35Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:35Z [0;32m    msg:[0m
+2026-11-04T03:32:35Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:35Z [0;32m    - NRI Balloon Policy deployed[0m
+2026-11-04T03:32:35Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:35Z [0;32m    - 'NUMA nodes (max):  2'[0m
+2026-11-04T03:32:35Z [0;32m    - 'Physical CPUs:     32'[0m
+2026-11-04T03:32:35Z [0;32m    - 'Reserved cpuset:   0,1,2,3,4,5,16,17,18,19,20,21 (12 CPUs)'[0m
+2026-11-04T03:32:35Z [0;32m    - 'Deployment profile: siblings'[0m
+2026-11-04T03:32:35Z [0;32m    - 'Max TP size:       2'[0m
+2026-11-04T03:32:35Z [0;32m    - 'Balloon types:     vllm-balloon-tp1, -tp2'[0m
+2026-11-04T03:32:35Z [0;32m    - ''[0m
+2026-11-04T03:32:35Z [0;32m    - 'Pods should be annotated with:'[0m
+2026-11-04T03:32:35Z [0;32m    - '  balloon.balloons.resource-policy.nri.io: vllm-balloon-tp<N>'[0m
+2026-11-04T03:32:35Z [0;32m    - =================================================================[0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Clean up tmp dir] ******************
+2026-11-04T03:32:35Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nri_cpu_balloons — install complete] *************************************
+2026-11-04T03:32:35Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:35Z [0;32m    msg: |-[0m
+2026-11-04T03:32:35Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:32:35Z [0;32m        ┃  ✓ nri_cpu_balloons — install complete                                    ┃[0m
+2026-11-04T03:32:35Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:32:35Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [INSTALL: nfd] ************************************************************
+2026-11-04T03:32:35Z [0;32mok: [localhost] => [0m
+2026-11-04T03:32:35Z [0;32m    msg: |-[0m
+2026-11-04T03:32:35Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:32:35Z [0;32m        ┃  INSTALL: nfd                                                             ┃[0m
+2026-11-04T03:32:35Z [0;32m        ┃  Layer: inference                                                         ┃[0m
+2026-11-04T03:32:35Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [Execute nfd] *************************************************************
+2026-11-04T03:32:35Z [0;36mincluded: nfd for localhost[0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nfd : nfd | Dispatch action: install] ************************************
+2026-11-04T03:32:35Z [0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/nfd/tasks/install.yaml for localhost[0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nfd : nfd | Skip — disabled] *********************************************
+2026-11-04T03:32:35Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:35Z 
+2026-11-04T03:32:35Z TASK [nfd : nfd | Check for existing Helm release] *****************************
+2026-11-04T03:32:36Z [0;32mok: [localhost][0m
+2026-11-04T03:32:36Z 
+2026-11-04T03:32:36Z TASK [nfd : nfd | Already installed — skipping] ********************************
+2026-11-04T03:32:36Z [0;36mskipping: [localhost][0m
+2026-11-04T03:32:36Z 
+2026-11-04T03:32:36Z TASK [nfd : nfd | Create namespace] ********************************************
+2026-11-04T03:32:37Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:37Z 
+2026-11-04T03:32:37Z TASK [nfd : nfd | Add Helm repo] ***********************************************
+2026-11-04T03:32:37Z [0;33mchanged: [localhost][0m
+2026-11-04T03:32:37Z 
+2026-11-04T03:32:37Z TASK [nfd : nfd | Install via Helm] ********************************************
+2026-11-04T03:33:02Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:02Z 
+2026-11-04T03:33:02Z TASK [nfd : nfd | Label namespace — PSS] ***************************************
+2026-11-04T03:33:03Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:03Z 
+2026-11-04T03:33:03Z TASK [nfd : nfd | Wait for worker DaemonSet ready] *****************************
+2026-11-04T03:33:04Z [0;32mok: [localhost][0m
+2026-11-04T03:33:04Z 
+2026-11-04T03:33:04Z TASK [nfd : nfd | Verify AMX labels present on at least one node] **************
+2026-11-04T03:33:04Z [0;32mok: [localhost][0m
+2026-11-04T03:33:04Z 
+2026-11-04T03:33:04Z TASK [nfd : nfd | AMX node summary] ********************************************
+2026-11-04T03:33:04Z [0;32mok: [localhost] => [0m
+2026-11-04T03:33:04Z [0;32m    msg: 'NFD detected 1 node(s) with AMX support: localhost'[0m
+2026-11-04T03:33:04Z 
+2026-11-04T03:33:04Z TASK [nfd : nfd | Install complete] ********************************************
+2026-11-04T03:33:04Z [0;32mok: [localhost] => [0m
+2026-11-04T03:33:04Z [0;32m    msg: NFD deployed in namespace 'node-feature-discovery' — node hardware labels are[0m
+2026-11-04T03:33:04Z [0;32m        now active.[0m
+2026-11-04T03:33:05Z 
+2026-11-04T03:33:05Z TASK [nfd — install complete] **************************************************
+2026-11-04T03:33:05Z [0;32mok: [localhost] => [0m
+2026-11-04T03:33:05Z [0;32m    msg: |-[0m
+2026-11-04T03:33:05Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:33:05Z [0;32m        ┃  ✓ nfd — install complete                                                 ┃[0m
+2026-11-04T03:33:05Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:33:05Z 
+2026-11-04T03:33:05Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:33:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:33:05Z 
+2026-11-04T03:33:05Z TASK [INSTALL: keycloak_config] ************************************************
+2026-11-04T03:33:05Z [0;32mok: [localhost] => [0m
+2026-11-04T03:33:05Z [0;32m    msg: |-[0m
+2026-11-04T03:33:05Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:33:05Z [0;32m        ┃  INSTALL: keycloak_config                                                 ┃[0m
+2026-11-04T03:33:05Z [0;32m        ┃  Layer: inference                                                         ┃[0m
+2026-11-04T03:33:05Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:33:05Z 
+2026-11-04T03:33:05Z TASK [Execute keycloak_config] *************************************************
+2026-11-04T03:33:05Z [0;36mincluded: keycloak_config for localhost[0m
+2026-11-04T03:33:05Z 
+2026-11-04T03:33:05Z TASK [keycloak_config : keycloak_config | Include install] *********************
+2026-11-04T03:33:05Z [0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/keycloak_config/tasks/install.yaml for localhost[0m
+2026-11-04T03:33:05Z 
+2026-11-04T03:33:05Z TASK [keycloak_config : keycloak_config | Check for existing client secret] ****
+2026-11-04T03:33:05Z [0;32mok: [localhost][0m
+2026-11-04T03:33:05Z 
+2026-11-04T03:33:05Z TASK [keycloak_config : keycloak_config | Already configured — skipping] *******
+2026-11-04T03:33:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:33:05Z 
+2026-11-04T03:33:05Z TASK [keycloak_config : keycloak_config | Verify Keycloak instance exists] *****
+2026-11-04T03:33:06Z [0;32mok: [localhost][0m
+2026-11-04T03:33:06Z 
+2026-11-04T03:33:06Z TASK [keycloak_config : keycloak_config | Wait for Keycloak StatefulSet readiness] ***
+2026-11-04T03:33:07Z [0;32mok: [localhost][0m
+2026-11-04T03:33:07Z 
+2026-11-04T03:33:07Z TASK [keycloak_config : keycloak_config | Generate client secret] **************
+2026-11-04T03:33:07Z [0;32mok: [localhost][0m
+2026-11-04T03:33:07Z 
+2026-11-04T03:33:07Z TASK [keycloak_config : keycloak_config | Apply KeycloakRealmImport CR] ********
+2026-11-04T03:33:07Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:07Z 
+2026-11-04T03:33:07Z TASK [keycloak_config : keycloak_config | Wait for realm import to complete] ***
+2026-11-04T03:33:08Z [1;30mFAILED - RETRYING: [localhost]: keycloak_config | Wait for realm import to complete (30 retries left).[0m
+2026-11-04T03:33:19Z [1;30mFAILED - RETRYING: [localhost]: keycloak_config | Wait for realm import to complete (29 retries left).[0m
+2026-11-04T03:33:29Z [1;30mFAILED - RETRYING: [localhost]: keycloak_config | Wait for realm import to complete (28 retries left).[0m
+2026-11-04T03:33:40Z [0;32mok: [localhost][0m
+2026-11-04T03:33:40Z 
+2026-11-04T03:33:40Z TASK [keycloak_config : keycloak_config | Check import result] *****************
+2026-11-04T03:33:40Z [0;36mskipping: [localhost][0m
+2026-11-04T03:33:40Z 
+2026-11-04T03:33:40Z TASK [keycloak_config : keycloak_config | Read Keycloak admin credentials] *****
+2026-11-04T03:33:41Z [0;32mok: [localhost][0m
+2026-11-04T03:33:41Z 
+2026-11-04T03:33:41Z TASK [keycloak_config : keycloak_config | Discover Keycloak server pod] ********
+2026-11-04T03:33:41Z [0;32mok: [localhost][0m
+2026-11-04T03:33:41Z 
+2026-11-04T03:33:41Z TASK [keycloak_config : keycloak_config | Set Keycloak pod name] ***************
+2026-11-04T03:33:41Z [0;32mok: [localhost][0m
+2026-11-04T03:33:41Z 
+2026-11-04T03:33:41Z TASK [keycloak_config : keycloak_config | kcadm — authenticate (writes in-pod config)] ***
+2026-11-04T03:33:45Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:45Z 
+2026-11-04T03:33:45Z TASK [keycloak_config : keycloak_config | kcadm — resolve client UUID] *********
+2026-11-04T03:33:48Z [0;32mok: [localhost][0m
+2026-11-04T03:33:48Z 
+2026-11-04T03:33:48Z TASK [keycloak_config : keycloak_config | kcadm — set client secret to our generated value] ***
+2026-11-04T03:33:50Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:50Z 
+2026-11-04T03:33:50Z TASK [keycloak_config : keycloak_config | Store client secret] *****************
+2026-11-04T03:33:51Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:51Z 
+2026-11-04T03:33:51Z TASK [keycloak_config : keycloak_config | Cleanup realm import CR] *************
+2026-11-04T03:33:51Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:51Z 
+2026-11-04T03:33:51Z TASK [keycloak_config : keycloak_config | Realm & client configured] ***********
+2026-11-04T03:33:51Z [0;32mok: [localhost] => [0m
+2026-11-04T03:33:51Z [0;32m    msg: Realm 'inference' + client 'inference-client' ready. Secret stored in keycloak-client-secret.[0m
+2026-11-04T03:33:51Z 
+2026-11-04T03:33:51Z TASK [keycloak_config — install complete] **************************************
+2026-11-04T03:33:51Z [0;32mok: [localhost] => [0m
+2026-11-04T03:33:51Z [0;32m    msg: |-[0m
+2026-11-04T03:33:51Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:33:51Z [0;32m        ┃  ✓ keycloak_config — install complete                                     ┃[0m
+2026-11-04T03:33:51Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:33:51Z 
+2026-11-04T03:33:51Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:33:51Z [0;36mskipping: [localhost][0m
+2026-11-04T03:33:51Z 
+2026-11-04T03:33:51Z TASK [INSTALL: envoy_ai_gateway] ***********************************************
+2026-11-04T03:33:52Z [0;32mok: [localhost] => [0m
+2026-11-04T03:33:52Z [0;32m    msg: |-[0m
+2026-11-04T03:33:52Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:33:52Z [0;32m        ┃  INSTALL: envoy_ai_gateway                                                ┃[0m
+2026-11-04T03:33:52Z [0;32m        ┃  Layer: inference                                                         ┃[0m
+2026-11-04T03:33:52Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:33:52Z 
+2026-11-04T03:33:52Z TASK [Execute envoy_ai_gateway] ************************************************
+2026-11-04T03:33:52Z [0;36mincluded: envoy_ai_gateway for localhost[0m
+2026-11-04T03:33:52Z 
+2026-11-04T03:33:52Z TASK [envoy_ai_gateway : envoy_ai_gateway | Dispatch action: install] **********
+2026-11-04T03:33:52Z [0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/envoy_ai_gateway/tasks/install.yaml for localhost[0m
+2026-11-04T03:33:52Z 
+2026-11-04T03:33:52Z TASK [envoy_ai_gateway : envoy_ai_gateway | Check for existing Helm release] ***
+2026-11-04T03:33:52Z [0;32mok: [localhost][0m
+2026-11-04T03:33:52Z 
+2026-11-04T03:33:52Z TASK [envoy_ai_gateway : envoy_ai_gateway | Detect version] ********************
+2026-11-04T03:33:52Z [0;32mok: [localhost][0m
+2026-11-04T03:33:52Z 
+2026-11-04T03:33:52Z TASK [envoy_ai_gateway : envoy_ai_gateway | Status] ****************************
+2026-11-04T03:33:52Z [0;32mok: [localhost] => [0m
+2026-11-04T03:33:52Z [0;32m    msg: |-[0m
+2026-11-04T03:33:52Z [0;32m        Fresh install[0m
+2026-11-04T03:33:52Z [0;32m        Envoy AI Gateway v0.6.0[0m
+2026-11-04T03:33:52Z 
+2026-11-04T03:33:52Z TASK [envoy_ai_gateway : envoy_ai_gateway | Label namespace — Istio] ***********
+2026-11-04T03:33:53Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:53Z 
+2026-11-04T03:33:53Z TASK [envoy_ai_gateway : envoy_ai_gateway | Allow apiserver to reach controller webhook (port-level mTLS)] ***
+2026-11-04T03:33:53Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:53Z 
+2026-11-04T03:33:53Z TASK [envoy_ai_gateway : envoy_ai_gateway | Label namespace — PSS] *************
+2026-11-04T03:33:54Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:54Z 
+2026-11-04T03:33:54Z TASK [envoy_ai_gateway : envoy_ai_gateway | Install/upgrade CRDs via Helm (OCI)] ***
+2026-11-04T03:33:59Z [0;33mchanged: [localhost][0m
+2026-11-04T03:33:59Z 
+2026-11-04T03:33:59Z TASK [envoy_ai_gateway : envoy_ai_gateway | Install/upgrade controller via Helm (OCI)] ***
+2026-11-04T03:34:10Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:10Z 
+2026-11-04T03:34:10Z TASK [envoy_ai_gateway : envoy_ai_gateway | Wait for controller deployment] ****
+2026-11-04T03:34:11Z [0;32mok: [localhost][0m
+2026-11-04T03:34:11Z 
+2026-11-04T03:34:11Z TASK [envoy_ai_gateway : envoy_ai_gateway | Install/upgrade complete] **********
+2026-11-04T03:34:11Z [0;32mok: [localhost] => [0m
+2026-11-04T03:34:11Z [0;32m    msg: Envoy AI Gateway v0.6.0 ready in envoy-ai-gateway-system.[0m
+2026-11-04T03:34:11Z 
+2026-11-04T03:34:11Z TASK [envoy_ai_gateway : envoy_ai_gateway | Ensure AI Gateway namespace exists] ***
+2026-11-04T03:34:12Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:12Z 
+2026-11-04T03:34:12Z TASK [envoy_ai_gateway : envoy_ai_gateway | Label AI Gateway namespace — Istio] ***
+2026-11-04T03:34:12Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:12Z 
+2026-11-04T03:34:12Z TASK [envoy_ai_gateway : envoy_ai_gateway | Label AI Gateway namespace — PSS] ***
+2026-11-04T03:34:13Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:13Z 
+2026-11-04T03:34:13Z TASK [envoy_ai_gateway : envoy_ai_gateway | Create EnvoyProxy config (ClusterIP + data-plane affinity)] ***
+2026-11-04T03:34:14Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:14Z 
+2026-11-04T03:34:14Z TASK [envoy_ai_gateway : envoy_ai_gateway | Create GatewayClass for AI Gateway] ***
+2026-11-04T03:34:14Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:14Z 
+2026-11-04T03:34:14Z TASK [envoy_ai_gateway : envoy_ai_gateway | Create AI Gateway namespace] *******
+2026-11-04T03:34:15Z [0;32mok: [localhost][0m
+2026-11-04T03:34:15Z 
+2026-11-04T03:34:15Z TASK [envoy_ai_gateway : envoy_ai_gateway | Create AI Gateway resource] ********
+2026-11-04T03:34:16Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:16Z 
+2026-11-04T03:34:16Z TASK [envoy_ai_gateway : envoy_ai_gateway | Check if Prometheus Operator CRDs are available] ***
+2026-11-04T03:34:16Z [0;32mok: [localhost][0m
+2026-11-04T03:34:16Z 
+2026-11-04T03:34:16Z TASK [envoy_ai_gateway : envoy_ai_gateway | Create ServiceMonitor for AI Gateway controller] ***
+2026-11-04T03:34:17Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:17Z 
+2026-11-04T03:34:17Z TASK [envoy_ai_gateway : envoy_ai_gateway | ServiceMonitor skipped (Prometheus Operator not yet installed)] ***
+2026-11-04T03:34:17Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:17Z 
+2026-11-04T03:34:17Z TASK [envoy_ai_gateway : envoy_ai_gateway | Wait for AI Gateway to be accepted] ***
+2026-11-04T03:34:18Z [0;32mok: [localhost][0m
+2026-11-04T03:34:18Z 
+2026-11-04T03:34:18Z TASK [envoy_ai_gateway : envoy_ai_gateway | Create external inference HTTPRoute (eg-gateway → ai-gateway)] ***
+2026-11-04T03:34:19Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [envoy_ai_gateway : envoy_ai_gateway | Remove external inference HTTPRoute when not keycloak] ***
+2026-11-04T03:34:19Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [envoy_ai_gateway — install complete] *************************************
+2026-11-04T03:34:19Z [0;32mok: [localhost] => [0m
+2026-11-04T03:34:19Z [0;32m    msg: |-[0m
+2026-11-04T03:34:19Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:34:19Z [0;32m        ┃  ✓ envoy_ai_gateway — install complete                                    ┃[0m
+2026-11-04T03:34:19Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:34:19Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [INSTALL: kserve] *********************************************************
+2026-11-04T03:34:19Z [0;32mok: [localhost] => [0m
+2026-11-04T03:34:19Z [0;32m    msg: |-[0m
+2026-11-04T03:34:19Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:34:19Z [0;32m        ┃  INSTALL: kserve                                                          ┃[0m
+2026-11-04T03:34:19Z [0;32m        ┃  Layer: inference                                                         ┃[0m
+2026-11-04T03:34:19Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [Execute kserve] **********************************************************
+2026-11-04T03:34:19Z [0;36mincluded: kserve for localhost[0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [kserve : kserve | Dispatch action: install] ******************************
+2026-11-04T03:34:19Z [0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/kserve/tasks/install.yaml for localhost[0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [kserve : kserve | Validate deploy mode] **********************************
+2026-11-04T03:34:19Z [0;32mok: [localhost] => [0m
+2026-11-04T03:34:19Z [0;32m    changed: false[0m
+2026-11-04T03:34:19Z [0;32m    msg: 'Deploy mode: Standard'[0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [kserve : kserve | Verify cert-manager is running] ************************
+2026-11-04T03:34:19Z [0;32mok: [localhost][0m
+2026-11-04T03:34:19Z 
+2026-11-04T03:34:19Z TASK [kserve : kserve | Wait for cert-manager webhook] *************************
+2026-11-04T03:34:20Z [0;32mok: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Check Istio installed] *********************************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Install Istio via Helm (istio-base)] *******************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Install Istio (istiod)] ********************************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Wait for istiod] ***************************************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Check Knative Serving installed] ***********************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Install Knative Serving CRDs] **************************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Install Knative Serving core] **************************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Install Knative Istio controller] **********************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Wait for Knative Serving controller] *******************
+2026-11-04T03:34:20Z [0;36mskipping: [localhost][0m
+2026-11-04T03:34:20Z 
+2026-11-04T03:34:20Z TASK [kserve : kserve | Check for existing KServe Helm release] ****************
+2026-11-04T03:34:21Z [0;32mok: [localhost][0m
+2026-11-04T03:34:21Z 
+2026-11-04T03:34:21Z TASK [kserve : kserve | Detect version] ****************************************
+2026-11-04T03:34:21Z [0;32mok: [localhost][0m
+2026-11-04T03:34:21Z 
+2026-11-04T03:34:21Z TASK [kserve : kserve | Status] ************************************************
+2026-11-04T03:34:21Z [0;32mok: [localhost] => [0m
+2026-11-04T03:34:21Z [0;32m    msg: |-[0m
+2026-11-04T03:34:21Z [0;32m        Fresh install[0m
+2026-11-04T03:34:21Z [0;32m        KServe v0.18.0[0m
+2026-11-04T03:34:21Z 
+2026-11-04T03:34:21Z TASK [kserve : kserve | Label namespace — Istio] *******************************
+2026-11-04T03:34:21Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:21Z 
+2026-11-04T03:34:21Z TASK [kserve : kserve | Allow apiserver to reach webhooks (port-level mTLS)] ***
+2026-11-04T03:34:22Z [0;33mchanged: [localhost] => (item=allow-webhook)[0m
+2026-11-04T03:34:23Z [0;33mchanged: [localhost] => (item=allow-webhook-llmisvc)[0m
+2026-11-04T03:34:23Z 
+2026-11-04T03:34:23Z TASK [kserve : kserve | Label namespace — PSS] *********************************
+2026-11-04T03:34:23Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:23Z 
+2026-11-04T03:34:23Z TASK [kserve : kserve | Install KServe CRDs via Helm template + server-side apply] ***
+2026-11-04T03:34:25Z [0;33mchanged: [localhost][0m
+2026-11-04T03:34:25Z 
+2026-11-04T03:34:25Z TASK [kserve : kserve | Install KServe resources via Helm] *********************
+2026-11-04T03:35:07Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:07Z 
+2026-11-04T03:35:07Z TASK [kserve : kserve | Detect pre-existing LLMIsvc runtime configs] ***********
+2026-11-04T03:35:07Z [0;32mok: [localhost][0m
+2026-11-04T03:35:07Z 
+2026-11-04T03:35:07Z TASK [kserve : kserve | Compute initial llmisvcConfigs enablement] *************
+2026-11-04T03:35:07Z [0;32mok: [localhost][0m
+2026-11-04T03:35:07Z 
+2026-11-04T03:35:07Z TASK [kserve : kserve | Install KServe runtime configs via Helm] ***************
+2026-11-04T03:35:09Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:09Z 
+2026-11-04T03:35:09Z TASK [kserve : kserve | Wait for controller] ***********************************
+2026-11-04T03:35:09Z [0;32mok: [localhost][0m
+2026-11-04T03:35:09Z 
+2026-11-04T03:35:09Z TASK [kserve : kserve | Configure Gateway API ingress] *************************
+2026-11-04T03:35:10Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:10Z 
+2026-11-04T03:35:10Z TASK [kserve : kserve | Restart controller to pick up ingress config] **********
+2026-11-04T03:35:10Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:10Z 
+2026-11-04T03:35:10Z TASK [kserve : kserve | LLMIsvc — check LWS operator] **************************
+2026-11-04T03:35:11Z [0;32mok: [localhost][0m
+2026-11-04T03:35:11Z 
+2026-11-04T03:35:11Z TASK [kserve : kserve | LLMIsvc — label LWS namespace — Istio] *****************
+2026-11-04T03:35:11Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:11Z 
+2026-11-04T03:35:11Z TASK [kserve : kserve | LLMIsvc — label LWS namespace — PSS] *******************
+2026-11-04T03:35:12Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:12Z 
+2026-11-04T03:35:12Z TASK [kserve : kserve | LLMIsvc — install LWS operator via Helm] ***************
+2026-11-04T03:35:32Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:32Z 
+2026-11-04T03:35:32Z TASK [kserve : kserve | LLMIsvc — wait for LWS operator] ***********************
+2026-11-04T03:35:33Z [0;32mok: [localhost][0m
+2026-11-04T03:35:33Z 
+2026-11-04T03:35:33Z TASK [kserve : kserve | LLMIsvc — allow apiserver to reach LWS webhook (port-level mTLS)] ***
+2026-11-04T03:35:34Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:34Z 
+2026-11-04T03:35:34Z TASK [kserve : kserve | LLMIsvc — verify Envoy Gateway is running] *************
+2026-11-04T03:35:34Z [0;32mok: [localhost][0m
+2026-11-04T03:35:34Z 
+2026-11-04T03:35:34Z TASK [kserve : kserve | LLMIsvc — verify Envoy AI Gateway is running] **********
+2026-11-04T03:35:35Z [0;32mok: [localhost][0m
+2026-11-04T03:35:35Z 
+2026-11-04T03:35:35Z TASK [kserve : kserve | LLMIsvc — check existing release] **********************
+2026-11-04T03:35:35Z [0;32mok: [localhost][0m
+2026-11-04T03:35:35Z 
+2026-11-04T03:35:35Z TASK [kserve : kserve | LLMIsvc — detect version change] ***********************
+2026-11-04T03:35:35Z [0;32mok: [localhost][0m
+2026-11-04T03:35:35Z 
+2026-11-04T03:35:35Z TASK [kserve : kserve | LLMIsvc — install CRDs via Helm] ***********************
+2026-11-04T03:35:44Z [0;33mchanged: [localhost][0m
+2026-11-04T03:35:44Z 
+2026-11-04T03:35:44Z TASK [kserve : kserve | LLMIsvc — adopt GIE CRDs for Helm tracking] ************
+2026-11-04T03:35:45Z [0;32mok: [localhost] => (item=inferencemodelrewrites.inference.networking.x-k8s.io)[0m
+2026-11-04T03:35:45Z [0;32mok: [localhost] => (item=inferenceobjectives.inference.networking.x-k8s.io)[0m
+2026-11-04T03:35:45Z [0;32mok: [localhost] => (item=inferencepoolimports.inference.networking.x-k8s.io)[0m
+2026-11-04T03:35:46Z [0;32mok: [localhost] => (item=inferencepools.inference.networking.x-k8s.io)[0m
+2026-11-04T03:35:46Z [0;32mok: [localhost] => (item=inferencepools.inference.networking.k8s.io)[0m
+2026-11-04T03:35:46Z 
+2026-11-04T03:35:46Z TASK [kserve : kserve | LLMIsvc — annotate GIE CRDs for Helm release] **********
+2026-11-04T03:35:46Z [0;32mok: [localhost] => (item=inferencemodelrewrites.inference.networking.x-k8s.io)[0m
+2026-11-04T03:35:47Z [0;32mok: [localhost] => (item=inferenceobjectives.inference.networking.x-k8s.io)[0m
+2026-11-04T03:35:47Z [0;32mok: [localhost] => (item=inferencepoolimports.inference.networking.x-k8s.io)[0m
+2026-11-04T03:35:47Z [0;32mok: [localhost] => (item=inferencepools.inference.networking.x-k8s.io)[0m
+2026-11-04T03:35:48Z [0;32mok: [localhost] => (item=inferencepools.inference.networking.k8s.io)[0m
+2026-11-04T03:35:48Z 
+2026-11-04T03:35:48Z TASK [kserve : kserve | LLMIsvc — install resources via Helm] ******************
+2026-11-04T03:36:27Z [0;33mchanged: [localhost][0m
+2026-11-04T03:36:27Z 
+2026-11-04T03:36:27Z TASK [kserve : kserve | LLMIsvc — wait for controller] *************************
+2026-11-04T03:36:28Z [0;32mok: [localhost][0m
+2026-11-04T03:36:28Z 
+2026-11-04T03:36:28Z TASK [kserve : kserve | LLMIsvc — upgrade runtime configs with llmisvcConfigs] ***
+2026-11-04T03:36:31Z [1;35m[WARNING]: The default idempotency check can fail to report changes in certain cases. Install helm diff >= 3.4.1 for better results.[0m
+2026-11-04T03:36:31Z [0;33mchanged: [localhost][0m
+2026-11-04T03:36:31Z 
+2026-11-04T03:36:31Z TASK [kserve : kserve | LLMIsvc — read scheduler preset] ***********************
+2026-11-04T03:36:32Z [0;32mok: [localhost][0m
+2026-11-04T03:36:32Z 
+2026-11-04T03:36:32Z TASK [kserve : kserve | LLMIsvc — repin llm-d router images] *******************
+2026-11-04T03:36:32Z [0;33mchanged: [localhost] => (item=main → ghcr.io/llm-d/llm-d-router-endpoint-picker:v0.9.0)[0m
+2026-11-04T03:36:33Z [0;33mchanged: [localhost] => (item=tokenizer → ghcr.io/llm-d/llm-d-uds-tokenizer:vllm-v0.19.1)[0m
+2026-11-04T03:36:33Z 
+2026-11-04T03:36:33Z TASK [kserve : kserve | LLMIsvc — create image pre-pull DaemonSet] *************
+2026-11-04T03:36:34Z [0;33mchanged: [localhost][0m
+2026-11-04T03:36:34Z 
+2026-11-04T03:36:34Z TASK [kserve : kserve | LLMIsvc — wait for image pre-pull to complete] *********
+2026-11-04T03:36:34Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (120 retries left).[0m
+2026-11-04T03:37:00Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (119 retries left).[0m
+2026-11-04T03:37:11Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (118 retries left).[0m
+2026-11-04T03:37:22Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (117 retries left).[0m
+2026-11-04T03:37:33Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (116 retries left).[0m
+2026-11-04T03:37:43Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (115 retries left).[0m
+2026-11-04T03:37:59Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (114 retries left).[0m
+2026-11-04T03:38:17Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (113 retries left).[0m
+2026-11-04T03:38:28Z [1;30mFAILED - RETRYING: [localhost]: kserve | LLMIsvc — wait for image pre-pull to complete (112 retries left).[0m
+2026-11-04T03:38:38Z [0;32mok: [localhost][0m
+2026-11-04T03:38:38Z 
+2026-11-04T03:38:38Z TASK [kserve : kserve | LLMIsvc — remove pre-pull DaemonSet] *******************
+2026-11-04T03:38:39Z [0;33mchanged: [localhost][0m
+2026-11-04T03:38:39Z 
+2026-11-04T03:38:39Z TASK [kserve : kserve | Ensure temp directory exists] **************************
+2026-11-04T03:38:39Z [0;33mchanged: [localhost][0m
+2026-11-04T03:38:39Z 
+2026-11-04T03:38:39Z TASK [kserve : kserve | Render AI Gateway values for Envoy Gateway] ************
+2026-11-04T03:38:40Z [0;33mchanged: [localhost][0m
+2026-11-04T03:38:40Z 
+2026-11-04T03:38:40Z TASK [kserve : kserve | Upgrade Envoy Gateway with AI integration] *************
+2026-11-04T03:38:51Z [0;33mchanged: [localhost][0m
+2026-11-04T03:38:51Z 
+2026-11-04T03:38:51Z TASK [kserve : kserve | Wait for Envoy Gateway to stabilise after upgrade] *****
+2026-11-04T03:38:52Z [0;32mok: [localhost][0m
+2026-11-04T03:38:52Z 
+2026-11-04T03:38:52Z TASK [kserve : kserve | Install complete] **************************************
+2026-11-04T03:38:52Z [0;32mok: [localhost] => [0m
+2026-11-04T03:38:52Z [0;32m    msg: 'KServe v0.18.0 installed in kserve (mode: Standard) + LLMIsvc add-on.'[0m
+2026-11-04T03:38:52Z 
+2026-11-04T03:38:52Z TASK [kserve — install complete] ***********************************************
+2026-11-04T03:38:52Z [0;32mok: [localhost] => [0m
+2026-11-04T03:38:52Z [0;32m    msg: |-[0m
+2026-11-04T03:38:52Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:38:52Z [0;32m        ┃  ✓ kserve — install complete                                              ┃[0m
+2026-11-04T03:38:52Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:38:52Z 
+2026-11-04T03:38:52Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:38:52Z [0;36mskipping: [localhost][0m
+2026-11-04T03:38:52Z 
+2026-11-04T03:38:52Z TASK [INSTALL: llm_services] ***************************************************
+2026-11-04T03:38:52Z [0;32mok: [localhost] => [0m
+2026-11-04T03:38:52Z [0;32m    msg: |-[0m
+2026-11-04T03:38:52Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:38:52Z [0;32m        ┃  INSTALL: llm_services                                                    ┃[0m
+2026-11-04T03:38:52Z [0;32m        ┃  Layer: inference                                                         ┃[0m
+2026-11-04T03:38:52Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:38:52Z 
+2026-11-04T03:38:52Z TASK [Execute llm_services] ****************************************************
+2026-11-04T03:38:52Z [0;36mincluded: llm_services for localhost[0m
+2026-11-04T03:38:52Z 
+2026-11-04T03:38:52Z TASK [llm_services : llm_services | Dispatch action: install] ******************
+2026-11-04T03:38:52Z [0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/llm_services/tasks/install.yaml for localhost[0m
+2026-11-04T03:38:52Z 
+2026-11-04T03:38:52Z TASK [llm_services : llm_services | Create namespace] **************************
+2026-11-04T03:38:53Z [0;32mok: [localhost][0m
+2026-11-04T03:38:53Z 
+2026-11-04T03:38:53Z TASK [llm_services : llm_services | Label namespace — Istio] *******************
+2026-11-04T03:38:54Z [0;32mok: [localhost][0m
+2026-11-04T03:38:54Z 
+2026-11-04T03:38:54Z TASK [llm_services : llm_services | Label namespace — PSS] *********************
+2026-11-04T03:38:54Z [0;32mok: [localhost][0m
+2026-11-04T03:38:54Z 
+2026-11-04T03:38:54Z TASK [llm_services : llm_services | Create model-store PVC] ********************
+2026-11-04T03:38:55Z [0;33mchanged: [localhost][0m
+2026-11-04T03:38:55Z 
+2026-11-04T03:38:55Z TASK [llm_services : llm_services | Verify InferenceService CRD] ***************
+2026-11-04T03:38:56Z [0;32mok: [localhost][0m
+2026-11-04T03:38:56Z 
+2026-11-04T03:38:56Z TASK [llm_services : llm_services | Check LLMInferenceService CRD] *************
+2026-11-04T03:38:57Z [0;32mok: [localhost][0m
+2026-11-04T03:38:57Z 
+2026-11-04T03:38:57Z TASK [llm_services : llm_services | LLMInferenceService CRD status] ************
+2026-11-04T03:38:57Z [0;32mok: [localhost] => [0m
+2026-11-04T03:38:57Z [0;32m    msg: 'LLMInferenceService CRD: available'[0m
+2026-11-04T03:38:57Z 
+2026-11-04T03:38:57Z TASK [llm_services : llm_services | Find serving runtimes] *********************
+2026-11-04T03:38:57Z [0;32mok: [localhost][0m
+2026-11-04T03:38:57Z 
+2026-11-04T03:38:57Z TASK [llm_services : llm_services | Deploy serving runtimes] *******************
+2026-11-04T03:38:58Z [0;33mchanged: [localhost] => (item=vllm-runtime.yaml)[0m
+2026-11-04T03:38:58Z 
+2026-11-04T03:38:58Z TASK [llm_services : llm_services | Wire up engine observability] **************
+2026-11-04T03:38:58Z [0;36mincluded: /home/ubuntu/eas/ext/enterprise.ai-inference/roles/llm_services/tasks/observability.yaml for localhost[0m
+2026-11-04T03:38:58Z 
+2026-11-04T03:38:58Z TASK [llm_services : llm_services | observability | Check for ServiceMonitor file] ***
+2026-11-04T03:38:58Z [0;32mok: [localhost] => (item=vllm-cpu)[0m
+2026-11-04T03:38:58Z 
+2026-11-04T03:38:58Z TASK [llm_services : llm_services | observability | Deploy ServiceMonitors] ****
+2026-11-04T03:38:59Z [0;33mchanged: [localhost] => (item=ServiceMonitor/vllm-cpu)[0m
+2026-11-04T03:38:59Z 
+2026-11-04T03:38:59Z TASK [llm_services : llm_services | observability | Check for dashboard file] ***
+2026-11-04T03:38:59Z [0;32mok: [localhost] => (item=vllm-cpu)[0m
+2026-11-04T03:38:59Z 
+2026-11-04T03:38:59Z TASK [llm_services : llm_services | observability | Deploy Grafana dashboard ConfigMaps] ***
+2026-11-04T03:39:00Z [0;33mchanged: [localhost] => (item=Dashboard/vllm-cpu)[0m
+2026-11-04T03:39:00Z 
+2026-11-04T03:39:00Z TASK [llm_services : llm_services | observability | Engines without dashboard file (skipped)] ***
+2026-11-04T03:39:00Z [0;36mskipping: [localhost] => (item=vllm-cpu) [0m
+2026-11-04T03:39:00Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:00Z 
+2026-11-04T03:39:00Z TASK [llm_services : llm_services | Install complete] **************************
+2026-11-04T03:39:00Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:00Z [0;32m    msg: 'Namespace ''llm-inference'' ready. ServingRuntimes: 1. InferenceService: supported.[0m
+2026-11-04T03:39:00Z [0;32m        LLMInferenceService: supported. Observability engines: vllm-cpu.'[0m
+2026-11-04T03:39:00Z 
+2026-11-04T03:39:00Z TASK [llm_services : llm_services | Set inference extension directory] *********
+2026-11-04T03:39:00Z [0;32mok: [localhost][0m
+2026-11-04T03:39:00Z 
+2026-11-04T03:39:00Z TASK [llm_services : llm_services | Deploy default models] *********************
+2026-11-04T03:39:00Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:00Z 
+2026-11-04T03:39:00Z TASK [llm_services — install complete] *****************************************
+2026-11-04T03:39:00Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:00Z [0;32m    msg: |-[0m
+2026-11-04T03:39:00Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:00Z [0;32m        ┃  ✓ llm_services — install complete                                        ┃[0m
+2026-11-04T03:39:00Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:00Z 
+2026-11-04T03:39:00Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:00Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:00Z 
+2026-11-04T03:39:00Z PLAY RECAP *********************************************************************
+2026-11-04T03:39:00Z [0;33mlocalhost[0m                  : [0;32mok=468 [0m [0;33mchanged=147 [0m unreachable=0    failed=0    [0;36mskipped=113 [0m rescued=0    ignored=0   
+2026-11-04T03:39:00Z 
+2026-11-04T03:39:01Z 
+2026-11-04T03:39:01Z [0;32m╭────────────────────────────────────────────────────────────────────────────────╮[0m
+2026-11-04T03:39:01Z [0;32m│[0m INSTALLATION COMPLETE                                                          [0;32m│[0m
+2026-11-04T03:39:01Z [0;32m│[0m                                                                                [0;32m│[0m
+2026-11-04T03:39:01Z [0;32m│[0m Target:  inference                                                             [0;32m│[0m
+2026-11-04T03:39:01Z [0;32m│[0m Env:     local                                                                 [0;32m│[0m
+2026-11-04T03:39:01Z [0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/install-inference-20261104-031410.log [0;32m│[0m
+2026-11-04T03:39:01Z [0;32m╰────────────────────────────────────────────────────────────────────────────────╯[0m
+2026-11-04T03:39:01Z 
+2026-11-04T03:39:01Z 
+2026-11-04T03:39:01Z ### PHASE validate  03:39:01
+2026-11-04T03:39:01Z Validate: inference  (env=local, installer 1.1.0)
+2026-11-04T03:39:01Z Using existing venv: /home/ubuntu/eas/.venv
+2026-11-04T03:39:01Z Inventory: /home/ubuntu/eas/env/local/inventory/hosts.yaml
+2026-11-04T03:39:01Z 
+2026-11-04T03:39:01Z PLAY [AI-solutions] ************************************************************
+2026-11-04T03:39:01Z 
+2026-11-04T03:39:01Z TASK [Gathering Facts] *********************************************************
+2026-11-04T03:39:03Z [0;32mok: [localhost][0m
+2026-11-04T03:39:03Z 
+2026-11-04T03:39:03Z TASK [Preflight] ***************************************************************
+2026-11-04T03:39:03Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/preflight.yaml for localhost[0m
+2026-11-04T03:39:03Z 
+2026-11-04T03:39:03Z TASK [Preflight - Load ai-solutions component registry] ************************
+2026-11-04T03:39:03Z [0;32mok: [localhost][0m
+2026-11-04T03:39:03Z 
+2026-11-04T03:39:03Z TASK [Preflight - Ensure log and tmp directories exist] ************************
+2026-11-04T03:39:03Z [0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs)[0m
+2026-11-04T03:39:03Z [0;32mok: [localhost] => (item=/home/ubuntu/eas/env/local/logs/tmp)[0m
+2026-11-04T03:39:03Z 
+2026-11-04T03:39:03Z TASK [Preflight - Note which layers ai-solutions declares itself] **************
+2026-11-04T03:39:03Z [0;32mok: [localhost][0m
+2026-11-04T03:39:03Z 
+2026-11-04T03:39:03Z TASK [Preflight - Check for ext directory] *************************************
+2026-11-04T03:39:04Z [0;32mok: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - Discover ext component manifests] ****************************
+2026-11-04T03:39:04Z [0;32mok: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - Merge ext components + layers] *******************************
+2026-11-04T03:39:04Z [0;32mok: [localhost] => (item=components.yaml (enterprise.ai-inference))[0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - Proxy: fail fast if proxy set without no_proxy] **************
+2026-11-04T03:39:04Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - Check internet connectivity] *********************************
+2026-11-04T03:39:04Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - Show proxy status] *******************************************
+2026-11-04T03:39:04Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - Abort on no connectivity] ************************************
+2026-11-04T03:39:04Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - Object store: reject legacy MinIO configuration for object store] ***
+2026-11-04T03:39:04Z [0;32mok: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - Object store: validate backend value] ************************
+2026-11-04T03:39:04Z [0;32mok: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - CPU policy: validate value] **********************************
+2026-11-04T03:39:04Z [0;32mok: [localhost][0m
+2026-11-04T03:39:04Z 
+2026-11-04T03:39:04Z TASK [Preflight - CPU policy: warn that accelerator overrides pinning] *********
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - CPU policy: downgrade to best-effort] ************************
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - CPU policy: derive settings for nri-balloons] ****************
+2026-11-04T03:39:05Z [0;32mok: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - CPU policy: derive settings for kubelet-static] **************
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - CPU policy: derive settings for best-effort] *****************
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - CPU policy: announce] ****************************************
+2026-11-04T03:39:05Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:05Z [0;32m    msg: 'CPU policy: nri-balloons → kubelet_cpu_manager_policy=none, kubelet_topology_manager_policy=none,[0m
+2026-11-04T03:39:05Z [0;32m        nri_cpu_balloons_enabled=True'[0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - Define workload affinity (soft, label-based)] ****************
+2026-11-04T03:39:05Z [0;32mok: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - Empty affinity when topology disabled] ***********************
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - Storage: resolve backend] ************************************
+2026-11-04T03:39:05Z [0;36mincluded: storage for localhost[0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | normalize selector] ************************
+2026-11-04T03:39:05Z [0;32mok: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | detect multi-node] *************************
+2026-11-04T03:39:05Z [0;32mok: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | collect missing ONTAP values] **************
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | assert the ONTAP configuration is complete] ***
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | assert the custom StorageClass is named] ***
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | reject an RWO-only custom class on multi-node] ***
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | reject local-path on multi-node] ***********
+2026-11-04T03:39:05Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | look up backend in registry] ***************
+2026-11-04T03:39:05Z [0;32mok: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | reject unknown backend] ********************
+2026-11-04T03:39:05Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:05Z [0;32m    changed: false[0m
+2026-11-04T03:39:05Z [0;32m    msg: All assertions passed[0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | derive role] *******************************
+2026-11-04T03:39:05Z [0;32mok: [localhost][0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [storage : storage | resolve | announce] **********************************
+2026-11-04T03:39:05Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:05Z [0;32m    msg: 'Storage backend: local-path -> role=(none - local-path)'[0m
+2026-11-04T03:39:05Z 
+2026-11-04T03:39:05Z TASK [Preflight - Verify required CLI tools] ***********************************
+2026-11-04T03:39:05Z [0;32mok: [localhost] => (item=kubectl)[0m
+2026-11-04T03:39:06Z [0;32mok: [localhost] => (item=helm)[0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [Preflight - Warn about missing CLI tools] ********************************
+2026-11-04T03:39:06Z [0;36mskipping: [localhost] => (item=kubectl) [0m
+2026-11-04T03:39:06Z [0;36mskipping: [localhost] => (item=helm) [0m
+2026-11-04T03:39:06Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [Preflight - Resolve active components (see filter_plugins/resolve_components.py)] ***
+2026-11-04T03:39:06Z [0;32mok: [localhost][0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [Preflight - Refuse layers this env was not provisioned for] **************
+2026-11-04T03:39:06Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [Preflight - Show skipped components] *************************************
+2026-11-04T03:39:06Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:06Z [0;32m    msg: 'Skipped (disabled): velero, agentgateway, litellm, langfuse'[0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [Preflight - Display execution plan] **************************************
+2026-11-04T03:39:06Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:06Z [0;32m    msg: |-[0m
+2026-11-04T03:39:06Z [0;32m        ━━━ Validate Plan ━━━[0m
+2026-11-04T03:39:06Z [0;32m        Action: validate[0m
+2026-11-04T03:39:06Z [0;32m        Target: inference[0m
+2026-11-04T03:39:06Z [0;32m        Components: kubernetes, storage, cert_manager, istio, metallb, envoy_gateway, postgresql, keycloak, object_store, seaweedfs, observability, nri_cpu_balloons, nfd, keycloak_config, envoy_ai_gateway, kserve, llm_services[0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [Execute components] ******************************************************
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=kubernetes)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=storage)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=cert_manager)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=istio)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=metallb)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=envoy_gateway)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=postgresql)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=keycloak)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=object_store)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=seaweedfs)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=observability)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=nri_cpu_balloons)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=nfd)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=keycloak_config)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=envoy_ai_gateway)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=kserve)[0m
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/playbooks/includes/run_component.yaml for localhost => (item=llm_services)[0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [VALIDATE: kubernetes] ****************************************************
+2026-11-04T03:39:06Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:06Z [0;32m    msg: |-[0m
+2026-11-04T03:39:06Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:06Z [0;32m        ┃  VALIDATE: kubernetes                                                     ┃[0m
+2026-11-04T03:39:06Z [0;32m        ┃  Layer: infrastructure                                                    ┃[0m
+2026-11-04T03:39:06Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [Execute kubernetes] ******************************************************
+2026-11-04T03:39:06Z [0;36mincluded: kubernetes for localhost[0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [kubernetes : kubernetes | Dispatch action: validate] *********************
+2026-11-04T03:39:06Z [0;36mincluded: /home/ubuntu/eas/roles/kubernetes/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:06Z 
+2026-11-04T03:39:06Z TASK [kubernetes : kubernetes | validate | Check kubectl available] ************
+2026-11-04T03:39:07Z [0;32mok: [localhost][0m
+2026-11-04T03:39:07Z 
+2026-11-04T03:39:07Z TASK [kubernetes : kubernetes | validate | Verify kubeconfig exists] ***********
+2026-11-04T03:39:07Z [0;32mok: [localhost][0m
+2026-11-04T03:39:07Z 
+2026-11-04T03:39:07Z TASK [kubernetes : kubernetes | validate | Fail if kubeconfig missing] *********
+2026-11-04T03:39:07Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:07Z 
+2026-11-04T03:39:07Z TASK [kubernetes : kubernetes | validate | Verify cluster reachable] ***********
+2026-11-04T03:39:07Z [0;32mok: [localhost][0m
+2026-11-04T03:39:07Z 
+2026-11-04T03:39:07Z TASK [kubernetes : kubernetes | validate | Get node list] **********************
+2026-11-04T03:39:08Z [0;32mok: [localhost][0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [kubernetes : kubernetes | validate | Check for not-ready nodes] **********
+2026-11-04T03:39:08Z [0;32mok: [localhost][0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [kubernetes : kubernetes | validate | Warn about not-ready nodes] *********
+2026-11-04T03:39:08Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [kubernetes : kubernetes | validate | Get server version] *****************
+2026-11-04T03:39:08Z [0;32mok: [localhost][0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [kubernetes : kubernetes | validate | Parse server version] ***************
+2026-11-04T03:39:08Z [0;32mok: [localhost][0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [kubernetes : kubernetes | validate | Check minimum version compatibility] ***
+2026-11-04T03:39:08Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:08Z [0;32m    changed: false[0m
+2026-11-04T03:39:08Z [0;32m    msg: Kubernetes v1.34.3 meets minimum requirement (>= v1.29)[0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [kubernetes : kubernetes | validate | Validation summary] *****************
+2026-11-04T03:39:08Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:08Z [0;32m    msg:[0m
+2026-11-04T03:39:08Z [0;32m    - Kubernetes validation PASSED[0m
+2026-11-04T03:39:08Z [0;32m    - 'Nodes: 1'[0m
+2026-11-04T03:39:08Z [0;32m    - 'Not-ready: 0'[0m
+2026-11-04T03:39:08Z [0;32m    - 'Version: v1.34.3'[0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [kubernetes — validate complete] ******************************************
+2026-11-04T03:39:08Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:08Z [0;32m    msg: |-[0m
+2026-11-04T03:39:08Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:08Z [0;32m        ┃  ✓ kubernetes — validate complete                                         ┃[0m
+2026-11-04T03:39:08Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:08Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [VALIDATE: storage] *******************************************************
+2026-11-04T03:39:08Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:08Z [0;32m    msg: |-[0m
+2026-11-04T03:39:08Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:08Z [0;32m        ┃  VALIDATE: storage                                                        ┃[0m
+2026-11-04T03:39:08Z [0;32m        ┃  Layer: infrastructure                                                    ┃[0m
+2026-11-04T03:39:08Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [Execute storage] *********************************************************
+2026-11-04T03:39:08Z [0;36mincluded: storage for localhost[0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [storage : storage | ensure backend is resolved] **************************
+2026-11-04T03:39:08Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:08Z 
+2026-11-04T03:39:08Z TASK [storage : storage | no backend role to run (local-path)] *****************
+2026-11-04T03:39:08Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:08Z [0;32m    msg: Backend 'local-path' has no role to run — handled by Kubespray. Skipping.[0m
+2026-11-04T03:39:09Z 
+2026-11-04T03:39:09Z TASK [storage | dispatch to backend role ''] ***********************************
+2026-11-04T03:39:09Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:09Z 
+2026-11-04T03:39:09Z TASK [storage — validate complete] *********************************************
+2026-11-04T03:39:09Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:09Z [0;32m    msg: |-[0m
+2026-11-04T03:39:09Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:09Z [0;32m        ┃  ✓ storage — validate complete                                            ┃[0m
+2026-11-04T03:39:09Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:09Z 
+2026-11-04T03:39:09Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:09Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:09Z 
+2026-11-04T03:39:09Z TASK [VALIDATE: cert_manager] **************************************************
+2026-11-04T03:39:09Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:09Z [0;32m    msg: |-[0m
+2026-11-04T03:39:09Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:09Z [0;32m        ┃  VALIDATE: cert_manager                                                   ┃[0m
+2026-11-04T03:39:09Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:09Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:09Z 
+2026-11-04T03:39:09Z TASK [Execute cert_manager] ****************************************************
+2026-11-04T03:39:09Z [0;36mincluded: cert_manager for localhost[0m
+2026-11-04T03:39:09Z 
+2026-11-04T03:39:09Z TASK [cert_manager : cert_manager | Dispatch action: validate] *****************
+2026-11-04T03:39:09Z [0;36mincluded: /home/ubuntu/eas/roles/cert_manager/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:09Z 
+2026-11-04T03:39:09Z TASK [cert_manager : cert_manager | Check Helm release] ************************
+2026-11-04T03:39:11Z [0;32mok: [localhost][0m
+2026-11-04T03:39:11Z 
+2026-11-04T03:39:11Z TASK [cert_manager : cert_manager | Assert cert-manager is installed] **********
+2026-11-04T03:39:11Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:11Z [0;32m    changed: false[0m
+2026-11-04T03:39:11Z [0;32m    msg: cert-manager Helm release found[0m
+2026-11-04T03:39:11Z 
+2026-11-04T03:39:11Z TASK [cert_manager : cert_manager | Check webhook deployment] ******************
+2026-11-04T03:39:12Z [0;32mok: [localhost][0m
+2026-11-04T03:39:12Z 
+2026-11-04T03:39:12Z TASK [cert_manager : cert_manager | Assert webhook has ready replicas] *********
+2026-11-04T03:39:12Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:12Z [0;32m    changed: false[0m
+2026-11-04T03:39:12Z [0;32m    msg: cert-manager-webhook ready (1 replicas)[0m
+2026-11-04T03:39:12Z 
+2026-11-04T03:39:12Z TASK [cert_manager : cert_manager | Validation passed] *************************
+2026-11-04T03:39:12Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:12Z [0;32m    msg: cert-manager validation passed.[0m
+2026-11-04T03:39:12Z 
+2026-11-04T03:39:12Z TASK [cert_manager — validate complete] ****************************************
+2026-11-04T03:39:12Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:12Z [0;32m    msg: |-[0m
+2026-11-04T03:39:12Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:12Z [0;32m        ┃  ✓ cert_manager — validate complete                                       ┃[0m
+2026-11-04T03:39:12Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:12Z 
+2026-11-04T03:39:12Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:12Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:12Z 
+2026-11-04T03:39:12Z TASK [VALIDATE: istio] *********************************************************
+2026-11-04T03:39:12Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:12Z [0;32m    msg: |-[0m
+2026-11-04T03:39:12Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:12Z [0;32m        ┃  VALIDATE: istio                                                          ┃[0m
+2026-11-04T03:39:12Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:12Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:12Z 
+2026-11-04T03:39:12Z TASK [Execute istio] ***********************************************************
+2026-11-04T03:39:12Z [0;36mincluded: istio for localhost[0m
+2026-11-04T03:39:12Z 
+2026-11-04T03:39:12Z TASK [istio : istio | Dispatch action: validate] *******************************
+2026-11-04T03:39:12Z [0;36mincluded: /home/ubuntu/eas/roles/istio/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:12Z 
+2026-11-04T03:39:12Z TASK [istio : istio | Check Helm release exists] *******************************
+2026-11-04T03:39:14Z [0;32mok: [localhost][0m
+2026-11-04T03:39:14Z 
+2026-11-04T03:39:14Z TASK [istio : istio | Assert Helm release is deployed] *************************
+2026-11-04T03:39:14Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:14Z [0;32m    changed: false[0m
+2026-11-04T03:39:14Z [0;32m    msg: Istio Helm release 'istio' is deployed[0m
+2026-11-04T03:39:14Z 
+2026-11-04T03:39:14Z TASK [istio : istio | Check istiod deployment] *********************************
+2026-11-04T03:39:15Z [0;32mok: [localhost][0m
+2026-11-04T03:39:15Z 
+2026-11-04T03:39:15Z TASK [istio : istio | Assert istiod is available] ******************************
+2026-11-04T03:39:15Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:15Z [0;32m    changed: false[0m
+2026-11-04T03:39:15Z [0;32m    msg: istiod is running and available[0m
+2026-11-04T03:39:15Z 
+2026-11-04T03:39:15Z TASK [istio : istio | Check ztunnel DaemonSet (ambient mode data plane)] *******
+2026-11-04T03:39:15Z [0;32mok: [localhost][0m
+2026-11-04T03:39:15Z 
+2026-11-04T03:39:15Z TASK [istio : istio | Assert ztunnel DaemonSet is fully scheduled] *************
+2026-11-04T03:39:15Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:15Z [0;32m    changed: false[0m
+2026-11-04T03:39:15Z [0;32m    msg: ztunnel DaemonSet is fully scheduled (1 / 1 ready)[0m
+2026-11-04T03:39:15Z 
+2026-11-04T03:39:15Z TASK [istio : istio | Check mesh-wide PeerAuthentication] **********************
+2026-11-04T03:39:16Z [0;32mok: [localhost][0m
+2026-11-04T03:39:16Z 
+2026-11-04T03:39:16Z TASK [istio : istio | Assert mutual TLS is enforced (STRICT)] ******************
+2026-11-04T03:39:16Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:16Z [0;32m    changed: false[0m
+2026-11-04T03:39:16Z [0;32m    msg: Mesh-wide mutual TLS is enforced (STRICT)[0m
+2026-11-04T03:39:16Z 
+2026-11-04T03:39:16Z TASK [istio — validate complete] ***********************************************
+2026-11-04T03:39:16Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:16Z [0;32m    msg: |-[0m
+2026-11-04T03:39:16Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:16Z [0;32m        ┃  ✓ istio — validate complete                                              ┃[0m
+2026-11-04T03:39:16Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:16Z 
+2026-11-04T03:39:16Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:16Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:16Z 
+2026-11-04T03:39:16Z TASK [VALIDATE: metallb] *******************************************************
+2026-11-04T03:39:16Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:16Z [0;32m    msg: |-[0m
+2026-11-04T03:39:16Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:16Z [0;32m        ┃  VALIDATE: metallb                                                        ┃[0m
+2026-11-04T03:39:16Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:16Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:16Z 
+2026-11-04T03:39:16Z TASK [Execute metallb] *********************************************************
+2026-11-04T03:39:16Z [0;36mincluded: metallb for localhost[0m
+2026-11-04T03:39:16Z 
+2026-11-04T03:39:16Z TASK [metallb : metallb | Dispatch action: validate] ***************************
+2026-11-04T03:39:16Z [0;36mincluded: /home/ubuntu/eas/roles/metallb/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:16Z 
+2026-11-04T03:39:16Z TASK [metallb : metallb | Cloud environment — skipping MetalLB validation] *****
+2026-11-04T03:39:16Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:16Z 
+2026-11-04T03:39:16Z TASK [metallb : metallb | Check Helm release] **********************************
+2026-11-04T03:39:17Z [0;32mok: [localhost][0m
+2026-11-04T03:39:17Z 
+2026-11-04T03:39:17Z TASK [metallb : metallb | Assert MetalLB is installed] *************************
+2026-11-04T03:39:17Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:17Z [0;32m    changed: false[0m
+2026-11-04T03:39:17Z [0;32m    msg: MetalLB Helm release found[0m
+2026-11-04T03:39:17Z 
+2026-11-04T03:39:17Z TASK [metallb : metallb | Check controller deployment] *************************
+2026-11-04T03:39:18Z [0;32mok: [localhost][0m
+2026-11-04T03:39:18Z 
+2026-11-04T03:39:18Z TASK [metallb : metallb | Assert controller has ready replicas] ****************
+2026-11-04T03:39:18Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:18Z [0;32m    changed: false[0m
+2026-11-04T03:39:18Z [0;32m    msg: metallb-controller ready (1 replicas)[0m
+2026-11-04T03:39:18Z 
+2026-11-04T03:39:18Z TASK [metallb : metallb | Check IPAddressPool exists] **************************
+2026-11-04T03:39:18Z [0;32mok: [localhost][0m
+2026-11-04T03:39:18Z 
+2026-11-04T03:39:18Z TASK [metallb : metallb | Assert IPAddressPool exists] *************************
+2026-11-04T03:39:18Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:18Z [0;32m    changed: false[0m
+2026-11-04T03:39:18Z [0;32m    msg: IPAddressPool 'default-pool' exists[0m
+2026-11-04T03:39:18Z 
+2026-11-04T03:39:18Z TASK [metallb : metallb | Validation passed] ***********************************
+2026-11-04T03:39:18Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:18Z [0;32m    msg: MetalLB validation passed.[0m
+2026-11-04T03:39:19Z 
+2026-11-04T03:39:19Z TASK [metallb — validate complete] *********************************************
+2026-11-04T03:39:19Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:19Z [0;32m    msg: |-[0m
+2026-11-04T03:39:19Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:19Z [0;32m        ┃  ✓ metallb — validate complete                                            ┃[0m
+2026-11-04T03:39:19Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:19Z 
+2026-11-04T03:39:19Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:19Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:19Z 
+2026-11-04T03:39:19Z TASK [VALIDATE: envoy_gateway] *************************************************
+2026-11-04T03:39:19Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:19Z [0;32m    msg: |-[0m
+2026-11-04T03:39:19Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:19Z [0;32m        ┃  VALIDATE: envoy_gateway                                                  ┃[0m
+2026-11-04T03:39:19Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:19Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:19Z 
+2026-11-04T03:39:19Z TASK [Execute envoy_gateway] ***************************************************
+2026-11-04T03:39:19Z [0;36mincluded: envoy_gateway for localhost[0m
+2026-11-04T03:39:19Z 
+2026-11-04T03:39:19Z TASK [envoy_gateway : envoy_gateway | Dispatch action: validate] ***************
+2026-11-04T03:39:19Z [0;36mincluded: /home/ubuntu/eas/roles/envoy_gateway/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:19Z 
+2026-11-04T03:39:19Z TASK [envoy_gateway : envoy_gateway | Check deployment] ************************
+2026-11-04T03:39:19Z [0;32mok: [localhost][0m
+2026-11-04T03:39:19Z 
+2026-11-04T03:39:19Z TASK [envoy_gateway : envoy_gateway | Assert replicas ready] *******************
+2026-11-04T03:39:19Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:19Z [0;32m    changed: false[0m
+2026-11-04T03:39:19Z [0;32m    msg: Envoy Gateway has 1 ready replica(s)[0m
+2026-11-04T03:39:19Z 
+2026-11-04T03:39:19Z TASK [envoy_gateway : envoy_gateway | Check GatewayClass] **********************
+2026-11-04T03:39:20Z [0;32mok: [localhost][0m
+2026-11-04T03:39:20Z 
+2026-11-04T03:39:20Z TASK [envoy_gateway : envoy_gateway | Assert GatewayClass exists] **************
+2026-11-04T03:39:20Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:20Z [0;32m    changed: false[0m
+2026-11-04T03:39:20Z [0;32m    msg: GatewayClass 'eg' exists[0m
+2026-11-04T03:39:20Z 
+2026-11-04T03:39:20Z TASK [envoy_gateway : envoy_gateway | Check Gateway is accepted] ***************
+2026-11-04T03:39:21Z [0;32mok: [localhost][0m
+2026-11-04T03:39:21Z 
+2026-11-04T03:39:21Z TASK [envoy_gateway : envoy_gateway | Assert Gateway accepted] *****************
+2026-11-04T03:39:21Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:21Z [0;32m    changed: false[0m
+2026-11-04T03:39:21Z [0;32m    msg: Gateway 'eg-gateway' is Accepted[0m
+2026-11-04T03:39:21Z 
+2026-11-04T03:39:21Z TASK [envoy_gateway : envoy_gateway | Check TLS secret exists] *****************
+2026-11-04T03:39:21Z [0;32mok: [localhost][0m
+2026-11-04T03:39:21Z 
+2026-11-04T03:39:21Z TASK [envoy_gateway : envoy_gateway | Assert TLS secret exists] ****************
+2026-11-04T03:39:22Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:22Z [0;32m    changed: false[0m
+2026-11-04T03:39:22Z [0;32m    msg: TLS secret 'gateway-tls' exists[0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [envoy_gateway : envoy_gateway | Check exported root CA certificate] ******
+2026-11-04T03:39:22Z [0;32mok: [localhost][0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [envoy_gateway : envoy_gateway | Assert root CA was exported] *************
+2026-11-04T03:39:22Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:22Z [0;32m    changed: false[0m
+2026-11-04T03:39:22Z [0;32m    msg: Root CA certificate exported to '/home/ubuntu/eas/env/local/logs/ai-solutions-ca.crt'[0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [envoy_gateway : envoy_gateway | Validation passed] ***********************
+2026-11-04T03:39:22Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:22Z [0;32m    msg: Envoy Gateway validation passed. Gateway eg-gateway with TLS (selfsigned) on[0m
+2026-11-04T03:39:22Z [0;32m        solutions.ai[0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [envoy_gateway — validate complete] ***************************************
+2026-11-04T03:39:22Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:22Z [0;32m    msg: |-[0m
+2026-11-04T03:39:22Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:22Z [0;32m        ┃  ✓ envoy_gateway — validate complete                                      ┃[0m
+2026-11-04T03:39:22Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:22Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [VALIDATE: postgresql] ****************************************************
+2026-11-04T03:39:22Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:22Z [0;32m    msg: |-[0m
+2026-11-04T03:39:22Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:22Z [0;32m        ┃  VALIDATE: postgresql                                                     ┃[0m
+2026-11-04T03:39:22Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:22Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [Execute postgresql] ******************************************************
+2026-11-04T03:39:22Z [0;36mincluded: postgresql for localhost[0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [postgresql : postgresql | Include validate] ******************************
+2026-11-04T03:39:22Z [0;36mincluded: /home/ubuntu/eas/roles/postgresql/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:22Z 
+2026-11-04T03:39:22Z TASK [postgresql : postgresql | Validate CNPG Cluster readiness] ***************
+2026-11-04T03:39:23Z [0;32mok: [localhost][0m
+2026-11-04T03:39:23Z 
+2026-11-04T03:39:23Z TASK [postgresql : postgresql | PostgreSQL is ready] ***************************
+2026-11-04T03:39:23Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:23Z [0;32m    msg: PostgreSQL running in postgresql.[0m
+2026-11-04T03:39:23Z 
+2026-11-04T03:39:23Z TASK [postgresql — validate complete] ******************************************
+2026-11-04T03:39:23Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:23Z [0;32m    msg: |-[0m
+2026-11-04T03:39:23Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:23Z [0;32m        ┃  ✓ postgresql — validate complete                                         ┃[0m
+2026-11-04T03:39:23Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:23Z 
+2026-11-04T03:39:23Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:23Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:23Z 
+2026-11-04T03:39:23Z TASK [VALIDATE: keycloak] ******************************************************
+2026-11-04T03:39:23Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:23Z [0;32m    msg: |-[0m
+2026-11-04T03:39:23Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:23Z [0;32m        ┃  VALIDATE: keycloak                                                       ┃[0m
+2026-11-04T03:39:23Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:23Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:23Z 
+2026-11-04T03:39:23Z TASK [Execute keycloak] ********************************************************
+2026-11-04T03:39:23Z [0;36mincluded: keycloak for localhost[0m
+2026-11-04T03:39:23Z 
+2026-11-04T03:39:23Z TASK [keycloak : keycloak | Dispatch action: validate] *************************
+2026-11-04T03:39:23Z [0;36mincluded: /home/ubuntu/eas/roles/keycloak/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:23Z 
+2026-11-04T03:39:23Z TASK [keycloak : keycloak | Check operator deployment] *************************
+2026-11-04T03:39:24Z [0;32mok: [localhost][0m
+2026-11-04T03:39:24Z 
+2026-11-04T03:39:24Z TASK [keycloak : keycloak | Assert operator replicas ready] ********************
+2026-11-04T03:39:24Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:24Z [0;32m    changed: false[0m
+2026-11-04T03:39:24Z [0;32m    msg: Keycloak Operator has 1 ready replica(s)[0m
+2026-11-04T03:39:24Z 
+2026-11-04T03:39:24Z TASK [keycloak : keycloak | Check Keycloak StatefulSet] ************************
+2026-11-04T03:39:24Z [0;32mok: [localhost][0m
+2026-11-04T03:39:24Z 
+2026-11-04T03:39:24Z TASK [keycloak : keycloak | Assert Keycloak instances ready] *******************
+2026-11-04T03:39:24Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:24Z [0;32m    changed: false[0m
+2026-11-04T03:39:24Z [0;32m    msg: Keycloak has 1/1 ready instance(s)[0m
+2026-11-04T03:39:24Z 
+2026-11-04T03:39:24Z TASK [keycloak : keycloak | Validation passed] *********************************
+2026-11-04T03:39:25Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:25Z [0;32m    msg: Keycloak 26.6.0 validation passed (1 instance(s) running).[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [keycloak — validate complete] ********************************************
+2026-11-04T03:39:25Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:25Z [0;32m    msg: |-[0m
+2026-11-04T03:39:25Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:25Z [0;32m        ┃  ✓ keycloak — validate complete                                           ┃[0m
+2026-11-04T03:39:25Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:25Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [VALIDATE: object_store] **************************************************
+2026-11-04T03:39:25Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:25Z [0;32m    msg: |-[0m
+2026-11-04T03:39:25Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:25Z [0;32m        ┃  VALIDATE: object_store                                                   ┃[0m
+2026-11-04T03:39:25Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:25Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [Execute object_store] ****************************************************
+2026-11-04T03:39:25Z [0;36mincluded: object_store for localhost[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [object_store : object_store | Interface role — no tasks] *****************
+2026-11-04T03:39:25Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:25Z [0;32m    msg: 'object_store is an interface role. Active backend: seaweedfs'[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [object_store — validate complete] ****************************************
+2026-11-04T03:39:25Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:25Z [0;32m    msg: |-[0m
+2026-11-04T03:39:25Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:25Z [0;32m        ┃  ✓ object_store — validate complete                                       ┃[0m
+2026-11-04T03:39:25Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:25Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [VALIDATE: seaweedfs] *****************************************************
+2026-11-04T03:39:25Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:25Z [0;32m    msg: |-[0m
+2026-11-04T03:39:25Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:25Z [0;32m        ┃  VALIDATE: seaweedfs                                                      ┃[0m
+2026-11-04T03:39:25Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:25Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [Execute seaweedfs] *******************************************************
+2026-11-04T03:39:25Z [0;36mincluded: seaweedfs for localhost[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [seaweedfs : seaweedfs | Dispatch action: validate] ***********************
+2026-11-04T03:39:25Z [0;36mincluded: /home/ubuntu/eas/roles/seaweedfs/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:25Z 
+2026-11-04T03:39:25Z TASK [seaweedfs : seaweedfs | Check Helm release] ******************************
+2026-11-04T03:39:26Z [0;32mok: [localhost][0m
+2026-11-04T03:39:26Z 
+2026-11-04T03:39:26Z TASK [seaweedfs : seaweedfs | Assert SeaweedFS is installed] *******************
+2026-11-04T03:39:26Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:26Z [0;32m    changed: false[0m
+2026-11-04T03:39:26Z [0;32m    msg: SeaweedFS Helm release found[0m
+2026-11-04T03:39:26Z 
+2026-11-04T03:39:26Z TASK [seaweedfs : seaweedfs | Check S3 gateway Deployment] *********************
+2026-11-04T03:39:26Z [0;32mok: [localhost][0m
+2026-11-04T03:39:26Z 
+2026-11-04T03:39:26Z TASK [seaweedfs : seaweedfs | Assert S3 gateway has ready replicas] ************
+2026-11-04T03:39:26Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:26Z [0;32m    changed: false[0m
+2026-11-04T03:39:26Z [0;32m    msg: SeaweedFS S3 gateway ready (1 replicas)[0m
+2026-11-04T03:39:26Z 
+2026-11-04T03:39:26Z TASK [seaweedfs : seaweedfs | Validation passed] *******************************
+2026-11-04T03:39:26Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:26Z [0;32m    msg: 'SeaweedFS validation passed. Endpoint: http://telemetry-seaweedfs-s3.monitoring.svc.cluster.local:8333'[0m
+2026-11-04T03:39:26Z 
+2026-11-04T03:39:26Z TASK [seaweedfs — validate complete] *******************************************
+2026-11-04T03:39:26Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:26Z [0;32m    msg: |-[0m
+2026-11-04T03:39:26Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:26Z [0;32m        ┃  ✓ seaweedfs — validate complete                                          ┃[0m
+2026-11-04T03:39:26Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:26Z 
+2026-11-04T03:39:26Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:26Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:26Z 
+2026-11-04T03:39:26Z TASK [VALIDATE: observability] *************************************************
+2026-11-04T03:39:26Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:26Z [0;32m    msg: |-[0m
+2026-11-04T03:39:26Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:26Z [0;32m        ┃  VALIDATE: observability                                                  ┃[0m
+2026-11-04T03:39:26Z [0;32m        ┃  Layer: platform                                                          ┃[0m
+2026-11-04T03:39:26Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:26Z 
+2026-11-04T03:39:26Z TASK [Execute observability] ***************************************************
+2026-11-04T03:39:27Z [0;36mincluded: observability for localhost[0m
+2026-11-04T03:39:27Z 
+2026-11-04T03:39:27Z TASK [observability : observability | Dispatch action: validate] ***************
+2026-11-04T03:39:27Z [0;36mincluded: /home/ubuntu/eas/roles/observability/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:27Z 
+2026-11-04T03:39:27Z TASK [observability : observability | Check kube-prometheus-stack release] *****
+2026-11-04T03:39:28Z [0;32mok: [localhost][0m
+2026-11-04T03:39:28Z 
+2026-11-04T03:39:28Z TASK [observability : observability | Assert kube-prometheus-stack is installed] ***
+2026-11-04T03:39:28Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:28Z [0;32m    changed: false[0m
+2026-11-04T03:39:28Z [0;32m    msg: kube-prometheus-stack release found[0m
+2026-11-04T03:39:28Z 
+2026-11-04T03:39:28Z TASK [observability : observability | Check Prometheus Operator deployment] ****
+2026-11-04T03:39:29Z [0;32mok: [localhost][0m
+2026-11-04T03:39:29Z 
+2026-11-04T03:39:29Z TASK [observability : observability | Assert Prometheus Operator is ready] *****
+2026-11-04T03:39:29Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:29Z [0;32m    changed: false[0m
+2026-11-04T03:39:29Z [0;32m    msg: Prometheus Operator ready[0m
+2026-11-04T03:39:29Z 
+2026-11-04T03:39:29Z TASK [observability : observability | Check Grafana deployment] ****************
+2026-11-04T03:39:29Z [0;32mok: [localhost][0m
+2026-11-04T03:39:29Z 
+2026-11-04T03:39:29Z TASK [observability : observability | Assert Grafana is ready] *****************
+2026-11-04T03:39:29Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:29Z [0;32m    changed: false[0m
+2026-11-04T03:39:29Z [0;32m    msg: Grafana ready (1 replicas)[0m
+2026-11-04T03:39:29Z 
+2026-11-04T03:39:29Z TASK [observability : observability | Check Node Exporter DaemonSet] ***********
+2026-11-04T03:39:30Z [0;32mok: [localhost][0m
+2026-11-04T03:39:30Z 
+2026-11-04T03:39:30Z TASK [observability : observability | Assert Node Exporter is fully scheduled] ***
+2026-11-04T03:39:30Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:30Z [0;32m    changed: false[0m
+2026-11-04T03:39:30Z [0;32m    msg: Node Exporter ready on all 1 nodes[0m
+2026-11-04T03:39:30Z 
+2026-11-04T03:39:30Z TASK [observability : observability | Check Loki release] **********************
+2026-11-04T03:39:31Z [0;32mok: [localhost][0m
+2026-11-04T03:39:31Z 
+2026-11-04T03:39:31Z TASK [observability : observability | Assert Loki is installed] ****************
+2026-11-04T03:39:31Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:31Z [0;32m    changed: false[0m
+2026-11-04T03:39:31Z [0;32m    msg: Loki release found[0m
+2026-11-04T03:39:31Z 
+2026-11-04T03:39:31Z TASK [observability : observability | Check Loki StatefulSet] ******************
+2026-11-04T03:39:31Z [0;32mok: [localhost][0m
+2026-11-04T03:39:31Z 
+2026-11-04T03:39:31Z TASK [observability : observability | Assert Loki has ready replicas] **********
+2026-11-04T03:39:32Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:32Z [0;32m    changed: false[0m
+2026-11-04T03:39:32Z [0;32m    msg: Loki ready (1 replicas)[0m
+2026-11-04T03:39:32Z 
+2026-11-04T03:39:32Z TASK [observability : observability | Check Tempo release] *********************
+2026-11-04T03:39:32Z [0;32mok: [localhost][0m
+2026-11-04T03:39:32Z 
+2026-11-04T03:39:32Z TASK [observability : observability | Assert Tempo is installed] ***************
+2026-11-04T03:39:32Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:32Z [0;32m    changed: false[0m
+2026-11-04T03:39:32Z [0;32m    msg: Tempo release found[0m
+2026-11-04T03:39:32Z 
+2026-11-04T03:39:32Z TASK [observability : observability | Check Tempo StatefulSet] *****************
+2026-11-04T03:39:33Z [0;32mok: [localhost][0m
+2026-11-04T03:39:33Z 
+2026-11-04T03:39:33Z TASK [observability : observability | Assert Tempo is ready] *******************
+2026-11-04T03:39:33Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:33Z [0;32m    changed: false[0m
+2026-11-04T03:39:33Z [0;32m    msg: Tempo ready (1 replicas)[0m
+2026-11-04T03:39:33Z 
+2026-11-04T03:39:33Z TASK [observability : observability | Check OTel Collector release] ************
+2026-11-04T03:39:34Z [0;32mok: [localhost][0m
+2026-11-04T03:39:34Z 
+2026-11-04T03:39:34Z TASK [observability : observability | Assert OTel Collector is installed] ******
+2026-11-04T03:39:34Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:34Z [0;32m    changed: false[0m
+2026-11-04T03:39:34Z [0;32m    msg: OpenTelemetry Collector release found[0m
+2026-11-04T03:39:34Z 
+2026-11-04T03:39:34Z TASK [observability : observability | Check OTel Collector DaemonSet] **********
+2026-11-04T03:39:34Z [0;32mok: [localhost][0m
+2026-11-04T03:39:34Z 
+2026-11-04T03:39:34Z TASK [observability : observability | Assert OTel Collector is running on all nodes] ***
+2026-11-04T03:39:34Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:34Z [0;32m    changed: false[0m
+2026-11-04T03:39:34Z [0;32m    msg: OTel Collector running on all 1 nodes[0m
+2026-11-04T03:39:34Z 
+2026-11-04T03:39:34Z TASK [observability : observability | Validation passed] ***********************
+2026-11-04T03:39:34Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:34Z [0;32m    msg: 'Observability stack validation passed. Grafana: https://grafana.solutions.ai[0m
+2026-11-04T03:39:34Z [0;32m        All components healthy in namespace ''monitoring''.'[0m
+2026-11-04T03:39:34Z 
+2026-11-04T03:39:34Z TASK [observability — validate complete] ***************************************
+2026-11-04T03:39:34Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:34Z [0;32m    msg: |-[0m
+2026-11-04T03:39:34Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:34Z [0;32m        ┃  ✓ observability — validate complete                                      ┃[0m
+2026-11-04T03:39:34Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:34Z 
+2026-11-04T03:39:34Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:34Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:34Z 
+2026-11-04T03:39:34Z TASK [VALIDATE: nri_cpu_balloons] **********************************************
+2026-11-04T03:39:35Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:35Z [0;32m    msg: |-[0m
+2026-11-04T03:39:35Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:35Z [0;32m        ┃  VALIDATE: nri_cpu_balloons                                               ┃[0m
+2026-11-04T03:39:35Z [0;32m        ┃  Layer: inference                                                         ┃[0m
+2026-11-04T03:39:35Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:35Z 
+2026-11-04T03:39:35Z TASK [Execute nri_cpu_balloons] ************************************************
+2026-11-04T03:39:35Z [0;36mincluded: nri_cpu_balloons for localhost[0m
+2026-11-04T03:39:35Z 
+2026-11-04T03:39:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Dispatch action: validate] *********
+2026-11-04T03:39:35Z [0;36mincluded: /home/ubuntu/eas/roles/nri_cpu_balloons/tasks/validate.yaml for localhost[0m
+2026-11-04T03:39:35Z 
+2026-11-04T03:39:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Not CPU — nothing to validate] *****
+2026-11-04T03:39:35Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:35Z 
+2026-11-04T03:39:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | End host] **************************
+2026-11-04T03:39:35Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:35Z 
+2026-11-04T03:39:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Check Helm release] ****************
+2026-11-04T03:39:35Z [0;32mok: [localhost][0m
+2026-11-04T03:39:35Z 
+2026-11-04T03:39:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Assert Helm release present] *******
+2026-11-04T03:39:35Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:35Z [0;32m    changed: false[0m
+2026-11-04T03:39:35Z [0;32m    msg: NRI balloons Helm release found.[0m
+2026-11-04T03:39:35Z 
+2026-11-04T03:39:35Z TASK [nri_cpu_balloons : nri_cpu_balloons | Check policy ConfigMap] ************
+2026-11-04T03:39:36Z [0;32mok: [localhost][0m
+2026-11-04T03:39:36Z 
+2026-11-04T03:39:36Z TASK [nri_cpu_balloons : nri_cpu_balloons | Assert ConfigMap present] **********
+2026-11-04T03:39:36Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:36Z [0;32m    changed: false[0m
+2026-11-04T03:39:36Z [0;32m    msg: All assertions passed[0m
+2026-11-04T03:39:36Z 
+2026-11-04T03:39:36Z TASK [nri_cpu_balloons : nri_cpu_balloons | Check DaemonSet readiness] *********
+2026-11-04T03:39:37Z [0;32mok: [localhost][0m
+2026-11-04T03:39:37Z 
+2026-11-04T03:39:37Z TASK [nri_cpu_balloons : nri_cpu_balloons | Assert DaemonSet has ready pods] ***
+2026-11-04T03:39:37Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:37Z [0;32m    changed: false[0m
+2026-11-04T03:39:37Z [0;32m    msg: NRI balloons DaemonSet ready (1 pods).[0m
+2026-11-04T03:39:37Z 
+2026-11-04T03:39:37Z TASK [nri_cpu_balloons : nri_cpu_balloons | Gather node capability labels] *****
+2026-11-04T03:39:37Z [0;32mok: [localhost][0m
+2026-11-04T03:39:37Z 
+2026-11-04T03:39:37Z TASK [nri_cpu_balloons : nri_cpu_balloons | Per-node NRI capability summary] ***
+2026-11-04T03:39:37Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:37Z [0;32m    msg: |-[0m
+2026-11-04T03:39:37Z [0;32m        ============================================================[0m
+2026-11-04T03:39:37Z [0;32m        NRI balloons — per-node capability summary[0m
+2026-11-04T03:39:37Z [0;32m        ============================================================[0m
+2026-11-04T03:39:37Z [0;32m          - localhost                                 enabled=true  max-tp=2  numa=2  pcpus=32[0m
+2026-11-04T03:39:37Z [0;32m        ------------------------------------------------------------[0m
+2026-11-04T03:39:37Z [0;32m        labeled nodes : 1[0m
+2026-11-04T03:39:37Z [0;32m        unlabeled     : 0[0m
+2026-11-04T03:39:37Z [0;32m        best max-tp   : 2[0m
+2026-11-04T03:39:37Z [0;32m        ds ready pods : 1 / 1[0m
+2026-11-04T03:39:37Z [0;32m        ============================================================[0m
+2026-11-04T03:39:37Z 
+2026-11-04T03:39:37Z TASK [nri_cpu_balloons : nri_cpu_balloons | Count nodes with NRI max-tp label] ***
+2026-11-04T03:39:37Z [0;32mok: [localhost][0m
+2026-11-04T03:39:37Z 
+2026-11-04T03:39:37Z TASK [nri_cpu_balloons : nri_cpu_balloons | Warn when no nodes carry NRI labels] ***
+2026-11-04T03:39:37Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:37Z 
+2026-11-04T03:39:37Z TASK [nri_cpu_balloons : nri_cpu_balloons | Pre-flight CPU validator (optional)] ***
+2026-11-04T03:39:37Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:37Z 
+2026-11-04T03:39:37Z TASK [nri_cpu_balloons : nri_cpu_balloons | Validation passed] *****************
+2026-11-04T03:39:37Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:37Z [0;32m    msg: nri_cpu_balloons validation passed.[0m
+2026-11-04T03:39:38Z 
+2026-11-04T03:39:38Z TASK [nri_cpu_balloons — validate complete] ************************************
+2026-11-04T03:39:38Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:38Z [0;32m    msg: |-[0m
+2026-11-04T03:39:38Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:38Z [0;32m        ┃  ✓ nri_cpu_balloons — validate complete                                   ┃[0m
+2026-11-04T03:39:38Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:38Z 
+2026-11-04T03:39:38Z TASK [Reset prep-only flag] ****************************************************
+2026-11-04T03:39:38Z [0;36mskipping: [localhost][0m
+2026-11-04T03:39:38Z 
+2026-11-04T03:39:38Z TASK [VALIDATE: nfd] ***********************************************************
+2026-11-04T03:39:38Z [0;32mok: [localhost] => [0m
+2026-11-04T03:39:38Z [0;32m    msg: |-[0m
+2026-11-04T03:39:38Z [0;32m        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+2026-11-04T03:39:38Z [0;32m        ┃  VALIDATE: nfd                                                            ┃[0m
+2026-11-04T03:39:38Z [0;32m        ┃  Layer: inference                                                         ┃[0m
+2026-11-04T03:39:38Z [0;32m        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026-11-04T03:39:38Z 
+2026-11-04T03:39:38Z TASK [Execute nfd] *************************************************************
+2026-11-04T03:39:38Z [0;36mincluded: nfd for localhost[0m
+2026-11-04T03:39:38Z 
+2026-11-04T03:39:38Z TASK [nfd : nfd | Dispatch action: validate] ***********************************
+2026-11-04T03:39:38Z [0;31m[ERROR]: Could not find or access '/home/ubuntu/eas/playbooks/validate.yaml' on the Ansible Controller: Unable to retrieve file contents.[0m
+2026-11-04T03:39:38Z [0;31mCould not find or access '/home/ubuntu/eas/playbooks/validate.yaml' on the Ansible Controller.[0m
+2026-11-04T03:39:38Z [0;31mIf you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/home/ubuntu/eas/playbooks/validate.yaml'[0m
+2026-11-04T03:39:38Z [0;31m[0m
+2026-11-04T03:39:38Z [0;31mfatal: [localhost]: FAILED! => [0m
+2026-11-04T03:39:38Z [0;31m    changed: false[0m
+2026-11-04T03:39:38Z [0;31m    include: validate.yaml[0m
+2026-11-04T03:39:38Z [0;31m    reason: |-[0m
+2026-11-04T03:39:38Z [0;31m        Could not find or access '/home/ubuntu/eas/playbooks/validate.yaml' on the Ansible Controller: Unable to retrieve file contents.[0m
+2026-11-04T03:39:38Z [0;31m        Could not find or access '/home/ubuntu/eas/playbooks/validate.yaml' on the Ansible Controller.[0m
+2026-11-04T03:39:38Z [0;31m        If you are using a module and expect the file to exist on the remote, see the remote_src option: [Errno 2] No such file or directory: '/home/ubuntu/eas/playbooks/validate.yaml'[0m
+2026-11-04T03:39:38Z 
+2026-11-04T03:39:38Z PLAY RECAP *********************************************************************
+2026-11-04T03:39:38Z [0;31mlocalhost[0m                  : [0;32mok=175 [0m changed=0    unreachable=0    [0;31mfailed=1   [0m [0;36mskipped=36  [0m rescued=0    ignored=0   
+2026-11-04T03:39:38Z 
+2026-11-04T03:39:38Z [0;31mERROR: site failed. Log: /home/ubuntu/eas/env/local/logs/validate-inference-20261104-033901.log[0m
+2026-11-04T03:39:38Z PHASE validate FAILED (exit 1)
+2026-11-04T03:39:38Z ALL-DONE exit=1
+2026-11-04T03:40:59Z [?2004h[01;32mubuntu@opea-ei-node[00m:[01;34m~[00m$ clear; cd ~/eas; for c in kserve envoy_ai_gateway keycloak_config llm_services; do echo "### VALIDATE $c"; ./es_auto_installer.sh validate $c --env local 2>&1 | tee -a ~/results/validate-components.log | tail -3; done; echo VALIDATE-COMPONENTS-DONE; ~/node/experiments.sh; echo ALL-DONE exit=$?
+2026-11-04T03:40:59Z [?2004l[H[J[3J### VALIDATE kserve
+2026-11-04T03:41:09Z [0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/validate-kserve-20261104-034059.log [0;32m│[0m
+2026-11-04T03:41:09Z [0;32m╰──────────────────────────────────────────────────────────────────────────────╯[0m
+2026-11-04T03:41:09Z 
+2026-11-04T03:41:09Z ### VALIDATE envoy_ai_gateway
+2026-11-04T03:41:15Z [0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/validate-envoy_ai_gateway-20261104-034109.log [0;32m│[0m
+2026-11-04T03:41:15Z [0;32m╰────────────────────────────────────────────────────────────────────────────────────────╯[0m
+2026-11-04T03:41:15Z 
+2026-11-04T03:41:15Z ### VALIDATE keycloak_config
+2026-11-04T03:41:22Z [0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/validate-keycloak_config-20261104-034115.log [0;32m│[0m
+2026-11-04T03:41:22Z [0;32m╰───────────────────────────────────────────────────────────────────────────────────────╯[0m
+2026-11-04T03:41:22Z 
+2026-11-04T03:41:22Z ### VALIDATE llm_services
+2026-11-04T03:41:34Z [0;32m│[0m Log:     /home/ubuntu/eas/env/local/logs/validate-llm_services-20261104-034122.log [0;32m│[0m
+2026-11-04T03:41:34Z [0;32m╰────────────────────────────────────────────────────────────────────────────────────╯[0m
+2026-11-04T03:41:34Z 
+2026-11-04T03:41:34Z VALIDATE-COMPONENTS-DONE
+2026-11-04T03:41:34Z 2026-11-04T03:41:34Z 
+2026-11-04T03:41:34Z 2026-11-04T03:41:34Z ### experiments.sh start (solutions v1.1.0)  03:41:34
+2026-11-04T03:41:35Z 2026-11-04T03:41:35Z ./ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh: line 20: _gt_oldopts: unbound variable
+2026-11-04T03:41:35Z 2026-11-04T03:41:35Z 
+2026-11-04T03:41:35Z ALL-DONE exit=1
+2026-11-04T03:41:35Z [?2004h[01;32mubuntu@opea-ei-node[00m:[01;34m~/eas[00m$ 2026-11-04T03:41:35Z ### experiments.sh exit code 1  03:41:35
+2026-11-04T03:42:48Z clear; ~/node/experiments.sh; echo ALL-DONE exit=$?
+2026-11-04T03:42:48Z [?2004l[H[J[3J2026-11-04T03:42:48Z 
+2026-11-04T03:42:48Z 2026-11-04T03:42:48Z ### experiments.sh start (solutions v1.1.0)  03:42:48
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z 
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z ### TOKEN ok (gateway inference.solutions.ai)  03:42:49
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z 
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z ### DEPLOY qwen3-0-6b  03:42:49
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z [INFO] Using environment: local
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z [INFO ]  Deploying qwen3-0-6b (LLMInferenceService)
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:42:49Z 2026-11-04T03:42:49Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:42:50Z 2026-11-04T03:42:50Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:42:51Z 2026-11-04T03:42:51Z [  OK ]  Storage ready: model-store (Pending — binds on first consumer, StorageClass 'local-path' uses WaitForFirstConsumer)
+2026-11-04T03:42:51Z 2026-11-04T03:42:51Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-0-6b
+2026-11-04T03:42:51Z 2026-11-04T03:42:51Z job.batch/download-qwen3-0-6b created
+2026-11-04T03:42:51Z 2026-11-04T03:42:51Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+2026-11-04T03:42:51Z 2026-11-04T03:42:51Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T03:42:51Z 2026-11-04T03:42:51Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T03:43:48Z ^CALL-DONE exit=141
+2026-11-04T03:43:49Z [?2004h[01;32mubuntu@opea-ei-node[00m:[01;34m~/eas[00m$ ^C[?2004l[?2004h[?2004l
+2026-11-04T03:43:52Z [?2004h[01;32mubuntu@opea-ei-node[00m:[01;34m~/eas[00m$ clear; ~/node/experiments.sh; echo ALL-DONE exit=$?
+2026-11-04T03:43:52Z [?2004l[H[J[3J2026-11-04T03:43:52Z 
+2026-11-04T03:43:52Z 2026-11-04T03:43:52Z ### experiments.sh start (solutions v1.1.0)  03:43:52
+2026-11-04T03:43:53Z 2026-11-04T03:43:53Z 
+2026-11-04T03:43:53Z 2026-11-04T03:43:53Z ### TOKEN ok (gateway inference.solutions.ai)  03:43:53
+2026-11-04T03:43:53Z 2026-11-04T03:43:53Z 
+2026-11-04T03:43:53Z 2026-11-04T03:43:53Z ### DEPLOY qwen3-0-6b  03:43:53
+2026-11-04T03:43:53Z 2026-11-04T03:43:53Z [INFO] Using environment: local
+2026-11-04T03:43:53Z 2026-11-04T03:43:53Z [INFO ]  Deploying qwen3-0-6b (LLMInferenceService)
+2026-11-04T03:43:53Z 2026-11-04T03:43:53Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:43:53Z 2026-11-04T03:43:53Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T03:43:54Z 2026-11-04T03:43:54Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:43:54Z 2026-11-04T03:43:54Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:43:54Z 2026-11-04T03:43:54Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:43:56Z 2026-11-04T03:43:56Z [  OK ]  Storage ready: model-store (Bound)
+2026-11-04T03:43:56Z 2026-11-04T03:43:56Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-0-6b
+2026-11-04T03:43:56Z 2026-11-04T03:43:56Z job.batch/download-qwen3-0-6b created
+2026-11-04T03:43:56Z 2026-11-04T03:43:56Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+2026-11-04T03:43:56Z 2026-11-04T03:43:56Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T03:43:56Z 2026-11-04T03:43:56Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T03:46:50Z 2026-11-04T03:46:50Z job.batch/download-qwen3-0-6b condition met
+2026-11-04T03:46:50Z 2026-11-04T03:46:50Z [  OK ]  Download complete: qwen3-0-6b
+2026-11-04T03:46:50Z 2026-11-04T03:46:50Z llminferenceservice.serving.kserve.io/qwen3-0-6b serverside-applied
+2026-11-04T03:46:50Z 2026-11-04T03:46:50Z [  OK ]  Manifest applied: LLMInferenceService/qwen3-0-6b in llm-inference
+2026-11-04T03:46:50Z 2026-11-04T03:46:50Z [INFO ]  Creating AIGatewayRoute aigw-qwen3-0-6b (EPP → qwen3-0-6b-inference-pool)
+2026-11-04T03:46:50Z 2026-11-04T03:46:50Z aigatewayroute.aigateway.envoyproxy.io/aigw-qwen3-0-6b serverside-applied
+2026-11-04T03:46:50Z 2026-11-04T03:46:50Z [INFO ]  Waiting for qwen3-0-6b to become Ready (timeout: 1800s)...
+2026-11-04T03:46:50Z 2026-11-04T03:46:50Z [INFO ]    [0s] qwen3-0-6b: waiting for pod to be created
+2026-11-04T03:47:05Z 2026-11-04T03:47:05Z [INFO ]    [15s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T03:47:51Z 2026-11-04T03:47:51Z [INFO ]    [1m 1s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T03:48:52Z 2026-11-04T03:48:52Z [INFO ]    [2m 2s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T03:49:54Z 2026-11-04T03:49:54Z [INFO ]    [3m 4s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z [  OK ]  qwen3-0-6b is Ready
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z inferencepool.inference.networking.k8s.io/qwen3-0-6b-inference-pool patched
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   ────────────────────────────────────────────────────────
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   Model:    qwen3-0-6b  |  Kind: LLMInferenceService  |  Category: llm
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   Auth:     keycloak
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   Endpoint: https://inference.solutions.ai/v1/chat/completions
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   Note:     Pass "model": "qwen3-0-6b" in the request body
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   ────────────────────────────────────────────────────────
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   1. Get a Keycloak token:
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   2. Call the model:
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z   curl -sk --noproxy "*" \
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z     --resolve "inference.solutions.ai:443:10.241.0.4" \
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z     -d '{"model":"qwen3-0-6b","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z     https://inference.solutions.ai/v1/chat/completions
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z 
+2026-11-04T03:49:59Z 2026-11-04T03:49:59Z ### DEPLOY qwen3-0-6b finished: exit 0 after 366 s  03:49:59
+2026-11-04T03:50:00Z 2026-11-04T03:50:00Z 
+2026-11-04T03:50:00Z 2026-11-04T03:50:00Z ### TOKEN ok (gateway inference.solutions.ai)  03:50:00
+2026-11-04T03:50:08Z 2026-11-04T03:50:08Z PASS qwen3-0-6b: Paris
+2026-11-04T03:50:08Z 2026-11-04T03:50:08Z 
+2026-11-04T03:50:08Z 2026-11-04T03:50:08Z ### SMOKE qwen3-0-6b: PASS qwen3-0-6b: Paris  03:50:08
+2026-11-04T03:50:08Z 2026-11-04T03:50:08Z No-token request -> HTTP 401 (expect 401/403)
+2026-11-04T03:50:11Z 2026-11-04T03:50:11Z 
+2026-11-04T03:50:11Z 2026-11-04T03:50:11Z ### BENCH E2-qwen0.6b-amx  03:50:11
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z {"concurrency": 1, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 71.53, "req_per_s": 0.447, "output_tok_per_s": 21.0, "avg_in_tokens": 597, "ttft_p50_s": 0.1494, "ttft_p95_s": 0.1599, "tpot_p50_ms": 45.4, "latency_p50_s": 2.2357, "latency_p95_s": 2.2669}
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z {"concurrency": 2, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 42.41, "req_per_s": 0.755, "output_tok_per_s": 35.5, "avg_in_tokens": 597, "ttft_p50_s": 0.2473, "ttft_p95_s": 0.2839, "tpot_p50_ms": 52.9, "latency_p50_s": 2.6534, "latency_p95_s": 2.6744}
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z {"concurrency": 4, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 25.15, "req_per_s": 1.272, "output_tok_per_s": 59.8, "avg_in_tokens": 597, "ttft_p50_s": 0.3721, "ttft_p95_s": 0.4252, "tpot_p50_ms": 60.1, "latency_p50_s": 3.1289, "latency_p95_s": 3.207}
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z {"concurrency": 8, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 12.55, "req_per_s": 2.55, "output_tok_per_s": 119.9, "avg_in_tokens": 597, "ttft_p50_s": 0.659, "ttft_p95_s": 0.6884, "tpot_p50_ms": 54.1, "latency_p50_s": 3.1326, "latency_p95_s": 3.1899}
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z {"concurrency": 16, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 8.26, "req_per_s": 3.873, "output_tok_per_s": 182.4, "avg_in_tokens": 597, "ttft_p50_s": 1.108, "ttft_p95_s": 1.2072, "tpot_p50_ms": 64.1, "latency_p50_s": 4.0585, "latency_p95_s": 4.0799}
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z 
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z    1   32   0.447      21.0    0.1494    0.1599        45.4
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z    2   32   0.755      35.5    0.2473    0.2839        52.9
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z    4   32   1.272      59.8    0.3721    0.4252        60.1
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z    8   32    2.55     119.9     0.659    0.6884        54.1
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z   16   32   3.873     182.4     1.108    1.2072        64.1
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z 
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z ### BENCH E2-qwen0.6b-amx finished: [{"c":1,"ok":32,"tok_s":21.0,"ttft95":0.1599},{"c":2,"ok":32,"tok_s":35.5,"ttft95":0.2839},{"c":4,"ok":32,"tok_s":59.8,"ttft95":0.4252},{"c":8,"ok":32,"tok_s":119.9,"ttft95":0.6884},{"c":16,"ok":32,"tok_s":182.4,"ttft95":1.2072}]  03:52:54
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z 
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z ### UNDEPLOY qwen3-0-6b  03:52:54
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z [INFO] Using environment: local
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z [INFO ]  Undeploying qwen3-0-6b
+2026-11-04T03:52:54Z 2026-11-04T03:52:54Z llminferenceservice.serving.kserve.io "qwen3-0-6b" deleted from llm-inference namespace
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z aigatewayroute.aigateway.envoyproxy.io "aigw-qwen3-0-6b" deleted from llm-inference namespace
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z [  OK ]  qwen3-0-6b undeployed
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z 
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z ### DEPLOY qwen3-noamx  03:52:55
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z [INFO] Using environment: local
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z [INFO ]  Deploying qwen3-noamx (LLMInferenceService)
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T03:52:55Z 2026-11-04T03:52:55Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:52:56Z 2026-11-04T03:52:56Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:52:56Z 2026-11-04T03:52:56Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:52:57Z 2026-11-04T03:52:57Z [WARN ]  NRI pre-flight issues detected:
+2026-11-04T03:52:57Z 2026-11-04T03:52:57Z [WARN ]    - cluster cannot host 1 replica(s) of eff_cpu=8 tp=1 (balloon='vllm-balloon-tp1'): only 0 balloon slot(s) free across 1 node(s). localhost: tp=1 needs 1 NUMA node(s) with >= 8 balloon CPU each, only 0 qualify (per-NUMA balloon pool free: [6, 6]). Lower cpu/--replicas, raise --tp, undeploy a model, or add a node.
+2026-11-04T03:52:57Z 2026-11-04T03:52:57Z [ERROR]  NRI pre-flight failed: not enough physical cores to place qwen3-noamx (cpu=8 tp=1 replicas=1) without spilling onto reserved hyperthread-sibling cores. Lower --cpu/--replicas, raise --tp, undeploy a model, or add a node. Override with MM_NRI_PREFLIGHT=warn (proceed anyway) or MM_NRI_SKIP_PREFLIGHT=1 (skip check).
+2026-11-04T03:52:57Z 2026-11-04T03:52:57Z 
+2026-11-04T03:52:57Z 2026-11-04T03:52:57Z ### DEPLOY qwen3-noamx finished: exit 1 after 2 s  03:52:57
+2026-11-04T03:52:58Z 2026-11-04T03:52:58Z 
+2026-11-04T03:52:58Z 2026-11-04T03:52:58Z ### TOKEN ok (gateway inference.solutions.ai)  03:52:58
+2026-11-04T03:52:58Z 2026-11-04T03:52:58Z FAIL qwen3-noamx: 
+2026-11-04T03:52:58Z 2026-11-04T03:52:58Z 
+2026-11-04T03:52:58Z 2026-11-04T03:52:58Z ### SMOKE qwen3-noamx: FAIL qwen3-noamx:   03:52:58
+2026-11-04T03:52:58Z 2026-11-04T03:52:58Z error: the server doesn't have a resource type ""
+2026-11-04T03:52:58Z 2026-11-04T03:52:58Z 
+2026-11-04T03:52:58Z 2026-11-04T03:52:58Z ### BENCH E3-qwen0.6b-noamx  03:52:58
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z {"concurrency": 1, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.13, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z {"concurrency": 2, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.08, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z {"concurrency": 4, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.06, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z {"concurrency": 8, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 500: Internal Server Error", "HTTP Error 404: Not Found"], "wall_s": 0.05, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z {"concurrency": 16, "requests": 32, "succeeded": 0, "failed": 32, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.04, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z 
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z    1    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z    2    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z    4    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z    8    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z   16    0     0.0       0.0      None      None        None
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z 
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z ### BENCH E3-qwen0.6b-noamx finished: [{"c":1,"ok":0,"tok_s":0.0,"ttft95":null},{"c":2,"ok":0,"tok_s":0.0,"ttft95":null},{"c":4,"ok":0,"tok_s":0.0,"ttft95":null},{"c":8,"ok":0,"tok_s":0.0,"ttft95":null},{"c":16,"ok":0,"tok_s":0.0,"ttft95":null}]  03:52:59
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z 
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z ### UNDEPLOY qwen3-noamx  03:52:59
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z [INFO] Using environment: local
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z [ERROR]  No catalog entry or deployed resource named 'qwen3-noamx' found.
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z 
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z ### DEPLOY qwen2-5-3b  03:52:59
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z [INFO] Using environment: local
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z [INFO ]  Category: llm (auto-detected)
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z [INFO ]  Deploying qwen2-5-3b (LLMInferenceService)
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z [INFO ]    CPU: 8 | Memory: 32Gi | Replicas: 1
+2026-11-04T03:52:59Z 2026-11-04T03:52:59Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:53:00Z 2026-11-04T03:53:00Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:53:00Z 2026-11-04T03:53:00Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:53:01Z 2026-11-04T03:53:01Z [WARN ]  NRI pre-flight issues detected:
+2026-11-04T03:53:01Z 2026-11-04T03:53:01Z [WARN ]    - cluster cannot host 1 replica(s) of eff_cpu=8 tp=1 (balloon='vllm-balloon-tp1'): only 0 balloon slot(s) free across 1 node(s). localhost: tp=1 needs 1 NUMA node(s) with >= 8 balloon CPU each, only 0 qualify (per-NUMA balloon pool free: [6, 6]). Lower cpu/--replicas, raise --tp, undeploy a model, or add a node.
+2026-11-04T03:53:01Z 2026-11-04T03:53:01Z [ERROR]  NRI pre-flight failed: not enough physical cores to place qwen2-5-3b (cpu=8 tp=1 replicas=1) without spilling onto reserved hyperthread-sibling cores. Lower --cpu/--replicas, raise --tp, undeploy a model, or add a node. Override with MM_NRI_PREFLIGHT=warn (proceed anyway) or MM_NRI_SKIP_PREFLIGHT=1 (skip check).
+2026-11-04T03:53:01Z 2026-11-04T03:53:01Z 
+2026-11-04T03:53:01Z 2026-11-04T03:53:01Z ### DEPLOY qwen2-5-3b finished: exit 1 after 2 s  03:53:01
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z ### TOKEN ok (gateway inference.solutions.ai)  03:53:02
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z FAIL qwen2-5-3b: 
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z ### SMOKE qwen2-5-3b: FAIL qwen2-5-3b:   03:53:02
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z error: the server doesn't have a resource type ""
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z ### BENCH E4-qwen2.5-3b-amx  03:53:02
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z {"concurrency": 1, "requests": 16, "succeeded": 0, "failed": 16, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.06, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z {"concurrency": 2, "requests": 16, "succeeded": 0, "failed": 16, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.04, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z {"concurrency": 4, "requests": 16, "succeeded": 0, "failed": 16, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.02, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z {"concurrency": 8, "requests": 16, "succeeded": 0, "failed": 16, "errors": ["HTTP Error 404: Not Found"], "wall_s": 0.02, "req_per_s": 0.0, "output_tok_per_s": 0.0, "avg_in_tokens": null, "ttft_p50_s": null, "ttft_p95_s": null, "tpot_p50_ms": null, "latency_p50_s": null, "latency_p95_s": null}
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z    1    0     0.0       0.0      None      None        None
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z    2    0     0.0       0.0      None      None        None
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z    4    0     0.0       0.0      None      None        None
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z    8    0     0.0       0.0      None      None        None
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z ### BENCH E4-qwen2.5-3b-amx finished: [{"c":1,"ok":0,"tok_s":0.0,"ttft95":null},{"c":2,"ok":0,"tok_s":0.0,"ttft95":null},{"c":4,"ok":0,"tok_s":0.0,"ttft95":null},{"c":8,"ok":0,"tok_s":0.0,"ttft95":null}]  03:53:02
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z 
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z ### UNDEPLOY qwen2-5-3b  03:53:02
+2026-11-04T03:53:02Z 2026-11-04T03:53:02Z [INFO] Using environment: local
+2026-11-04T03:53:03Z 2026-11-04T03:53:03Z [ERROR]  No catalog entry or deployed resource named 'qwen2-5-3b' found.
+2026-11-04T03:53:03Z 2026-11-04T03:53:03Z 
+2026-11-04T03:53:03Z 2026-11-04T03:53:03Z ### EXPERIMENTS DONE  03:53:03
+2026-11-04T03:53:03Z 2026-11-04T03:53:03Z 
+2026-11-04T03:53:03Z 2026-11-04T03:53:03Z ### experiments.sh exit code 0  03:53:03
+2026-11-04T03:53:03Z ALL-DONE exit=0
+2026-11-04T03:54:53Z [?2004h[01;32mubuntu@opea-ei-node[00m:[01;34m~/eas[00m$ clear; STAGES="E3 E4" ~/node/experiments.sh; echo ALL-DONE exit=$?
+2026-11-04T03:54:53Z [?2004l[H[J[3J2026-11-04T03:54:53Z 
+2026-11-04T03:54:53Z 2026-11-04T03:54:53Z ### experiments.sh start (solutions v1.1.0)  03:54:53
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z 
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z ### TOKEN ok (gateway inference.solutions.ai)  03:54:54
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z 
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z ### DEPLOY qwen3-noamx  03:54:54
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z [INFO] Using environment: local
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z [INFO ]  Deploying qwen3-noamx (LLMInferenceService)
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T03:54:54Z 2026-11-04T03:54:54Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T03:54:56Z 2026-11-04T03:54:56Z [  OK ]  Storage ready: model-store (Bound)
+2026-11-04T03:54:56Z 2026-11-04T03:54:56Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-noamx
+2026-11-04T03:54:56Z 2026-11-04T03:54:56Z job.batch/download-qwen3-noamx created
+2026-11-04T03:54:56Z 2026-11-04T03:54:56Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+2026-11-04T03:54:56Z 2026-11-04T03:54:56Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T03:54:56Z 2026-11-04T03:54:56Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T03:54:59Z 2026-11-04T03:54:59Z sh: 4: cannot create {{DOWNLOAD_CMD}}1: Permission denied
+2026-11-04T03:56:13Z 2026-11-04T03:56:13Z failed to create fsnotify watcher: too many open filesjob.batch/download-qwen3-noamx condition met
+2026-11-04T03:56:13Z 2026-11-04T03:56:13Z [  OK ]  Download complete: qwen3-noamx
+2026-11-04T03:56:13Z 2026-11-04T03:56:13Z llminferenceservice.serving.kserve.io/qwen3-noamx serverside-applied
+2026-11-04T03:56:13Z 2026-11-04T03:56:13Z [  OK ]  Manifest applied: LLMInferenceService/qwen3-noamx in llm-inference
+2026-11-04T03:56:13Z 2026-11-04T03:56:13Z [INFO ]  Creating AIGatewayRoute aigw-qwen3-noamx (EPP → qwen3-noamx-inference-pool)
+2026-11-04T03:56:13Z 2026-11-04T03:56:13Z aigatewayroute.aigateway.envoyproxy.io/aigw-qwen3-noamx serverside-applied
+2026-11-04T03:56:13Z 2026-11-04T03:56:13Z [INFO ]  Waiting for qwen3-noamx to become Ready (timeout: 1800s)...
+2026-11-04T03:56:13Z 2026-11-04T03:56:13Z [INFO ]    [0s] qwen3-noamx: waiting for pod to be created
+2026-11-04T03:56:29Z 2026-11-04T03:56:29Z [INFO ]    [16s] qwen3-noamx: running — loading model / warming up
+2026-11-04T03:57:15Z 2026-11-04T03:57:15Z [INFO ]    [1m 1s] qwen3-noamx: running — loading model / warming up
+2026-11-04T03:58:16Z 2026-11-04T03:58:16Z [INFO ]    [2m 3s] qwen3-noamx: running — loading model / warming up
+2026-11-04T03:59:17Z 2026-11-04T03:59:17Z [INFO ]    [3m 4s] qwen3-noamx: running — loading model / warming up
+2026-11-04T03:59:33Z 2026-11-04T03:59:33Z [  OK ]  qwen3-noamx is Ready
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z inferencepool.inference.networking.k8s.io/qwen3-noamx-inference-pool patched
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   ────────────────────────────────────────────────────────
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   Model:    qwen3-noamx  |  Kind: LLMInferenceService  |  Category: llm
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   Auth:     keycloak
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   Endpoint: https://inference.solutions.ai/v1/chat/completions
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   Note:     Pass "model": "qwen3-noamx" in the request body
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   ────────────────────────────────────────────────────────
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   1. Get a Keycloak token:
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   2. Call the model:
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z   curl -sk --noproxy "*" \
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z     --resolve "inference.solutions.ai:443:10.241.0.4" \
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z     -d '{"model":"qwen3-noamx","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z     https://inference.solutions.ai/v1/chat/completions
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z ### DEPLOY qwen3-noamx finished: exit 0 after 280 s  03:59:34
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z 
+2026-11-04T03:59:34Z 2026-11-04T03:59:34Z ### TOKEN ok (gateway inference.solutions.ai)  03:59:34
+2026-11-04T03:59:41Z 2026-11-04T03:59:41Z PASS qwen3-noamx: Paris
+2026-11-04T03:59:41Z 2026-11-04T03:59:41Z 
+2026-11-04T03:59:41Z 2026-11-04T03:59:41Z ### SMOKE qwen3-noamx: PASS qwen3-noamx: Paris  03:59:41
+2026-11-04T03:59:44Z 2026-11-04T03:59:44Z 
+2026-11-04T03:59:44Z 2026-11-04T03:59:44Z ### BENCH E3-qwen0.6b-noamx  03:59:44
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z {"concurrency": 1, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 108.67, "req_per_s": 0.294, "output_tok_per_s": 18.0, "avg_in_tokens": 597, "ttft_p50_s": 0.6069, "ttft_p95_s": 0.6179, "tpot_p50_ms": 46.7, "latency_p50_s": 3.3975, "latency_p95_s": 3.4476}
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z {"concurrency": 2, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 77.85, "req_per_s": 0.411, "output_tok_per_s": 28.4, "avg_in_tokens": 597, "ttft_p50_s": 1.143, "ttft_p95_s": 1.1999, "tpot_p50_ms": 59.6, "latency_p50_s": 4.9054, "latency_p95_s": 4.9747}
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z {"concurrency": 4, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 50.96, "req_per_s": 0.628, "output_tok_per_s": 39.6, "avg_in_tokens": 597, "ttft_p50_s": 0.6758, "ttft_p95_s": 2.1465, "tpot_p50_ms": 88.3, "latency_p50_s": 6.5437, "latency_p95_s": 7.1161}
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z {"concurrency": 8, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 34.92, "req_per_s": 0.916, "output_tok_per_s": 55.4, "avg_in_tokens": 597, "ttft_p50_s": 2.7801, "ttft_p95_s": 4.4009, "tpot_p50_ms": 99.3, "latency_p50_s": 8.6555, "latency_p95_s": 9.7622}
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z {"concurrency": 16, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 32.44, "req_per_s": 0.986, "output_tok_per_s": 59.0, "avg_in_tokens": 597, "ttft_p50_s": 7.4442, "ttft_p95_s": 8.3893, "tpot_p50_ms": 151.1, "latency_p50_s": 15.7835, "latency_p95_s": 17.4564}
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z 
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z    1   32   0.294      18.0    0.6069    0.6179        46.7
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z    2   32   0.411      28.4     1.143    1.1999        59.6
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z    4   32   0.628      39.6    0.6758    2.1465        88.3
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z    8   32   0.916      55.4    2.7801    4.4009        99.3
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z   16   32   0.986      59.0    7.4442    8.3893       151.1
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z 
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z ### BENCH E3-qwen0.6b-noamx finished: [{"c":1,"ok":32,"tok_s":18.0,"ttft95":0.6179},{"c":2,"ok":32,"tok_s":28.4,"ttft95":1.1999},{"c":4,"ok":32,"tok_s":39.6,"ttft95":2.1465},{"c":8,"ok":32,"tok_s":55.4,"ttft95":4.4009},{"c":16,"ok":32,"tok_s":59.0,"ttft95":8.3893}]  04:04:57
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z 
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z ### UNDEPLOY qwen3-noamx  04:04:57
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z [INFO] Using environment: local
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z [INFO ]  Discovered live LLMInferenceService/qwen3-noamx in llm-inference (no catalog entry)
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z [INFO ]  Undeploying qwen3-noamx
+2026-11-04T04:04:57Z 2026-11-04T04:04:57Z llminferenceservice.serving.kserve.io "qwen3-noamx" deleted from llm-inference namespace
+2026-11-04T04:04:58Z 2026-11-04T04:04:58Z aigatewayroute.aigateway.envoyproxy.io "aigw-qwen3-noamx" deleted from llm-inference namespace
+2026-11-04T04:04:58Z 2026-11-04T04:04:58Z [  OK ]  qwen3-noamx undeployed
+2026-11-04T04:05:33Z 2026-11-04T04:05:33Z 
+2026-11-04T04:05:33Z 2026-11-04T04:05:33Z ### UNDEPLOY qwen3-noamx done: pods gone  04:05:33
+2026-11-04T04:05:33Z 2026-11-04T04:05:33Z 
+2026-11-04T04:05:33Z 2026-11-04T04:05:33Z ### DEPLOY qwen2-5-3b  04:05:33
+2026-11-04T04:05:33Z 2026-11-04T04:05:33Z [INFO] Using environment: local
+2026-11-04T04:05:34Z 2026-11-04T04:05:34Z [INFO ]  Category: llm (auto-detected)
+2026-11-04T04:05:34Z 2026-11-04T04:05:34Z [INFO ]  Deploying qwen2-5-3b (LLMInferenceService)
+2026-11-04T04:05:34Z 2026-11-04T04:05:34Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T04:05:34Z 2026-11-04T04:05:34Z [INFO ]    CPU: 8 | Memory: 32Gi | Replicas: 1
+2026-11-04T04:05:34Z 2026-11-04T04:05:34Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T04:05:34Z 2026-11-04T04:05:34Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T04:05:34Z 2026-11-04T04:05:34Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T04:05:36Z 2026-11-04T04:05:36Z [  OK ]  Storage ready: model-store (Bound)
+2026-11-04T04:05:36Z 2026-11-04T04:05:36Z [INFO ]  Downloading model weights: Qwen/Qwen2.5-3B-Instruct → PVC:/qwen2-5-3b
+2026-11-04T04:05:36Z 2026-11-04T04:05:36Z job.batch/download-qwen2-5-3b created
+2026-11-04T04:05:36Z 2026-11-04T04:05:36Z [INFO ]  Downloading model weights: Qwen/Qwen2.5-3B-Instruct
+2026-11-04T04:05:36Z 2026-11-04T04:05:36Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T04:05:36Z 2026-11-04T04:05:36Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T04:05:39Z 2026-11-04T04:05:39Z sh: 4: cannot create {{DOWNLOAD_CMD}}1: Permission denied
+2026-11-04T04:08:47Z 2026-11-04T04:08:47Z failed to create fsnotify watcher: too many open filesjob.batch/download-qwen2-5-3b condition met
+2026-11-04T04:08:47Z 2026-11-04T04:08:47Z [  OK ]  Download complete: qwen2-5-3b
+2026-11-04T04:08:48Z 2026-11-04T04:08:48Z llminferenceservice.serving.kserve.io/qwen2-5-3b serverside-applied
+2026-11-04T04:08:48Z 2026-11-04T04:08:48Z [  OK ]  Manifest applied: LLMInferenceService/qwen2-5-3b in llm-inference
+2026-11-04T04:08:48Z 2026-11-04T04:08:48Z [INFO ]  Creating AIGatewayRoute aigw-qwen2-5-3b (EPP → qwen2-5-3b-inference-pool)
+2026-11-04T04:08:48Z 2026-11-04T04:08:48Z aigatewayroute.aigateway.envoyproxy.io/aigw-qwen2-5-3b serverside-applied
+2026-11-04T04:08:48Z 2026-11-04T04:08:48Z [INFO ]  Waiting for qwen2-5-3b to become Ready (timeout: 1800s)...
+2026-11-04T04:08:48Z 2026-11-04T04:08:48Z [INFO ]    [0s] qwen2-5-3b: waiting for pod to be created
+2026-11-04T04:09:03Z 2026-11-04T04:09:03Z [INFO ]    [15s] qwen2-5-3b: pending (waiting to be scheduled)
+2026-11-04T04:09:18Z 2026-11-04T04:09:18Z [INFO ]    [30s] qwen2-5-3b: running — loading model / warming up
+2026-11-04T04:09:49Z 2026-11-04T04:09:49Z [INFO ]    [1m 1s] qwen2-5-3b: running — loading model / warming up
+2026-11-04T04:10:50Z 2026-11-04T04:10:50Z [INFO ]    [2m 2s] qwen2-5-3b: running — loading model / warming up
+2026-11-04T04:11:51Z 2026-11-04T04:11:51Z [INFO ]    [3m 3s] qwen2-5-3b: running — loading model / warming up
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z [  OK ]  qwen2-5-3b is Ready
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z inferencepool.inference.networking.k8s.io/qwen2-5-3b-inference-pool patched
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   ────────────────────────────────────────────────────────
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   Model:    qwen2-5-3b  |  Kind: LLMInferenceService  |  Category: llm
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   Auth:     keycloak
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   Endpoint: https://inference.solutions.ai/v1/chat/completions
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   Note:     Pass "model": "qwen2-5-3b" in the request body
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   ────────────────────────────────────────────────────────
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   1. Get a Keycloak token:
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   2. Call the model:
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z   curl -sk --noproxy "*" \
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z     --resolve "inference.solutions.ai:443:10.241.0.4" \
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z     -d '{"model":"qwen2-5-3b","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z     https://inference.solutions.ai/v1/chat/completions
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z 
+2026-11-04T04:12:17Z 2026-11-04T04:12:17Z ### DEPLOY qwen2-5-3b finished: exit 0 after 404 s  04:12:17
+2026-11-04T04:12:18Z 2026-11-04T04:12:18Z 
+2026-11-04T04:12:18Z 2026-11-04T04:12:18Z ### TOKEN ok (gateway inference.solutions.ai)  04:12:18
+2026-11-04T04:12:20Z 2026-11-04T04:12:20Z PASS qwen2-5-3b: Paris
+2026-11-04T04:12:20Z 2026-11-04T04:12:20Z 
+2026-11-04T04:12:20Z 2026-11-04T04:12:20Z ### SMOKE qwen2-5-3b: PASS qwen2-5-3b: Paris  04:12:20
+2026-11-04T04:12:24Z 2026-11-04T04:12:24Z 
+2026-11-04T04:12:24Z 2026-11-04T04:12:24Z ### BENCH E4-qwen2.5-3b-amx  04:12:24
+2026-11-04T04:18:30Z 2026-11-04T04:18:29Z {"concurrency": 1, "requests": 16, "succeeded": 16, "failed": 0, "errors": [], "wall_s": 169.0, "req_per_s": 0.095, "output_tok_per_s": 4.9, "avg_in_tokens": 614, "ttft_p50_s": 0.7001, "ttft_p95_s": 0.7583, "tpot_p50_ms": 194.0, "latency_p50_s": 10.6244, "latency_p95_s": 10.746}
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z {"concurrency": 2, "requests": 16, "succeeded": 16, "failed": 0, "errors": [], "wall_s": 98.03, "req_per_s": 0.163, "output_tok_per_s": 8.5, "avg_in_tokens": 614, "ttft_p50_s": 1.3004, "ttft_p95_s": 1.4458, "tpot_p50_ms": 217.2, "latency_p50_s": 12.3018, "latency_p95_s": 12.6165}
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z {"concurrency": 4, "requests": 16, "succeeded": 16, "failed": 0, "errors": [], "wall_s": 60.16, "req_per_s": 0.266, "output_tok_per_s": 13.8, "avg_in_tokens": 614, "ttft_p50_s": 2.18, "ttft_p95_s": 2.2829, "tpot_p50_ms": 255.1, "latency_p50_s": 14.9531, "latency_p95_s": 15.3356}
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z {"concurrency": 8, "requests": 16, "succeeded": 16, "failed": 0, "errors": [], "wall_s": 28.03, "req_per_s": 0.571, "output_tok_per_s": 29.7, "avg_in_tokens": 614, "ttft_p50_s": 3.6212, "ttft_p95_s": 3.6821, "tpot_p50_ms": 205.4, "latency_p50_s": 14.1541, "latency_p95_s": 14.1578}
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z 
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z    1   16   0.095       4.9    0.7001    0.7583       194.0
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z    2   16   0.163       8.5    1.3004    1.4458       217.2
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z    4   16   0.266      13.8      2.18    2.2829       255.1
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z    8   16   0.571      29.7    3.6212    3.6821       205.4
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z 
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z ### BENCH E4-qwen2.5-3b-amx finished: [{"c":1,"ok":16,"tok_s":4.9,"ttft95":0.7583},{"c":2,"ok":16,"tok_s":8.5,"ttft95":1.4458},{"c":4,"ok":16,"tok_s":13.8,"ttft95":2.2829},{"c":8,"ok":16,"tok_s":29.7,"ttft95":3.6821}]  04:18:30
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z 
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z ### UNDEPLOY qwen2-5-3b  04:18:30
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z [INFO] Using environment: local
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z [INFO ]  Discovered live LLMInferenceService/qwen2-5-3b in llm-inference (no catalog entry)
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z [INFO ]  Undeploying qwen2-5-3b
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z llminferenceservice.serving.kserve.io "qwen2-5-3b" deleted from llm-inference namespace
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z aigatewayroute.aigateway.envoyproxy.io "aigw-qwen2-5-3b" deleted from llm-inference namespace
+2026-11-04T04:18:30Z 2026-11-04T04:18:30Z [  OK ]  qwen2-5-3b undeployed
+2026-11-04T04:19:06Z 2026-11-04T04:19:06Z 
+2026-11-04T04:19:06Z 2026-11-04T04:19:06Z ### UNDEPLOY qwen2-5-3b done: pods gone  04:19:06
+2026-11-04T04:19:06Z 2026-11-04T04:19:06Z 
+2026-11-04T04:19:06Z 2026-11-04T04:19:06Z ### EXPERIMENTS DONE  04:19:06
+2026-11-04T04:19:06Z 2026-11-04T04:19:06Z 
+2026-11-04T04:19:06Z 2026-11-04T04:19:06Z ### experiments.sh exit code 0  04:19:06
+2026-11-04T04:19:06Z ALL-DONE exit=0
+2026-11-04T04:20:29Z [?2004h[01;32mubuntu@opea-ei-node[00m:[01;34m~/eas[00m$ clear; STAGES=E2X ~/node/experiments.sh; echo ALL-DONE exit=$?
+2026-11-04T04:20:29Z [?2004l[H[J[3J2026-11-04T04:20:29Z 
+2026-11-04T04:20:29Z 2026-11-04T04:20:29Z ### experiments.sh start (solutions v1.1.0)  04:20:29
+2026-11-04T04:20:29Z 2026-11-04T04:20:29Z 
+2026-11-04T04:20:29Z 2026-11-04T04:20:29Z ### TOKEN ok (gateway inference.solutions.ai)  04:20:29
+2026-11-04T04:20:29Z 2026-11-04T04:20:29Z 
+2026-11-04T04:20:29Z 2026-11-04T04:20:29Z ### DEPLOY qwen3-0-6b  04:20:29
+2026-11-04T04:20:29Z 2026-11-04T04:20:29Z [INFO] Using environment: local
+2026-11-04T04:20:30Z 2026-11-04T04:20:30Z [INFO ]  Deploying qwen3-0-6b (LLMInferenceService)
+2026-11-04T04:20:30Z 2026-11-04T04:20:30Z [INFO ]    Runtime: vllm @ 0.24.0 | Category: llm | Routing: epp
+2026-11-04T04:20:30Z 2026-11-04T04:20:30Z [INFO ]    CPU: 8 | Memory: 16Gi | Replicas: 1
+2026-11-04T04:20:30Z 2026-11-04T04:20:30Z [INFO ]    CPU policy: nri-balloons
+2026-11-04T04:20:30Z 2026-11-04T04:20:30Z [INFO ]  Detected NRI balloons DaemonSet — using nri-balloons policy
+2026-11-04T04:20:30Z 2026-11-04T04:20:30Z [INFO ]  Binding pods to NRI balloon 'vllm-balloon-tp1'
+2026-11-04T04:20:32Z 2026-11-04T04:20:32Z [  OK ]  Storage ready: model-store (Bound)
+2026-11-04T04:20:32Z 2026-11-04T04:20:32Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B → PVC:/qwen3-0-6b
+2026-11-04T04:20:32Z 2026-11-04T04:20:32Z job.batch/download-qwen3-0-6b created
+2026-11-04T04:20:32Z 2026-11-04T04:20:32Z [INFO ]  Downloading model weights: Qwen/Qwen3-0.6B
+2026-11-04T04:20:32Z 2026-11-04T04:20:32Z [INFO ]    This may take several minutes depending on model size and your internet/proxy speed.
+2026-11-04T04:20:32Z 2026-11-04T04:20:32Z [INFO ]    Follow progress below — do not interrupt.
+2026-11-04T04:20:35Z 2026-11-04T04:20:35Z Weights already present, skipping download
+2026-11-04T04:20:36Z 2026-11-04T04:20:36Z failed to create fsnotify watcher: too many open filesjob.batch/download-qwen3-0-6b condition met
+2026-11-04T04:20:36Z 2026-11-04T04:20:36Z [  OK ]  Download complete: qwen3-0-6b
+2026-11-04T04:20:36Z 2026-11-04T04:20:36Z llminferenceservice.serving.kserve.io/qwen3-0-6b serverside-applied
+2026-11-04T04:20:36Z 2026-11-04T04:20:36Z [  OK ]  Manifest applied: LLMInferenceService/qwen3-0-6b in llm-inference
+2026-11-04T04:20:36Z 2026-11-04T04:20:36Z [INFO ]  Creating AIGatewayRoute aigw-qwen3-0-6b (EPP → qwen3-0-6b-inference-pool)
+2026-11-04T04:20:36Z 2026-11-04T04:20:36Z aigatewayroute.aigateway.envoyproxy.io/aigw-qwen3-0-6b serverside-applied
+2026-11-04T04:20:36Z 2026-11-04T04:20:36Z [INFO ]  Waiting for qwen3-0-6b to become Ready (timeout: 1800s)...
+2026-11-04T04:20:46Z 2026-11-04T04:20:46Z [INFO ]    [10s] qwen3-0-6b: waiting for pod to be created
+2026-11-04T04:21:02Z 2026-11-04T04:21:02Z [INFO ]    [26s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T04:21:48Z 2026-11-04T04:21:48Z [INFO ]    [1m 11s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T04:22:49Z 2026-11-04T04:22:49Z [INFO ]    [2m 13s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T04:23:50Z 2026-11-04T04:23:50Z [INFO ]    [3m 14s] qwen3-0-6b: running — loading model / warming up
+2026-11-04T04:23:56Z 2026-11-04T04:23:56Z [  OK ]  qwen3-0-6b is Ready
+2026-11-04T04:23:56Z 2026-11-04T04:23:56Z inferencepool.inference.networking.k8s.io/qwen3-0-6b-inference-pool patched
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   ────────────────────────────────────────────────────────
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   Model:    qwen3-0-6b  |  Kind: LLMInferenceService  |  Category: llm
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   Auth:     keycloak
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   Gateway:  10.241.0.4  (resolve inference.solutions.ai → 10.241.0.4)
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   Endpoint: https://inference.solutions.ai/v1/chat/completions
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   Note:     Pass "model": "qwen3-0-6b" in the request body
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   ────────────────────────────────────────────────────────
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   1. Get a Keycloak token:
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   source /home/ubuntu/eas/ext/enterprise.ai-inference/model_manager/scripts/get-keycloak-token.sh
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   # exports TOKEN, GATEWAY_IP, GATEWAY_DOMAIN
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   2. Call the model:
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z   curl -sk --noproxy "*" \
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z     --resolve "inference.solutions.ai:443:10.241.0.4" \
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z     -d '{"model":"qwen3-0-6b","messages":[{"role":"user","content":"Hello"}],"max_tokens":16}' \
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z     https://inference.solutions.ai/v1/chat/completions
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z ### DEPLOY qwen3-0-6b finished: exit 0 after 208 s  04:23:57
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z 
+2026-11-04T04:23:57Z 2026-11-04T04:23:57Z ### TOKEN ok (gateway inference.solutions.ai)  04:23:57
+2026-11-04T04:24:04Z 2026-11-04T04:24:04Z PASS qwen3-0-6b: Paris
+2026-11-04T04:24:04Z 2026-11-04T04:24:04Z 
+2026-11-04T04:24:04Z 2026-11-04T04:24:04Z ### SMOKE qwen3-0-6b: PASS qwen3-0-6b: Paris  04:24:04
+2026-11-04T04:24:04Z 2026-11-04T04:24:04Z 
+2026-11-04T04:24:04Z 2026-11-04T04:24:04Z ### BENCH E2X-qwen0.6b-amx-high  04:24:04
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z {"concurrency": 24, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.71, "req_per_s": 4.483, "output_tok_per_s": 210.7, "avg_in_tokens": 597, "ttft_p50_s": 1.6949, "ttft_p95_s": 1.7573, "tpot_p50_ms": 79.6, "latency_p50_s": 5.3089, "latency_p95_s": 5.4263}
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z {"concurrency": 32, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.43, "req_per_s": 4.604, "output_tok_per_s": 216.7, "avg_in_tokens": 597, "ttft_p50_s": 1.7511, "ttft_p95_s": 2.3109, "tpot_p50_ms": 96.9, "latency_p50_s": 6.217, "latency_p95_s": 6.3423}
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z {"concurrency": 48, "requests": 48, "succeeded": 48, "failed": 0, "errors": [], "wall_s": 10.34, "req_per_s": 4.643, "output_tok_per_s": 218.2, "avg_in_tokens": 597, "ttft_p50_s": 1.8298, "ttft_p95_s": 3.3862, "tpot_p50_ms": 183.1, "latency_p50_s": 10.2555, "latency_p95_s": 10.325}
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z 
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z   24   48   4.483     210.7    1.6949    1.7573        79.6
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z   32   48   4.604     216.7    1.7511    2.3109        96.9
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z   48   48   4.643     218.2    1.8298    3.3862       183.1
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z 
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z ### BENCH E2X-qwen0.6b-amx-high finished: [{"c":24,"ok":48,"tok_s":210.7,"ttft95":1.7573},{"c":32,"ok":48,"tok_s":216.7,"ttft95":2.3109},{"c":48,"ok":48,"tok_s":218.2,"ttft95":3.3862}]  04:24:37
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z 
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z ### UNDEPLOY qwen3-0-6b  04:24:37
+2026-11-04T04:24:37Z 2026-11-04T04:24:37Z [INFO] Using environment: local
+2026-11-04T04:24:38Z 2026-11-04T04:24:38Z [INFO ]  Undeploying qwen3-0-6b
+2026-11-04T04:24:38Z 2026-11-04T04:24:38Z llminferenceservice.serving.kserve.io "qwen3-0-6b" deleted from llm-inference namespace
+2026-11-04T04:24:38Z 2026-11-04T04:24:38Z aigatewayroute.aigateway.envoyproxy.io "aigw-qwen3-0-6b" deleted from llm-inference namespace
+2026-11-04T04:24:38Z 2026-11-04T04:24:38Z [  OK ]  qwen3-0-6b undeployed
+2026-11-04T04:25:14Z 2026-11-04T04:25:14Z 
+2026-11-04T04:25:14Z 2026-11-04T04:25:14Z ### UNDEPLOY qwen3-0-6b done: pods gone  04:25:14
+2026-11-04T04:25:14Z 2026-11-04T04:25:14Z 
+2026-11-04T04:25:14Z 2026-11-04T04:25:14Z ### EXPERIMENTS DONE  04:25:14
+2026-11-04T04:25:14Z 2026-11-04T04:25:14Z 
+2026-11-04T04:25:14Z 2026-11-04T04:25:14Z ### experiments.sh exit code 0  04:25:14
+2026-11-04T04:25:14Z ALL-DONE exit=0

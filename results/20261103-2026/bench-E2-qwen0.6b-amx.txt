@@ -1,0 +1,12 @@
+{"concurrency": 1, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 71.53, "req_per_s": 0.447, "output_tok_per_s": 21.0, "avg_in_tokens": 597, "ttft_p50_s": 0.1494, "ttft_p95_s": 0.1599, "tpot_p50_ms": 45.4, "latency_p50_s": 2.2357, "latency_p95_s": 2.2669}
+{"concurrency": 2, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 42.41, "req_per_s": 0.755, "output_tok_per_s": 35.5, "avg_in_tokens": 597, "ttft_p50_s": 0.2473, "ttft_p95_s": 0.2839, "tpot_p50_ms": 52.9, "latency_p50_s": 2.6534, "latency_p95_s": 2.6744}
+{"concurrency": 4, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 25.15, "req_per_s": 1.272, "output_tok_per_s": 59.8, "avg_in_tokens": 597, "ttft_p50_s": 0.3721, "ttft_p95_s": 0.4252, "tpot_p50_ms": 60.1, "latency_p50_s": 3.1289, "latency_p95_s": 3.207}
+{"concurrency": 8, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 12.55, "req_per_s": 2.55, "output_tok_per_s": 119.9, "avg_in_tokens": 597, "ttft_p50_s": 0.659, "ttft_p95_s": 0.6884, "tpot_p50_ms": 54.1, "latency_p50_s": 3.1326, "latency_p95_s": 3.1899}
+{"concurrency": 16, "requests": 32, "succeeded": 32, "failed": 0, "errors": [], "wall_s": 8.26, "req_per_s": 3.873, "output_tok_per_s": 182.4, "avg_in_tokens": 597, "ttft_p50_s": 1.108, "ttft_p95_s": 1.2072, "tpot_p50_ms": 64.1, "latency_p50_s": 4.0585, "latency_p95_s": 4.0799}
+
+conc   ok   req/s out tok/s  TTFT p50  TTFT p95 TPOT p50 ms
+   1   32   0.447      21.0    0.1494    0.1599        45.4
+   2   32   0.755      35.5    0.2473    0.2839        52.9
+   4   32   1.272      59.8    0.3721    0.4252        60.1
+   8   32    2.55     119.9     0.659    0.6884        54.1
+  16   32   3.873     182.4     1.108    1.2072        64.1

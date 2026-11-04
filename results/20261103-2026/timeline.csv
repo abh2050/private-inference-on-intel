@@ -1,0 +1,12 @@
+phase,start_utc,end_utc,seconds,exit
+os_packages,03:01:23,03:01:31,8,0
+clone,03:01:31,03:01:31,0,0
+configure,03:01:31,03:14:09,758,0
+init,03:14:09,03:14:10,1,0
+install_inference,03:14:10,03:39:01,1491,0
+validate,03:39:01,03:39:38,37,1
+deploy_qwen3-0-6b,03:42:49,03:43:48,59,141
+deploy_qwen3-0-6b,03:43:53,03:49:59,366,0
+deploy_qwen3-noamx,03:54:54,03:59:34,280,0
+deploy_qwen2-5-3b,04:05:33,04:12:17,404,0
+deploy_qwen3-0-6b,04:20:29,04:23:57,208,0

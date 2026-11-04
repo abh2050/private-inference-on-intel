@@ -1,0 +1,62 @@
+2026-11-04T03:41:34Z  experiments.sh start (solutions v1.1.0)
+2026-11-04T03:41:35Z  experiments.sh exit code 1
+2026-11-04T03:42:48Z  experiments.sh start (solutions v1.1.0)
+2026-11-04T03:42:49Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T03:42:49Z  DEPLOY qwen3-0-6b
+2026-11-04T03:43:52Z  experiments.sh start (solutions v1.1.0)
+2026-11-04T03:43:53Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T03:43:53Z  DEPLOY qwen3-0-6b
+2026-11-04T03:49:59Z  DEPLOY qwen3-0-6b finished: exit 0 after 366 s
+2026-11-04T03:50:00Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T03:50:08Z  SMOKE qwen3-0-6b: PASS qwen3-0-6b: Paris
+2026-11-04T03:50:11Z  BENCH E2-qwen0.6b-amx
+2026-11-04T03:52:54Z  BENCH E2-qwen0.6b-amx finished: [{"c":1,"ok":32,"tok_s":21.0,"ttft95":0.1599},{"c":2,"ok":32,"tok_s":35.5,"ttft95":0.2839},{"c":4,"ok":32,"tok_s":59.8,"ttft95":0.4252},{"c":8,"ok":32,"tok_s":119.9,"ttft95":0.6884},{"c":16,"ok":32,"tok_s":182.4,"ttft95":1.2072}]
+2026-11-04T03:52:54Z  UNDEPLOY qwen3-0-6b
+2026-11-04T03:52:55Z  DEPLOY qwen3-noamx
+2026-11-04T03:52:57Z  DEPLOY qwen3-noamx finished: exit 1 after 2 s
+2026-11-04T03:52:58Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T03:52:58Z  SMOKE qwen3-noamx: FAIL qwen3-noamx: 
+2026-11-04T03:52:58Z  BENCH E3-qwen0.6b-noamx
+2026-11-04T03:52:59Z  BENCH E3-qwen0.6b-noamx finished: [{"c":1,"ok":0,"tok_s":0.0,"ttft95":null},{"c":2,"ok":0,"tok_s":0.0,"ttft95":null},{"c":4,"ok":0,"tok_s":0.0,"ttft95":null},{"c":8,"ok":0,"tok_s":0.0,"ttft95":null},{"c":16,"ok":0,"tok_s":0.0,"ttft95":null}]
+2026-11-04T03:52:59Z  UNDEPLOY qwen3-noamx
+2026-11-04T03:52:59Z  DEPLOY qwen2-5-3b
+2026-11-04T03:53:01Z  DEPLOY qwen2-5-3b finished: exit 1 after 2 s
+2026-11-04T03:53:02Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T03:53:02Z  SMOKE qwen2-5-3b: FAIL qwen2-5-3b: 
+2026-11-04T03:53:02Z  BENCH E4-qwen2.5-3b-amx
+2026-11-04T03:53:02Z  BENCH E4-qwen2.5-3b-amx finished: [{"c":1,"ok":0,"tok_s":0.0,"ttft95":null},{"c":2,"ok":0,"tok_s":0.0,"ttft95":null},{"c":4,"ok":0,"tok_s":0.0,"ttft95":null},{"c":8,"ok":0,"tok_s":0.0,"ttft95":null}]
+2026-11-04T03:53:02Z  UNDEPLOY qwen2-5-3b
+2026-11-04T03:53:03Z  EXPERIMENTS DONE
+2026-11-04T03:53:03Z  experiments.sh exit code 0
+2026-11-04T03:54:53Z  experiments.sh start (solutions v1.1.0)
+2026-11-04T03:54:54Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T03:54:54Z  DEPLOY qwen3-noamx
+2026-11-04T03:59:34Z  DEPLOY qwen3-noamx finished: exit 0 after 280 s
+2026-11-04T03:59:34Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T03:59:41Z  SMOKE qwen3-noamx: PASS qwen3-noamx: Paris
+2026-11-04T03:59:44Z  BENCH E3-qwen0.6b-noamx
+2026-11-04T04:04:57Z  BENCH E3-qwen0.6b-noamx finished: [{"c":1,"ok":32,"tok_s":18.0,"ttft95":0.6179},{"c":2,"ok":32,"tok_s":28.4,"ttft95":1.1999},{"c":4,"ok":32,"tok_s":39.6,"ttft95":2.1465},{"c":8,"ok":32,"tok_s":55.4,"ttft95":4.4009},{"c":16,"ok":32,"tok_s":59.0,"ttft95":8.3893}]
+2026-11-04T04:04:57Z  UNDEPLOY qwen3-noamx
+2026-11-04T04:05:33Z  UNDEPLOY qwen3-noamx done: pods gone
+2026-11-04T04:05:33Z  DEPLOY qwen2-5-3b
+2026-11-04T04:12:17Z  DEPLOY qwen2-5-3b finished: exit 0 after 404 s
+2026-11-04T04:12:18Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T04:12:20Z  SMOKE qwen2-5-3b: PASS qwen2-5-3b: Paris
+2026-11-04T04:12:24Z  BENCH E4-qwen2.5-3b-amx
+2026-11-04T04:18:30Z  BENCH E4-qwen2.5-3b-amx finished: [{"c":1,"ok":16,"tok_s":4.9,"ttft95":0.7583},{"c":2,"ok":16,"tok_s":8.5,"ttft95":1.4458},{"c":4,"ok":16,"tok_s":13.8,"ttft95":2.2829},{"c":8,"ok":16,"tok_s":29.7,"ttft95":3.6821}]
+2026-11-04T04:18:30Z  UNDEPLOY qwen2-5-3b
+2026-11-04T04:19:06Z  UNDEPLOY qwen2-5-3b done: pods gone
+2026-11-04T04:19:06Z  EXPERIMENTS DONE
+2026-11-04T04:19:06Z  experiments.sh exit code 0
+2026-11-04T04:20:29Z  experiments.sh start (solutions v1.1.0)
+2026-11-04T04:20:29Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T04:20:29Z  DEPLOY qwen3-0-6b
+2026-11-04T04:23:57Z  DEPLOY qwen3-0-6b finished: exit 0 after 208 s
+2026-11-04T04:23:57Z  TOKEN ok (gateway inference.solutions.ai)
+2026-11-04T04:24:04Z  SMOKE qwen3-0-6b: PASS qwen3-0-6b: Paris
+2026-11-04T04:24:04Z  BENCH E2X-qwen0.6b-amx-high
+2026-11-04T04:24:37Z  BENCH E2X-qwen0.6b-amx-high finished: [{"c":24,"ok":48,"tok_s":210.7,"ttft95":1.7573},{"c":32,"ok":48,"tok_s":216.7,"ttft95":2.3109},{"c":48,"ok":48,"tok_s":218.2,"ttft95":3.3862}]
+2026-11-04T04:24:37Z  UNDEPLOY qwen3-0-6b
+2026-11-04T04:25:14Z  UNDEPLOY qwen3-0-6b done: pods gone
+2026-11-04T04:25:14Z  EXPERIMENTS DONE
+2026-11-04T04:25:14Z  experiments.sh exit code 0

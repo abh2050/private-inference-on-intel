@@ -1,0 +1,4 @@
+PASS qwen3-0-6b: Paris
+PASS qwen3-noamx: Paris
+PASS qwen2-5-3b: Paris
+PASS qwen3-0-6b: Paris
