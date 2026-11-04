@@ -29,6 +29,21 @@ Vendor documentation explains how to install the stack but gives no numbers for 
 - at least 10 output tokens per second for each user;
 - no failed requests.
 
+## From request to token
+
+| Step | Where | What happens | What it sets |
+|---|---|---|---|
+| 1 | Envoy Gateway | TLS termination and Keycloak JWT check; no token returns HTTP 401 | Access control |
+| 2 | Envoy AI Gateway | Reads `"model"` from the JSON body and selects that model's route | Multi-model routing |
+| 3 | EPP scheduler | Picks a serving endpoint for the `LLMInferenceService` | Load spreading |
+| 4 | vLLM | Tokenizes the prompt and adds it to the running batch (continuous batching) | Queueing |
+| 5 | vLLM prefill | Processes all prompt tokens at once; compute-bound bf16 matrix multiplies on AMX | **Time to first token** |
+| 6 | vLLM decode | One token per step per request, reading weights and the paged KV cache; memory-bandwidth-bound | **Tokens/s per user** |
+| 7 | Gateways | Tokens stream back as server-sent events | OpenAI compatibility |
+| 8 | NRI balloons (underneath) | Pin the pod to whole cores on one NUMA node, keeping memory local | Predictable latency |
+
+This is why AMX moves TTFT far more than per-user speed, and why 8 cores saturate near 217 tokens/s: past that point, new users queue for prefill.
+
 ## Results
 
 Every model ran on the same 8 physical cores (one NUMA node) with a ~600-token prompt and 128 output tokens. All traffic went through the authenticated gateway, and every request succeeded at every load level. Full tables are in [`results/20261103-2026/summary.md`](results/20261103-2026/summary.md).
@@ -85,6 +100,33 @@ The install itself was solid: 468 Ansible tasks with none failed, and 49 pods he
 | 7 | No Intel accelerator path yet | The release automates Xeon and NVIDIA GPU nodes, and its docs place Intel GPU support in a later milestone. Gaudi support exists only in the archived OPEA version. | — |
 
 The hardware-aware parts worked as designed. NRI balloons pinned each model to whole cores on one NUMA node. Pre-flight refused placements that would have spilled onto hyperthread siblings. KServe and the Envoy AI Gateway routed by the `model` field with no per-model gateway configuration.
+
+## Where Xeon fits, from this data
+
+The case for CPU inference is not raw speed. It is serving a known load within a target, on hardware that is already approved, owned, and allowed to see the data.
+
+| Good fit | Evidence |
+|---|---|
+| Small models at interactive load | Measured: 0.6B served 24 users within target on 8 cores |
+| Prefill-heavy traffic (RAG, summarization, classification) | Measured: AMX gives up to 3.1× under load |
+| Private and air-gapped deployments | Measured: one authenticated OpenAI-compatible endpoint; the model runs on the server |
+| Fleets that already run Xeon | Judgment: capacity without a new accelerator procurement |
+
+| Poor fit, or needs more hardware | Evidence |
+|---|---|
+| 3B+ models for interactive users on a few cores | Measured: 5.2 tokens/s for one user, target 10 |
+| Loads past saturation | Measured: beyond ~30 users on 8 cores, throughput stops rising |
+| Large models at high throughput | Judgment: accelerator memory bandwidth decides it |
+| More cores per replica, cross-socket tensor parallelism, INT8 / OpenVINO INT4 | Not yet tested |
+
+## What to build next
+
+Ranked by how much each would cut the time and expertise a new team needs to reach a trusted, measured endpoint.
+
+1. **A one-command evaluation path.** A single-node install that never prompts, validates each component without aborting, and ends by printing a working `curl`. This removes friction items 1–3, which cost about 15 minutes of this run. *Measure:* time to first answer, 49 minutes today, target under 15.
+2. **An SLA report built into model-manager.** `model-manager bench --sla ttft=2s,tps=10` would sweep concurrency, report capacity, TTFT, TPOT, and cost per million tokens, and export to the existing Grafana. *Measure:* the share of deployments with a recorded SLA capacity.
+3. **A capacity planner.** Given a model and an SLA, recommend cores, replicas, and tensor parallelism. NRI pre-flight already knows the free cores per NUMA node, and benchmark data supplies tokens/s per core. *Measure:* predicted vs. measured capacity, within 15%.
+4. **SLA-aware routing in the AI gateway.** The gateway already routes on the `model` field. Add a policy that sends each request to the smallest model that passes an evaluation set for its task, and report the realized saving. *Measure:* blended cost per million tokens at equal evaluation score.
 
 ## Architecture
 
