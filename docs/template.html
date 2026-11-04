@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Private Inference on Xeon</title>
-<meta name="description" content="A field report: deploying Intel AI for Enterprise Inference on one IBM Cloud Xeon server and measuring effort, SLA capacity, cost per token, and what AMX contributes.">
+<meta name="description" content="A field report: deploying Intel AI for Enterprise Inference on one IBM Cloud Xeon server and measuring deployment effort, observed capacity within a latency target, estimated cost per token, and what AMX contributes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -168,15 +168,15 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
     </div>
     <div class="bignum">
       <div class="n" id="hero-users">24<small>users</small></div>
-      <div class="l">served concurrently by <b>8 Xeon cores</b> while holding p95 time-to-first-token under 2 s</div>
+      <div class="l">observed within target on <b>8 Xeon cores</b>: p95 time-to-first-token under 2 s, no failed requests</div>
       <div class="stats">
-        <div><b id="hero-cost">$2.50</b><span>per 1M output tokens*</span></div>
+        <div><b id="hero-cost">$2.50</b><span>est. per 1M output tokens*</span></div>
         <div><b id="hero-amx">12×</b><span>more users than with AMX off</span></div>
-        <div><b id="hero-e1">33 min</b><span>bare server → first answer</span></div>
+        <div><b id="hero-e1">49 min</b><span>bare server → first answer (33 automated)</span></div>
       </div>
     </div>
   </div>
-  <div class="meta">IBM Cloud bx3d-32x160 · 4th Gen Xeon (Sapphire Rapids) · enterprise-ai-solutions v1.1.0 → enterprise-inference v1.0.1 · vLLM CPU 0.24 ·
+  <div class="meta">*Estimated at an assumed $1.90 per server-hour, for this workload (~600-token prompts, 128-token answers) at sustained load. Benchmark capacity from one run per configuration, not a production-certified SLA.<br><br>IBM Cloud bx3d-32x160 · 4th Gen Xeon (Sapphire Rapids) · enterprise-ai-solutions v1.1.0 → enterprise-inference v1.0.1 · vLLM CPU 0.24 ·
     <a href="https://github.com/abh2050/private-inference-on-intel">repository, raw data &amp; logs</a></div>
 </header>
 
@@ -220,14 +220,14 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
 
 <section class="reveal" id="capacity">
   <div class="sec-h"><span class="num">04</span><h2>Capacity: where one node bends</h2></div>
-  <p class="lede">Throughput climbs until the cores saturate near 217 tokens/s. After that, extra users only wait longer, and time-to-first-token is the first limit to break.</p>
+  <p class="lede">Throughput climbs until the cores saturate near 217 tokens/s. After that, extra users only wait longer, and time-to-first-token is the first limit to break. One run per configuration; 32 requests per level up to 16 users, 48 above.</p>
   <div class="legend" id="legend"></div>
   <div class="grid2">
     <div class="panel"><h3>Output throughput</h3><p class="sub">tokens per second, all users combined</p><div class="chart" id="c-tput"></div></div>
     <div class="panel"><h3>Time to first token, p95</h3><p class="sub">seconds · shaded area misses the 2 s target</p><div class="chart" id="c-ttft"></div></div>
   </div>
   <div class="finding">
-    <div><b id="f-cap"></b>users within target with AMX; breaks at 32 when TTFT p95 reaches 2.31 s</div>
+    <div><b id="f-cap"></b>observed within target with AMX; missed at 32 when TTFT p95 reached 2.31 s</div>
     <div><b>217 tok/s</b>the ceiling for 8 cores; 32 and 48 users add only 3%</div>
     <div><b>3B model</b>answers correctly, but one user gets 5.2 tok/s: below target at any load on 8 cores</div>
   </div>
@@ -238,9 +238,10 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
   <div class="sec-h"><span class="num">05</span><h2>What AMX is worth</h2></div>
   <p class="lede">With one user, AMX adds little, because decode is limited by memory bandwidth. Under load, prompt processing dominates, and that is compute-bound work for a matrix unit.</p>
   <div class="panel"><h3>Same model, same 8 cores, AMX on vs. off</h3><p class="sub">output tokens/s at each load · the gap is the AMX contribution</p><div class="chart" id="c-amx"></div></div>
-  <div class="evidence"><span class="c"># oneDNN, probed inside each running pod</span><br>
+  <div class="evidence"><span class="c"># small oneDNN probe, run inside each serving pod with that pod&#39;s environment</span><br>
     <span class="on">AMX on </span> → isa: Intel AMX with bfloat16 and 8-bit integer support · <b>brg_matmul:avx10_1_512_amx</b><br>
     <span class="off">AMX off</span> → isa: AVX-512 with bfloat16 support · <b>brg_matmul:avx512_core_bf16</b>   <span class="c"># ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16</span></div>
+  <p style="font-size:14px;margin:-4px 0 12px">The probe confirms the instruction-set cap took effect in each pod. It does not trace every kernel vLLM ran; the end-to-end throughput and latency gap is the main evidence.</p>
   <div class="finding">
     <div><b id="f-amxx"></b>throughput at 16 users</div>
     <div><b>8.4 s → 1.2 s</b>TTFT p95 at 16 users</div>
@@ -249,7 +250,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
 </section>
 
 <section class="reveal" id="cost">
-  <div class="sec-h"><span class="num">06</span><h2>The cost of a token</h2></div>
+  <div class="sec-h"><span class="num">06</span><h2>The cost of a token (estimated)</h2></div>
   <p class="lede">The server costs the same per hour however busy it is, so utilization sets the price of a token. Move the sliders to see how.</p>
   <div class="panel calc">
     <div class="ctl">
@@ -266,7 +267,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
       <p style="font-size:14px;margin-top:12px" id="o-note"></p>
     </div>
   </div>
-  <p style="font-size:14px">Default rate: an estimated $1.90 per server-hour. IBM's partial billing data for the run implies about $2. Throughput values are measured; every other number on this panel is arithmetic on them.</p>
+  <p style="font-size:14px">Throughput values are measured; every other number on this panel is an estimate built on them. The default rate is an assumed $1.90 per server-hour (IBM's partial billing for the run implies about $2), and the figures hold only for this workload.</p>
 </section>
 
 <section class="reveal" id="fit">
@@ -274,9 +275,10 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
   <p class="lede">The case for CPU inference is not raw speed. It is serving a known load within a target, on hardware that is already approved, owned, and allowed to see the data.</p>
   <div class="fit">
     <div class="col"><h3>Good fit</h3><ul>
-      <li>Small models at interactive load: a 0.6B model served 24 users within target on 8 cores<span class="tag meas">measured</span></li>
+      <li>Small models at interactive load: a 0.6B model, 24 users observed within target on 8 cores<span class="tag meas">measured</span></li>
       <li>Prefill-heavy traffic such as RAG, summarization, and classification, where AMX matters most<span class="tag meas">measured: 3.1×</span></li>
-      <li>Private and air-gapped deployments: the model runs on your server behind one authenticated, OpenAI-compatible endpoint, with no third-party API in the path<span class="tag meas">measured: 401 without token</span></li>
+      <li>Private deployments: the model runs on your own server behind one authenticated, OpenAI-compatible endpoint<span class="tag meas">demonstrated</span></li>
+      <li>Air-gapped deployments: plausible, but this install downloaded packages, images, and weights from the internet<span class="tag judg">not validated</span></li>
       <li>Fleets that already run Xeon: inference capacity without a new accelerator procurement<span class="tag judg">judgment</span></li>
     </ul></div>
     <div class="col"><h3>Needs more cores or an accelerator</h3><ul>
@@ -297,8 +299,8 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
 </section>
 
 <section class="reveal" id="routing">
-  <div class="sec-h"><span class="num">09</span><h2>Routing, as a calculation</h2></div>
-  <p class="lede">If a router sends easy requests to the small model, the blended price drops sharply. This is arithmetic on measured peak throughput, not a measured router.</p>
+  <div class="sec-h"><span class="num">09</span><h2>Routing: a scenario, not a router</h2></div>
+  <p class="lede">If a router sent easy requests to the small model, the blended price would drop sharply. This is arithmetic on measured peak throughput. No router was built, so the saving still needs quality evaluation and routing validation.</p>
   <div class="panel"><h3>Blended cost by share of traffic sent to the 0.6B model</h3><p class="sub">$ per 1M output tokens; the rest goes to Qwen2.5-3B</p><div class="chart" id="c-route"></div></div>
   <p style="font-size:14px">Before claiming the saving, an evaluation set has to show that the small model handles that share of real traffic acceptably.</p>
 </section>
@@ -310,7 +312,7 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
     <div class="it"><div class="n">1</div><div><h4>A one-command evaluation path</h4><p>Single-node install that never prompts, validates each component without aborting, and ends by printing a working <code>curl</code>. Removes friction items 1–3, which cost about 15 minutes of this run.</p></div><div class="kpi"><b>Measure</b>time to first answer: 49 min today, target under 15</div></div>
     <div class="it"><div class="n">2</div><div><h4>An SLA report built into model-manager</h4><p><code>model-manager bench --sla ttft=2s,tps=10</code>: sweep concurrency, report capacity, TTFT, TPOT, and cost per million tokens, and export to the existing Grafana. The numbers on this page took a separate load generator to produce.</p></div><div class="kpi"><b>Measure</b>share of deployments with a recorded SLA capacity</div></div>
     <div class="it"><div class="n">3</div><div><h4>A capacity planner</h4><p>Given a model and an SLA, recommend cores, replicas, and tensor parallelism. NRI pre-flight already knows the free cores per NUMA node; benchmark data supplies tokens/s per core.</p></div><div class="kpi"><b>Measure</b>predicted vs. measured capacity, within 15%</div></div>
-    <div class="it"><div class="n">4</div><div><h4>SLA-aware routing in the AI gateway</h4><p>The gateway already routes on the <code>model</code> field. Add a policy that sends a request to the smallest model that passes an evaluation set for its task, and report the realised saving (60% at a 70/30 split, section 09).</p></div><div class="kpi"><b>Measure</b>blended $/1M tokens at equal eval score</div></div>
+    <div class="it"><div class="n">4</div><div><h4>SLA-aware routing in the AI gateway</h4><p>The gateway already routes on the <code>model</code> field. Add a policy that sends a request to the smallest model that passes an evaluation set for its task, then measure the real saving against the 60% scenario in section 09.</p></div><div class="kpi"><b>Measure</b>blended $/1M tokens at equal eval score</div></div>
   </div>
 </section>
 
@@ -319,6 +321,8 @@ footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;font:12
   <ul class="limits">
     <li>One server and one run per configuration, so run-to-run variance has not been measured.</li>
     <li>The load generator ran on the same server. The model's cores were pinned; the client's were not.</li>
+    <li>Lab-only TLS: the gateway used the installer's self-signed certificate, and the load generator skipped certificate checks. Production clients must verify against the installed CA (<code>bench.py --cacert</code>) or a real certificate.</li>
+    <li>Connected install: air-gapped deployment was not tested.</li>
     <li>Scope is Xeon only. Intel accelerators (Gaudi 3 is available on IBM Cloud in 8-accelerator servers) are candidates for a follow-up run.</li>
   </ul>
   <pre>ibmcloud login --sso
@@ -363,10 +367,10 @@ const capOn=D.cap_on, capOff=D.cap_off, rOn=D.e2.find(r=>r.concurrency===capOn),
 document.getElementById('hero-users').innerHTML=capOn+'<small>users</small>';
 document.getElementById('hero-cost').textContent=fmt$(usdM(rOn,D.rate));
 document.getElementById('hero-amx').textContent=Math.round(capOn/capOff)+'×';
-document.getElementById('hero-e1').textContent=Math.round(D.e1.automation_min)+' min';
-document.getElementById('a-effort').textContent=D.e1.automation_min+' min automated · '+D.e1.wall_clock_min+' wall clock';
-document.getElementById('a-cap').textContent=capOn+' concurrent users';
-document.getElementById('a-cost').textContent=fmt$(usdM(rOn,D.rate))+' per 1M tokens';
+document.getElementById('hero-e1').textContent=Math.round(D.e1.wall_clock_min)+' min';
+document.getElementById('a-effort').textContent=D.e1.wall_clock_min+' min observed · '+D.e1.automation_min+' automated';
+document.getElementById('a-cap').textContent=capOn+' users observed within target';
+document.getElementById('a-cost').textContent='≈ '+fmt$(usdM(rOn,D.rate))+' per 1M tokens (est.)';
 document.getElementById('a-amx').textContent=capOn+' vs '+capOff+' users · up to '+D.amx_peak+'×';
 document.getElementById('f-cap').textContent=capOn+' users';
 document.getElementById('f-amxx').textContent=D.amx_peak+'×';

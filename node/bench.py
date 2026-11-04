@@ -13,9 +13,21 @@ BASE = ("Intel Xeon processors with Advanced Matrix Extensions accelerate matrix
         "for deep learning inference by using dedicated tile registers and a tile matrix unit. ")
 PROMPT = (BASE * 22) + "\nSummarize the text above in exactly three bullet points."
 
-CTX = ssl.create_default_context()
-CTX.check_hostname = False
-CTX.verify_mode = ssl.CERT_NONE  # self-signed certificate created by the installer
+# TLS. LAB-ONLY DEFAULT: the installer creates a self-signed certificate, and the benchmark reaches the gateway
+# through an /etc/hosts entry, so certificate and hostname checks are skipped unless --cacert is given.
+# Production clients must verify: pass the installer's CA (env/<env>/logs/ai-solutions-ca.crt) or use a real certificate.
+CTX = None
+
+
+def make_ctx(cacert):
+    if cacert:
+        return ssl.create_default_context(cafile=cacert)  # full certificate and hostname verification
+    import sys
+    print("WARNING: TLS verification disabled (lab-only). Use --cacert for verified connections.", file=sys.stderr)
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
 
 
 def one_request(url, model, token, max_tokens):
@@ -79,7 +91,10 @@ def main():
     ap.add_argument("--concurrency", type=int, nargs="+", default=[1, 4, 8])
     ap.add_argument("--requests", type=int, default=32); ap.add_argument("--max-tokens", type=int, default=128)
     ap.add_argument("--out", default=os.path.expanduser("~/results/bench.json"))
+    ap.add_argument("--cacert", help="CA file to verify the gateway certificate (omit only in a lab)")
     args = ap.parse_args()
+    global CTX
+    CTX = make_ctx(args.cacert)
     token = os.environ["TOKEN"]
     results = []
     for c in args.concurrency:

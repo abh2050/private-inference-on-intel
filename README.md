@@ -11,14 +11,14 @@ deployment effort, SLA capacity, cost per token, and what Intel AMX contributes.
 &nbsp;·&nbsp; <a href="logs/operator-log.md">Run log</a>
 </p>
 
-<p align="center"><a href="https://abh2050.github.io/private-inference-on-intel/"><img src="docs/preview-hero.png" alt="Results page header: 24 users served concurrently by 8 Xeon cores with p95 time-to-first-token under 2 seconds; $2.50 per million output tokens; 12 times more users than with AMX off; 33 minutes from bare server to first answer." width="900"></a></p>
+<p align="center"><a href="https://abh2050.github.io/private-inference-on-intel/"><img src="docs/preview-hero.png" alt="Results page header: 24 users observed within target on 8 Xeon cores; an estimated $2.50 per million output tokens; 12 times more users than with AMX off; 49 minutes from bare server to first answer, 33 of them automated." width="900"></a></p>
 
 ## In one minute
 
-- **24 concurrent users** on 8 Xeon cores (Qwen3-0.6B), with p95 time to first token under 2 s and every request succeeding.
-- **$2.50 per million output tokens** at that load, at an estimated $1.90 per server-hour.
-- **AMX is worth 12× the capacity.** With AMX disabled on the same cores, only 2 users stay within the target. Throughput is up to 3.1× higher with it.
-- **33 minutes of automation** from a bare server to an authenticated, OpenAI-compatible endpoint answering correctly. The install ran 468 Ansible tasks with none failing.
+- **24 concurrent users observed within target** on 8 Xeon cores (Qwen3-0.6B): p95 time to first token under 2 s and every request succeeded. This is benchmark capacity from one run per configuration, not a production-certified SLA.
+- **About $2.50 per million output tokens (estimated)** at that sustained load, for this workload (~600-token prompts, 128-token answers) at an assumed $1.90 per server-hour.
+- **AMX made a 12× difference in observed capacity.** With AMX disabled on the same cores, only 2 users stayed within the target; throughput was up to 3.1× higher with it.
+- **49 minutes observed** from a bare server to an authenticated, OpenAI-compatible endpoint answering correctly; **33 minutes** of that was automation, the rest an unanswered prompt and manual checks. The install ran 468 Ansible tasks with none failing.
 - **Six small deployment observations**, each paired with a suggested improvement, and four ideas for what to build next.
 
 ## The problem
@@ -40,9 +40,9 @@ All runs used the same 8 physical cores (one NUMA node), a ~600-token prompt, an
 
 <p align="center"><img src="docs/preview-capacity.png" alt="Two charts. Output throughput rises to about 217 tokens per second with AMX on, versus about 59 with AMX off and 30 for the 3B model. Time to first token p95 stays under 2 seconds up to 24 users with AMX on, but crosses it at 4 users with AMX off." width="900"></p>
 
-### Capacity and cost: Qwen3-0.6B with AMX
+### Observed capacity and estimated cost: Qwen3-0.6B with AMX
 
-| Users | Output tok/s | TTFT p95 | Tok/s per user | $ / 1M tokens | Within target |
+| Users | Output tok/s | TTFT p95 | Tok/s per user | Est. $ / 1M tokens | Within target |
 |---:|---:|---:|---:|---:|:---:|
 | 1 | 21.0 | 0.16 s | 22.0 | 25.13 | ✅ |
 | 4 | 59.8 | 0.43 s | 16.6 | 8.83 | ✅ |
@@ -52,11 +52,13 @@ All runs used the same 8 physical cores (one NUMA node), a ~600-token prompt, an
 | 32 | 216.7 | 2.31 s | 10.3 | 2.44 | — |
 | 48 | 218.2 | 3.39 s | 5.5 | 2.42 | — |
 
-Throughput saturates near 217 tokens/s at about 30 users, and TTFT is the first limit reached. Cost per token falls 10× between 1 and 24 users because the server costs the same per hour at any load. Running continuously, the node costs about $1,390 a month and can produce about 550 million output tokens at its 24-user operating point.
+Throughput saturates near 217 tokens/s at about 30 users, and TTFT is the first limit reached. Levels up to 16 users used 32 requests each; 24, 32, and 48 users used 48 each.
+
+**Cost figures are estimates.** They divide an assumed $1.90 per server-hour by the measured throughput, so they hold only for this workload and only while the node runs at that load. Cost per token falls 10× between 1 and 24 users because the server costs the same per hour at any load. Running continuously at the 24-user level, the node would cost about $1,390 a month for about 550 million output tokens; at lower utilization, the cost per token rises.
 
 ### What AMX contributes
 
-Same model, same cores; the only change was `ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16` on the pod. oneDNN, probed inside each pod, confirms the kernel that ran: `brg_matmul:avx10_1_512_amx` with AMX and `brg_matmul:avx512_core_bf16` without it.
+Same model, same cores; the only change was `ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16` on the pod. A small oneDNN probe, run inside each serving pod with that pod's environment, selected `brg_matmul:avx10_1_512_amx` in one and `brg_matmul:avx512_core_bf16` in the other. That confirms the instruction-set cap took effect in the pod. It does not trace every kernel vLLM executed; the end-to-end throughput and latency difference is the main evidence.
 
 | Users | Tok/s, AMX on | Tok/s, AMX off | Gain | TTFT p95, on → off |
 |---:|---:|---:|---:|---:|
@@ -65,7 +67,7 @@ Same model, same cores; the only change was `ONEDNN_MAX_CPU_ISA=AVX512_CORE_BF16
 | 8 | 119.9 | 55.4 | 2.2× | 0.69 → 4.40 s |
 | 16 | 182.4 | 59.0 | 3.1× | 1.21 → 8.39 s |
 
-Decode is limited by memory bandwidth, so a single user sees little difference. Prefill is compute-bound and dominates under load, which is where the matrix unit pays off: **24 users at $2.50 per million tokens with AMX, against 2 users at $18.58 without it.**
+Decode is limited by memory bandwidth, so a single user sees little difference. Prefill is compute-bound and dominates under load, which is where the matrix unit pays off: **24 users at an estimated $2.50 per million tokens with AMX, against 2 users at about $18.58 without it.**
 
 ### A larger model
 
@@ -117,9 +119,9 @@ The core install was solid: 468 Ansible tasks with none failing, 49 pods healthy
 
 | Strong fit | Evidence |
 |---|---|
-| Small and mid-size models at interactive load | 24 users within target on 8 cores (measured) |
+| Small models at interactive load | 24 users observed within target on 8 cores (0.6B model) |
 | Prefill-heavy work: RAG, summarization, classification | AMX adds up to 3.1× under load (measured) |
-| Private and air-gapped deployments | Authenticated, OpenAI-compatible endpoint on owned hardware (measured) |
+| Private deployments | Demonstrated: authenticated, OpenAI-compatible endpoint with the model on the operator's own server. Air-gapped operation was **not** validated; this install downloaded packages, images, and weights from the internet. |
 | Fleets that already run Xeon | Inference capacity without a new procurement (judgment) |
 
 | Needs more cores or an accelerator | Evidence |
@@ -132,7 +134,7 @@ The core install was solid: 468 Ansible tasks with none failing, 49 pods healthy
 1. **A one-command evaluation path.** A single-node install that never prompts, validates each component, and ends by printing a working `curl`. *Target:* first answer in under 15 minutes.
 2. **SLA reporting in model-manager.** `model-manager bench --sla ttft=2s,tps=10` would report capacity, TTFT, TPOT, and cost per million tokens into the existing Grafana. *Target:* every deployment ships with a recorded SLA capacity.
 3. **A capacity planner.** Given a model and an SLA, recommend cores, replicas, and tensor parallelism, using the core inventory NRI pre-flight already has. *Target:* predictions within 15% of measured capacity.
-4. **SLA-aware routing in the AI gateway.** Route each request to the smallest model that passes an evaluation set for its task. Measured throughput suggests a 70/30 split would cut cost by about 60%, which the evaluation would need to confirm.
+4. **SLA-aware routing in the AI gateway.** Route each request to the smallest model that passes an evaluation set for its task. As a scenario only: arithmetic on the measured throughputs puts a 70/30 split at about 60% lower cost. No router was built; the saving needs quality evaluation and routing validation before it means anything.
 
 ## Method and scope
 
@@ -142,14 +144,16 @@ The core install was solid: 468 Ansible tasks with none failing, 49 pods healthy
 | E2, capacity | Qwen3-0.6B at 1, 2, 4, 8, 16, 24, 32, and 48 concurrent users |
 | E3, AMX | E2 repeated with AMX disabled in oneDNN |
 | E4, model size | Qwen2.5-3B-Instruct at 1, 2, 4, and 8 users |
-| E5, routing | Blended cost calculated from E2 and E4 throughput |
+| E5, routing scenario | Blended cost calculated from E2 and E4 throughput; no router was built or measured |
 
 Cost per million output tokens = hourly price ÷ (output tokens/s × 3600) × 10⁶.
 
 Scope and limits:
-- One server and one run per configuration.
-- The load generator ran on the same server.
-- Costs use an estimated rate; IBM's partial billing for the run implies about $2/hour.
+- **Benchmark, not certification.** One server and one run per configuration, with 32 to 48 requests per load level. Capacity figures are what this run observed, not a production SLA.
+- The load generator ran on the same server as the model. The model's cores were pinned; the client's were not.
+- **Costs are estimates** at an assumed $1.90 per server-hour (IBM's partial billing for the run implies about $2) and assume sustained load.
+- **Lab-only TLS.** The gateway used the self-signed certificate the installer creates, and `node/bench.py` skips certificate and hostname verification by default. Production clients must verify against the installed CA (`bench.py --cacert`) or a real certificate.
+- **Connected install.** Air-gapped deployment was not tested.
 - Xeon only. Intel accelerators, such as Gaudi 3 on IBM Cloud, are candidates for a follow-up run.
 
 ## Reproduce
