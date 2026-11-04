@@ -35,4 +35,5 @@ Every action taken from the operator workstation, in order, including failures a
 | 03:14 | `init inference` | 1 s |
 | 03:14 | `install inference` started | Kubespray brought up Kubernetes **v1.34.3** (the docs say v1.35.4) |
 | 03:27 | Status check | Node `Ready`. Running: cert-manager, Istio, MetalLB, Envoy Gateway, Keycloak, PostgreSQL, Prometheus and Grafana, local-path storage. SeaweedFS deploying. |
-| 03:29 | Logging turned on | Session log, per-minute cluster snapshots, and step logging for `experiments.sh` (pushed before it started) |
+| 03:29 | Logging turned on | Per-minute cluster snapshots, plus step logging for `experiments.sh` (pushed before it started) |
+| 03:30 | Session log fixed | The first session log recorded only epoch numbers, because `tmux pipe-pane` expands `%` date codes itself. Moved the timestamping into `node/ts-log.sh`. The scrollback was re-captured, so nothing was lost. |
